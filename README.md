@@ -30,3 +30,14 @@ pip install -r requirements.txt
 python src/app.py
 ```
 
+## Current Features
+
+- [ ] 
+
+## Roadmap
+
+
+## Folder Structure
+
+```text
+```
