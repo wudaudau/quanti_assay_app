@@ -3,8 +3,8 @@
 
 from datetime import datetime
 import sqlite3
-from src_reform_app.src.assay_logging.assay_logging import select_sample_type, select_manipulator, log_experiment
-from src_reform_app.src.assay_lookup.assay_lookup import select_species, select_assay_type_by_species, select_assay_by_species_and_type
+from src.assay_logging.assay_logging import select_sample_type, select_manipulator, log_experiment
+from src.assay_lookup.assay_lookup import select_species, select_assay_type_by_species, select_assay_by_species_and_type
 
 def ask_manipulator(db_path):
     """
