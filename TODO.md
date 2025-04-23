@@ -8,6 +8,8 @@
     - [ ] Sensitive data:
       - [ ] Manipulators
       - [ ] Expriment log.
+  - [ ] What are the pre-set tables in the database and how to prepare the data in csv files?
+  - [ ] There are two main functions: 1) Lookup and 2) Log Exp. Refactor them by working flow. E.g. Before assay (purchase the reagent, prepare the sample, download the protocol ...), After assay ...
 
 ## Next Up
 
