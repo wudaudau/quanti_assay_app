@@ -45,7 +45,7 @@ def ask_user_choice():
 
 
 def run_app():
-    db_path = os.path.join("src_reform_app", "data", "reform_quantiapp.sqlite") # "../data/reform_quantiapp.sqlite"
+    db_path = os.path.join("data", "quanti_assay.sqlite") # Path to the SQLite database file
     create_database(db_path)
     load_all_data_from_csv(db_path)
 
