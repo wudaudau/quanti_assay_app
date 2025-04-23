@@ -9,7 +9,7 @@
 
 ## Next Up
 
-- [ ] 
+- [ ] Add tools or modules to ensre the app can run correctly. E.g. set different combination of input as scenarios. 
 
 ## Wishlist
 
