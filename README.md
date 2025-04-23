@@ -13,14 +13,14 @@ cd quanti_assay_app
 
 2. Create and activate a virtual environment:
 
-This project is developped in Python 3.7.9.
+This project is developped in Python 3.11.
 
 ```bash
-python3 -m venv venv # I have different versions of Python. python3 is the one I need.
+python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-3. Install dependencies:
+1. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
