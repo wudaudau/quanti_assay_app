@@ -42,6 +42,10 @@ python main.py
 ## Folder Structure
 
 ```text
+├── data/                   # Store your .sqlite file here
+│   └── quanti_assay.sqlite
+├── sql/                    # Database schema
+│   └── schema.sql
 src/
 ├── app.py                  # Main CLI app
 ├── database/               # DB logic and loaders
