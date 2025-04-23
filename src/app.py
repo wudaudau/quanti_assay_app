@@ -11,7 +11,7 @@ from src.database.db_data_loader import load_all_data_from_csv
 
 
 # Call the controllers
-from src_reform_app.src.controllers.assay_lookup_controller import (
+from src.controllers.assay_lookup_controller import (
     lookup_assay_details_full,
     lookup_assay_details_step_by_step,
     lookup_assay_details_by_species_and_analyte
