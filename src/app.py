@@ -6,8 +6,8 @@ This file manages the main loop and application flow.
 
 # create db and import data
 import os
-from src_reform_app.src.database.db_core import create_database
-from src_reform_app.src.database.db_data_loader import load_all_data_from_csv
+from src.database.db_core import create_database
+from src.database.db_data_loader import load_all_data_from_csv
 
 
 # Call the controllers
