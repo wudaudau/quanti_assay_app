@@ -16,7 +16,7 @@ from src.controllers.assay_lookup_controller import (
     lookup_assay_details_step_by_step,
     lookup_assay_details_by_species_and_analyte
 )
-from src_reform_app.src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
+from src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
 
 
 
