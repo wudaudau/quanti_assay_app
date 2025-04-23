@@ -4,7 +4,7 @@
 
 import sqlite3
 from datetime import datetime
-from src_reform_app.src.database.db_utils import get_or_insert
+from src.database.db_utils import get_or_insert
 
 
 def select_sample_type(db_path):
