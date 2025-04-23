@@ -4,6 +4,10 @@
 
 - [ ] Refactor the app into `feature/refactor-app` branch.
   - [ ] Add function-related documentations.
+  - [ ] Keep real data (e.g. Manipulators) in our place -> Add instruction to prepare the inital database.
+    - [ ] Sensitive data:
+      - [ ] Manipulators
+      - [ ] Expriment log.
 
 ## Next Up
 
