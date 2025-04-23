@@ -3,10 +3,11 @@
 ## In Progress
 
 - [ ] Move main CLI app into `feature/main-cli-app` branch
+  - [ ] 
 
 ## Next Up
 
-- [ ]
+- [ ] 
 
 ## Done
 
