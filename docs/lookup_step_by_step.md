@@ -3,6 +3,8 @@
 
 ## Menu
 
+Step 1
+
 ```text
 Available Species:
 1. Human
@@ -11,6 +13,8 @@ Available Species:
 Select a species by number: 
 ```
 
+Step 2
+
 ```text
 Available Assay Types:
 1. ELISA
@@ -18,6 +22,8 @@ Available Assay Types:
 
 Select an assay type by number: 
 ```
+
+Step 3
 
 ```text
 Available Assays:
@@ -30,6 +36,8 @@ Select an assay by number:
 ```
 
 ## Output examples
+
+Example 1
 
 ```text
 You selected: Human > ELISA > ELISA B2M
@@ -49,6 +57,8 @@ Available Kits:
   - Catalog #: RCD003R, Format: 
 --------------------------------------------------
 ```
+
+Example 2
 
 ```text
 You selected: Mouse > MSD > V-PLEX Proinfammatory P1 Mouse
