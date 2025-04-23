@@ -8,7 +8,7 @@ Use them in app.py to provide different ways for the user to lookup assay detail
 """
 
 
-from src_reform_app.src.assay_lookup.assay_lookup import (
+from src.assay_lookup.assay_lookup import (
     get_assay_details_by_name, get_analytes_for_assay,
     select_assay_name, select_species, select_assay_type_by_species, select_assay_by_species_and_type,
     select_analyte_for_species, select_assay_for_species_and_analyte
