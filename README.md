@@ -34,7 +34,13 @@ python main.py
 
 ## Current Features
 
-- [ ] Main CLI menu with welcome/goodbye flow.
+1. Lookup Assay (Full List)
+2. Lookup Assay (Step-by-Step Filter)
+3. Lookup Assay (Filter by Species and Analyte)
+4. Log Experiment
+5. Lookup Last 15 Experiments
+6. Lookup All Experiments
+7. Exit
 
 ## Roadmap
 
