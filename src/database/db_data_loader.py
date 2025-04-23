@@ -11,7 +11,7 @@ There are following csv files to import:
 
 import sqlite3
 import csv
-from src_reform_app.src.database.db_utils import get_or_insert
+from src.database.db_utils import get_or_insert
 
 
 
