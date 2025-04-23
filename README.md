@@ -36,7 +36,7 @@ python main.py
 
 1. [Lookup Assay (Full List)](docs/lookup_full_list.md)
 2. [Lookup Assay (Step-by-Step Filter)](docs/lookup_step_by_step.md)
-3. [Lookup Assay (Filter by Species and Analyte)](docslookup_by_analyte.md)
+3. [Lookup Assay (Filter by Species and Analyte)](docs/lookup_by_analyte.md)
 4. [Log Experiment](docs/log_experiment.md)
 5. [Lookup Last 15 Experiments](docs/lookup_last_logs.md)
 6. [Lookup All Experiments](docs/lookup_all_logs.md)
