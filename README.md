@@ -34,7 +34,7 @@ python src/app.py
 
 ## Current Features
 
-- [ ] 
+- [ ] Main CLI menu with welcome/goodbye flow.
 
 ## Roadmap
 
