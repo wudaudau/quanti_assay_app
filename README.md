@@ -29,7 +29,7 @@ pip install -r requirements.txt
 4. Run the app:
 
 ```bash
-python src/app.py
+python main.py
 ```
 
 ## Current Features
