@@ -2,14 +2,14 @@
 
 ## In Progress
 
-- [ ] Move main CLI app into `feature/main-cli-app` branch.
-  - [x] Move `main.py`, `src/app.py`, and related elements (py modules, db schema in sql, data in csv to initiate the database, etc).
-  - [ ] Add function discriptions in `README.md`.
-  - [ ] Move the unittests.
+- [ ] Refactor the app into `feature/refactor-app` branch.
+  - [ ] Add function-related documentations.
 
 ## Next Up
 
+- [ ] Remove "Manipulators" data from the repo. 
 - [ ] Add tools or modules to ensre the app can run correctly. E.g. set different combination of input as scenarios. 
+- [ ] Create the unittests.
 
 ## Wishlist
 
@@ -17,3 +17,7 @@
 
 ## Done
 
+- [x] Move main CLI app into `feature/main-cli-app` branch.
+  - [x] Move `main.py`, `src/app.py`, and related elements (py modules, db schema in sql, data in csv to initiate the database, etc).
+  - [x] Add function discriptions in `README.md`.
+- [x] Create unittest into `text/db_utils` branch.
