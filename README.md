@@ -42,4 +42,11 @@ python src/app.py
 ## Folder Structure
 
 ```text
+src/
+├── app.py                  # Main CLI app
+├── database/               # DB logic and loaders
+├── assay_lookup/           # Lookup CLI and queries
+├── assay_logging/          # Logging CLI and DB interface
+├── controllers/            # Interactive flows
+tests/                      # Unit tests (coming soon)
 ```
