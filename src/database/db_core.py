@@ -15,7 +15,7 @@ def create_database(db_path):
     """
     conn = connect_db(db_path)
 
-    with open("src_reform_app/sql/schema.sql", "r") as f:
+    with open("sql/schema.sql", "r") as f:
         schema_sql = f.read()
 
     conn.executescript(schema_sql)
