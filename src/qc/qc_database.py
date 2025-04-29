@@ -40,7 +40,8 @@ def insert_qc(
 
     # Check if QC lot number already exists in qc table
     if check_exists(cursor, "qc", {"lot_number": qc_lot_number}):
-        raise ValueError(f"QC lot number '{qc_lot_number}' already exists in the database.") # TODO: Handle this case better
+        print(f"QC with lot number '{qc_lot_number}' already exists.")
+        return None
 
     # Get or insert manufacture
     manufacture_id = get_or_insert(cursor, "manufacture", {"name": manufacture_name}) if manufacture_name else None
