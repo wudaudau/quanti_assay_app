@@ -65,9 +65,13 @@ def main_menu_flow(db_path):
         elif choice == "7":
             show_goodbye()
             break
+        
+
         elif choice == "8":
             add_qc_flow(db_path)
         elif choice == "9":
             lookup_qc_flow(db_path)
+
+            
         else:
             print("Invalid choice. Please try again.")
