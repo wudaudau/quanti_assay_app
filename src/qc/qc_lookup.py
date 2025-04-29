@@ -19,7 +19,7 @@ def get_qc_details_by_lot(db_path, qc_lot_number:str):
         WHERE qc.lot_number = ?
     """, (qc_lot_number,))
 
-    results = cursor.fetchall()
+    results = cursor.fetchall() # qc_lot is unique, so this should return at most one row per analyte
     conn.close()
 
     return results  # Returns a list of tuples with QC details
