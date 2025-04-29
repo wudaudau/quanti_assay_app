@@ -31,22 +31,12 @@ def show_main_menu():
     show_welcome()
 
     print("\nWaht do you want to do?")
-<<<<<<< HEAD
     print("1. Assay Lookup")
     
     print("2. Log Experiment")
     print("3. Lookup Last 15 Experiments")
     print("4. Lookup All Experiments")
     print()
-=======
-    print("new. Add a QC")
-    print("1. Lookup Assay (Full List)")
-    print("2. Lookup Assay (Step-by-Step Filter)")
-    print("3. Lookup Assay (Filter by Species and Analyte)")
-    print("4. Log Experiment")
-    print("5. Lookup Last 15 Experiments")
-    print("6. Lookup All Experiments")
->>>>>>> FEAT: Add option for new QC functionality in main menu
     print("7. Exit")
 
     print("8. Add a QC")
