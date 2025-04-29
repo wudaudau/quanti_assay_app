@@ -31,5 +31,4 @@ def run_app():
 
 
     main_menu_flow(db_path)
-    show_goodbye()
 

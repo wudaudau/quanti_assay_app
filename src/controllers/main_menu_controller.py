@@ -63,6 +63,7 @@ def main_menu_flow(db_path):
         elif choice == "6":
             lookup_experiments_flow(db_path)
         elif choice == "7":
+            show_goodbye()
             break
         else:
             print("Invalid choice. Please try again.")
