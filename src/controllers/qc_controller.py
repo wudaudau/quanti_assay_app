@@ -69,7 +69,7 @@ def add_qc_flow(db_path):
     print(f"\t- QC Cat Nº: {qc_cat_number}")
     print(f"\t- QC Lot Nº: {qc_lot_number}")
     print(f"\t- QC Name: {qc_name}")
-    # TODO: Refactor this to show analytes in a table
+    # TODO: Refactor this to show analytes in a table or make the entire details a table to be add to the database
     print(f"\t- Analyte Name: {analyte_name}")
     print(f"\t- Concentration: {conc}")
     print(f"\t- Unit: {unit}")
