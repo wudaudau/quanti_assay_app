@@ -9,7 +9,7 @@ def insert_qc(
     qc_type,
     qc_name,
     qc_lot_number,
-    manufacturer_name=None,
+    manufacture_name=None,
     qc_cat_number=None,
     unit=None,
     expiration_date=None,
@@ -24,7 +24,7 @@ def insert_qc(
         qc_type (str): 'Purchased' or 'Home made'
         qc_name (str)
         qc_lot_number (str)
-        manufacturer_name (str | None)
+        manufacture_name (str | None)
         qc_cat_number (str | None)
         unit (str | None)
         expiration_date (str | None)
@@ -37,28 +37,28 @@ def insert_qc(
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # Get or insert manufacturer
-    if manufacturer_name:
-        cursor.execute("SELECT id FROM manufacture WHERE name = ?", (manufacturer_name,))
+    # Get or insert manufacture
+    if manufacture_name:
+        cursor.execute("SELECT id FROM manufacture WHERE name = ?", (manufacture_name,))
         row = cursor.fetchone()
         if row:
-            manufacturer_id = row[0]
+            manufacture_id = row[0]
         else:
-            cursor.execute("INSERT INTO manufacture (name) VALUES (?)", (manufacturer_name,))
-            manufacturer_id = cursor.lastrowid
+            cursor.execute("INSERT INTO manufacture (name) VALUES (?)", (manufacture_name,))
+            manufacture_id = cursor.lastrowid
     else:
-        manufacturer_id = None
+        manufacture_id = None
 
     # Insert into qc table
     cursor.execute("""
         INSERT INTO qc (
-            qc_type, name, lot_number, manufacturer_id,
-            cat_number, unit, expiration_date, preparation_date
+            qc_type, name, lot_number, manufacture_id,
+            cat_number, expiration_date, preparation_date
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     """, (
-        qc_type, qc_name, qc_lot_number, manufacturer_id,
-        qc_cat_number, unit, expiration_date, preparation_date
+        qc_type, qc_name, qc_lot_number, manufacture_id,
+        qc_cat_number, expiration_date, preparation_date
     ))
 
     qc_id = cursor.lastrowid
@@ -76,9 +76,9 @@ def insert_qc(
 
         # Insert into qc_analyte
         cursor.execute("""
-            INSERT INTO qc_analyte (qc_id, analyte_id, concentration)
-            VALUES (?, ?, ?)
-        """, (qc_id, analyte_id, concentration))
+            INSERT INTO qc_analyte (qc_id, analyte_id, concentration, unit)
+            VALUES (?, ?, ?, ?)
+        """, (qc_id, analyte_id, concentration, unit))
 
     conn.commit()
     conn.close()
