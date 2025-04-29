@@ -86,6 +86,8 @@ def add_qc_flow(db_path):
     print(f"\t- QC Cat Nº: {qc_cat_number}")
     print(f"\t- QC Lot Nº: {qc_lot_number}")
     print(f"\t- QC Name: {qc_name}")
+    print(f"\t- Expiration Date: {expiration_date}")
+    print(f"\t- Preparation Date: {preparation_date}")
     print()
     print("\tQC concentration details:")
     for analyte_name, conc in analyte_and_conc:
@@ -93,8 +95,7 @@ def add_qc_flow(db_path):
     print()
 
     
-    print(f"\t- Expiration Date: {expiration_date}")
-    print(f"\t- Preparation Date: {preparation_date}")
+    
 
     print()
     # Ask for confirmation
