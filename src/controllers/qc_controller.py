@@ -29,7 +29,7 @@ def add_qc_flow(db_path):
         qc_name = ask_for_string("Enter QC name")
 
         unit = ask_a_choice("Select unit", ["pg/ml", "ng/ml"]) # TODO: obtain list of units from the database
-        expiration_date = ask_for_string("Enter expiration date (YYYY-MM-DD)") # TODO: Validate date format
+        expiration_date = ask_for_string("Enter expiration date (YYYY-MM-DD)") # TODO: None is ok here?
         preparation_date = None
     
     elif qc_type == "Home made":
