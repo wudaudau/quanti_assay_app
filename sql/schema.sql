@@ -58,6 +58,29 @@ CREATE TABLE IF NOT EXISTS assays_analytes (
 
 
 
+-- QC Table (Quality Control)
+CREATE TABLE IF NOT EXISTS qc (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    qc_type TEXT NOT NULL CHECK (qc_type IN ('Purchased', 'Home made')),
+    manufacture_id INTEGER,  -- NULL if home-made
+    cat_number TEXT,         -- NULL if home-made
+    lot_number TEXT NOT NULL UNIQUE,
+    preparation_date TEXT,
+    expiration_date TEXT,
+    FOREIGN KEY (manufacture_id) REFERENCES manufacture(id)
+);
+
+-- QC Analyte Table (links QC to analytes)
+CREATE TABLE IF NOT EXISTS qc_analyte (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    qc_id INTEGER NOT NULL,
+    analyte_id INTEGER NOT NULL,
+    concentration REAL NOT NULL,
+    unit TEXT NOT NULL,
+    FOREIGN KEY (qc_id) REFERENCES qc(id),
+    FOREIGN KEY (analyte_id) REFERENCES analyte(id)
+);
 
 -- experiment log
 
