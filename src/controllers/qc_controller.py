@@ -48,16 +48,16 @@ def add_qc_flow(db_path):
 
     # Preview the QC details
     print("\nQC Details:")
-    print(f"QC Type: {qc_type}")
-    print(f"Manufacturer: {manufacturer}")
-    print(f"QC Cat Nº: {qc_cat_number}")
-    print(f"QC Lot Nº: {qc_lot_number}")
-    print(f"QC Name: {qc_name}")
-    print(f"Analyte Name: {analyte_name}")
-    print(f"Concentration: {conc}")
-    print(f"Unit: {unit}")
-    print(f"Expiration Date: {expiration_date}")
-    print(f"Preparation Date: {preparation_date}")
+    print(f"\t- QC Type: {qc_type}")
+    print(f"\t- Manufacturer: {manufacturer}")
+    print(f"\t- QC Cat Nº: {qc_cat_number}")
+    print(f"\t- QC Lot Nº: {qc_lot_number}")
+    print(f"\t- QC Name: {qc_name}")
+    print(f"\t- Analyte Name: {analyte_name}")
+    print(f"\t- Concentration: {conc}")
+    print(f"\t- Unit: {unit}")
+    print(f"\t- Expiration Date: {expiration_date}")
+    print(f"\t- Preparation Date: {preparation_date}")
 
     print("-" * 50)
     # Ask for confirmation
