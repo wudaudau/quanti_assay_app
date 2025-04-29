@@ -12,7 +12,14 @@ def show_goodbye():
     print("Goodbye!")
 
 
-
+def show_menu_title(msg:str):
+    """
+    msg: str. Message to show in the menu title.
+    This function will print a title for the menu.
+    """
+    print("\n" + "=" * 40)
+    print(f"{msg:^40}")
+    print("=" * 40)
 
 
 
