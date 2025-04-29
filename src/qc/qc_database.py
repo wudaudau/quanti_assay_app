@@ -60,22 +60,6 @@ def insert_qc(
 
     qc_id = cursor.lastrowid
 
-    # Insert each analyte into qc_analyte table
-    for analyte_name, concentration in analytes or []:
-        # Get or insert analyte
-        cursor.execute("SELECT id FROM analyte WHERE name = ?", (analyte_name,))
-        row = cursor.fetchone()
-        if row:
-            analyte_id = row[0]
-        else:
-            cursor.execute("INSERT INTO analyte (name) VALUES (?)", (analyte_name,))
-            analyte_id = cursor.lastrowid
-
-        # Insert into qc_analyte
-        cursor.execute("""
-            INSERT INTO qc_analyte (qc_id, analyte_id, concentration, unit)
-            VALUES (?, ?, ?, ?)
-        """, (qc_id, analyte_id, concentration, unit))
 
     conn.commit()
     conn.close()
