@@ -1,7 +1,7 @@
 
 from src.controllers.messages_and_ask_questions import ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
 
-from src.qc.qc_database import insert_qc
+from src.qc.qc_database import insert_qc, insert_qc_analyte
 
 from src.qc.qc_lookup import get_qc_details_by_lot
 
@@ -101,19 +101,27 @@ def add_qc_flow(db_path):
     # Ask for confirmation
     confirm = ask_yes_no("Do you want to add this QC?")
     if confirm:
+        insert_qc(
+            db_path,
+            qc_type,
+            qc_name,
+            qc_lot_number,
+            manufacturer,
+            qc_cat_number,
+            unit,
+            expiration_date,
+            preparation_date
+        )
+
         for analyte_name, conc in analyte_and_conc:
-            insert_qc(
+            insert_qc_analyte(
                 db_path,
-                qc_type,
-                qc_name,
                 qc_lot_number,
-                manufacturer,
-                qc_cat_number,
-                unit,
-                expiration_date,
-                preparation_date,
-                [(analyte_name, conc)]
+                analyte_name,
+                conc,
+                unit
             )
+
         print("QC added successfully!")
         print("-" * 50)
     else:
