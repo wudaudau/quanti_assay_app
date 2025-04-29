@@ -30,7 +30,7 @@ def show_main_menu():
     print("3. Lookup Last 15 Experiments")
     print("4. Lookup All Experiments")
     print()
-    print("7. Exit")
+    print("q. Exit")
 
     print("8. Add a QC")
     print("9. Lookup a QC")
@@ -55,7 +55,7 @@ def main_menu_flow(db_path):
         elif choice == "4":
             lookup_experiments_flow(db_path)
 
-        elif choice == "7":
+        elif choice == "q":
             show_goodbye()
             break
         
