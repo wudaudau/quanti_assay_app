@@ -20,6 +20,10 @@ def get_qc_details_by_lot(db_path, qc_lot_number:str):
     """, (qc_lot_number,))
 
     results = cursor.fetchall() # qc_lot is unique, so this should return at most one row per analyte
+            # However, it can return multiple rows if there are multiple analytes for the same QC lot number
+            # No multiplex QC for now, so this should be fine
     conn.close()
 
+    
+    # qc_name, lot_number, cat_number, expiration_date, preparation_date, manufacture_name, analyte_name, concentration, unit
     return results  # Returns a list of tuples with QC details
