@@ -1,6 +1,8 @@
 
 from src.controllers.messages_and_ask_questions import ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
 
+from src.qc.qc_database import insert_qc
+
 def add_qc_flow(db_path):
     """
     Flow for adding a QC.
@@ -19,7 +21,7 @@ def add_qc_flow(db_path):
 
         qc_name = ask_for_string("Enter QC name")
 
-        is_multiplex = ask_yes_no("Is this a multiplex QC?")
+        is_multiplex = ask_yes_no("Is this a multiplex QC?") # TODO: Develop multiplex QC functionality
         if is_multiplex:
             anlyte_count = ask_for_number("Enter number of analytes")
         else:
@@ -46,7 +48,7 @@ def add_qc_flow(db_path):
         # QC Lot Nº (UNIQUE) # TODO: Need a convention for this
         qc_lot_number = ask_for_string("Enter QC Lot Nº")
         
-        is_multiplex = ask_yes_no("Is this a multiplex QC?")
+        is_multiplex = ask_yes_no("Is this a multiplex QC?") # TODO: Develop multiplex QC functionality
         if is_multiplex:
             anlyte_count = ask_for_number("Enter number of analytes")
         else:
