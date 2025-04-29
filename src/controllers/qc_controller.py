@@ -137,3 +137,4 @@ def lookup_qc_flow(db_path):
     # Example:
     # lookup_qc(db_path, ...)
     print("QC lookup completed!")
+    print("-" * 50)
