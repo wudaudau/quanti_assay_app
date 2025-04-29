@@ -86,3 +86,27 @@ quanti_assay_app/
 ├── README.md                    # Project documentation
 └── TODO.md                      # Development roadmap and task list
 ```
+
+
+
+## Developing commands
+
+- [ ] 8. Add a QC
+  - 8 (Add a QC)
+  - 1 (Purchased)
+  - 1 (Manufacturer A)
+  - C4050-1
+  - A00C0646
+  - QC1 (H)
+  - 1 (pg/ml)
+  - 2025-01-31
+  - y
+  - 3
+  - 1
+  - 100
+  - 2
+  - 200
+  - 3
+  - 300
+  - y
+
