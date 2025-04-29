@@ -23,14 +23,16 @@ from src.controllers.qc_controller import (add_qc_flow, lookup_qc_flow)
 def show_main_menu():
 
     print("\nWaht do you want to do?")
-    print("1. Assay Lookup")
+
+    print("1. Assay Lookup") # TODO: Make this "Assay Menu"
+    print()
     
-    print("2. Log Experiment")
+    print("2. Log Experiment") # TODO: Make this "Experiment Menu"
     print("3. Lookup Last 15 Experiments")
     print("4. Lookup All Experiments")
     print()
 
-    print("8. Add a QC")
+    print("8. Add a QC") # TODO: Make this "QC Menu"
     print("9. Lookup a QC")
     print()
     print("q. Exit")
