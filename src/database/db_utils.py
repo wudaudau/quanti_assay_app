@@ -2,10 +2,14 @@
 Reusable helper functions like check_exists and get_or_insert, querying, checking, and inserting data into the database. 
 """
 
-def check_exists(cursor, table, conditions):
+def check_exists(cursor, table:str, conditions:dict):
     """
-    Check if a row exists based on provided conditions.
+    cursor: sqlite3.Cursor
+    table: str. Table name to check.
     conditions: dict {column: value}
+
+    Check if a row exists based on provided conditions.
+    Returns the row ID if it exists, otherwise None.
     """
     where_clause = " AND ".join([f"{col} = ?" for col in conditions])
     values = tuple(conditions.values())
