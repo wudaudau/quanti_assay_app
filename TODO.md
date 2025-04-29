@@ -2,6 +2,9 @@
 
 ## In Progress
 
+- [ ] "refactor/update-menus"
+  - [ ] Draw menu structure
+
 - [ ] Refactor the app into `feature/refactor-app` branch.
   - [ ] Add function-related documentations.
   - [ ] Keep real data (e.g. Manipulators) in our place -> Add instruction to prepare the inital database.
