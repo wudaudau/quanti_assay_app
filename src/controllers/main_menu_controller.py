@@ -27,14 +27,15 @@ def show_main_menu():
     print("1. Assay Lookup") # TODO: Make this "Assay Menu"
     print()
     
-    print("2. Log Experiment") # TODO: Make this "Experiment Menu"
-    print("3. Lookup Last 15 Experiments")
-    print("4. Lookup All Experiments")
+    print("2. Add a QC") # TODO: Make this "QC Menu"
+    print("3. Lookup a QC")
+    print()
+    
+    print("4. Log Experiment") # TODO: Make this "Experiment Menu"
+    print("5. Lookup Last 15 Experiments")
+    print("6. Lookup All Experiments")
     print()
 
-    print("8. Add a QC") # TODO: Make this "QC Menu"
-    print("9. Lookup a QC")
-    print()
     print("q. Exit")
     print()
 
@@ -55,20 +56,20 @@ def main_menu_flow(db_path):
 
         if choice == "1":
             assay_lookup_flow(db_path)
-        
-            
-        elif choice == "2":
-            log_experiment_flow(db_path)
-        elif choice == "3":
-            lookup_experiments_flow(db_path, 15) # Limit to last 15 experiments
-        elif choice == "4":
-            lookup_experiments_flow(db_path)
 
         
-        elif choice == "8":
+        elif choice == "2":
             add_qc_flow(db_path)
-        elif choice == "9":
+        elif choice == "3":
             lookup_qc_flow(db_path)
+        
+            
+        elif choice == "4":
+            log_experiment_flow(db_path)
+        elif choice == "5":
+            lookup_experiments_flow(db_path, 15) # Limit to last 15 experiments
+        elif choice == "6":
+            lookup_experiments_flow(db_path)
 
         elif choice == "q":
             show_goodbye()
