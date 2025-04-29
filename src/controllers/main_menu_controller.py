@@ -4,7 +4,8 @@
 
 # Call controllers
 
-from src.controllers.messages_and_ask_questions import show_welcome, show_goodbye, ask_a_menu_choice, show_menu_title
+from src.controllers.messages_and_ask_questions import show_goodbye # TODO: Move this to app.py?
+from src.controllers.messages_and_ask_questions import show_menu_title, ask_a_menu_choice
 
 
 from src.controllers.assay_lookup_controller import assay_lookup_flow
