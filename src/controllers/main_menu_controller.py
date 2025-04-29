@@ -4,7 +4,7 @@
 
 # Call controllers
 
-from src.controllers.main_menu_controller import show_welcome, show_goodbye, ask_a_menu_choice
+from src.controllers.messages_and_ask_questions import show_welcome, show_goodbye, ask_a_menu_choice
 
 
 from src.controllers.assay_lookup_controller import assay_lookup_flow
