@@ -21,7 +21,7 @@ from src.controllers.qc_controller import (add_qc_flow, lookup_qc_flow)
 
 def show_main_menu():
 
-    show_welcome()
+    show_welcome() # TODO: Move this before main_menu_flow()
 
     print("\nWaht do you want to do?")
     print("1. Assay Lookup")
