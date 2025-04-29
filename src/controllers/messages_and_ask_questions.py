@@ -37,7 +37,7 @@ def ask_a_choice(question:str, choices:list):
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-def ask_yes_no(question:str):
+def ask_yes_no(question:str) -> bool:
     """
     Ask the user a yes/no question and return their answer.
     """
