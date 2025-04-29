@@ -3,11 +3,8 @@
 
 
 # Call controllers
-from src.controllers.assay_lookup_controller import (
-    lookup_assay_details_full,
-    lookup_assay_details_step_by_step,
-    lookup_assay_details_by_species_and_analyte
-)
+from src.controllers.assay_lookup_controller import assay_lookup_flow
+
 from src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
 
 
@@ -33,9 +30,8 @@ def show_main_menu():
     show_welcome()
 
     print("\nWaht do you want to do?")
-    print("1. Lookup Assay (Full List)")
-    print("2. Lookup Assay (Step-by-Step Filter)")
-    print("3. Lookup Assay (Filter by Species and Analyte)")
+    print("1. Assay Lookup")
+    
     print("4. Log Experiment")
     print("5. Lookup Last 15 Experiments")
     print("6. Lookup All Experiments")
@@ -51,11 +47,9 @@ def main_menu_flow(db_path):
         choice = ask_user_choice()
 
         if choice == "1":
-            lookup_assay_details_full(db_path)
-        elif choice == "2":
-            lookup_assay_details_step_by_step(db_path)
-        elif choice == "3":
-            lookup_assay_details_by_species_and_analyte(db_path)
+            assay_lookup_flow(db_path)
+        
+            
         elif choice == "4":
             log_experiment_flow(db_path)
         elif choice == "5":
