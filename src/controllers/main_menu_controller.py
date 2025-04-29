@@ -4,7 +4,7 @@
 
 # Call controllers
 
-from src.controllers.messages_and_ask_questions import show_welcome, show_goodbye, ask_a_menu_choice
+from src.controllers.messages_and_ask_questions import show_welcome, show_goodbye, ask_a_menu_choice, show_menu_title
 
 
 from src.controllers.assay_lookup_controller import assay_lookup_flow
@@ -41,6 +41,8 @@ def main_menu_flow(db_path):
     """
 
     while True:
+        show_menu_title("Main Menu")
+
         show_main_menu()
         choice = ask_a_menu_choice()
 
