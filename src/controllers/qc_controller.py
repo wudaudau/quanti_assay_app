@@ -1,5 +1,5 @@
 
-from src.controllers.messages_and_ask_questions import ask_a_choice
+from src.controllers.messages_and_ask_questions import ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
 
 def add_qc_flow(db_path):
     """
@@ -11,37 +11,67 @@ def add_qc_flow(db_path):
     qc_type = ask_a_choice("Select QC type", ["Purchased", "Home made"])
 
     if qc_type == "Purchased":
-        # Manufacture
-        # QC Cat Nº
+        manufacturer = ask_a_choice("Select manufacturer", ["Manufacturer A", "Manufacturer B"]) # TODO: obtain list of manufacturers from the database
+        qc_cat_number = ask_for_string("Enter QC Cat Nº")
+
         # QC Lot Nº (UNIQUE)
-        # QC name
-        # Analyte name
-        # concentration
-        # Expiration date
-        # unit
+        qc_lot_number = ask_for_string("Enter QC Lot Nº")
+
+        qc_name = ask_for_string("Enter QC name")
+        analyte_name = ask_a_choice("Select analyte name", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
+        conc = ask_for_number("Enter concentration")
+        unit = ask_a_choice("Select unit", ["Unit A", "Unit B"]) # TODO: obtain list of units from the database
+        expiration_date = ask_for_string("Enter expiration date (YYYY-MM-DD)") # TODO: Validate date format
+        preparation_date = None
+        
 
         # TODO: Link to assay? 
             # Probably in another many-to-many table to link QC to assay
             # Because QC could be used in different assays (e.g. MSD U-PLEX assays)
-        pass
+
+        print("Linking QC to assay is not implemented yet.")
     elif qc_type == "Home made":
+        manufacturer = None
+        qc_cat_number = None
+
         # QC Lot Nº (UNIQUE) # TODO: Need a convention for this
-        # QC name
-        # Analyte name
-        # concentration
-        # Preparation date
-        pass
+        qc_lot_number = ask_for_string("Enter QC Lot Nº")
+        
+        qc_name = ask_for_string("Enter QC name")
+        analyte_name = ask_a_choice("Select analyte name", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
+        conc = ask_for_number("Enter concentration")
+        unit = ask_a_choice("Select unit", ["Unit A", "Unit B"]) # TODO: obtain list of units from the database
+        expiration_date = None
+        preparation_date = ask_for_string("Enter preparation date (YYYY-MM-DD)") # TODO: Validate date format
+        
+        print("Linking QC to assay is not implemented yet.")
 
-    # Ask the lot Nº
-    lot_number = input("Enter the lot number: ").strip()
+    # Preview the QC details
+    print("\nQC Details:")
+    print(f"QC Type: {qc_type}")
+    print(f"Manufacturer: {manufacturer}")
+    print(f"QC Cat Nº: {qc_cat_number}")
+    print(f"QC Lot Nº: {qc_lot_number}")
+    print(f"QC Name: {qc_name}")
+    print(f"Analyte Name: {analyte_name}")
+    print(f"Concentration: {conc}")
+    print(f"Unit: {unit}")
+    print(f"Expiration Date: {expiration_date}")
+    print(f"Preparation Date: {preparation_date}")
 
-    # Check if the lot Nº is existing
-    # Implement the logic to check if the lot number exists in the database
-
-    # For example, you can call the add_qc function from the qc_controller module
-    # and pass the necessary parameters.
-    # Example:
-    # add_qc(db_path, ...)
+    print("-" * 50)
+    # Ask for confirmation
+    confirm = ask_yes_no("Do you want to add this QC?")
+    if confirm:
+        # Implement the logic to add the QC to the database here
+        # For example, you can call the add_qc function from the qc_controller module
+        # and pass the necessary parameters.
+        # Example:
+        # add_qc(db_path, qc_type, manufacturer, qc_cat_number, qc_lot_number, qc_name, analyte_name, conc, unit, expiration_date, preparation_date)
+        print("Adding QC to the database... (not implemented yet)")
+    else:
+        print("QC addition cancelled.")
+    
     print("QC added successfully!")
 
 def lookup_qc_flow(db_path):
