@@ -22,8 +22,6 @@ from src.controllers.qc_controller import (add_qc_flow, lookup_qc_flow)
 
 def show_main_menu():
 
-    show_welcome() # TODO: Move this before main_menu_flow()
-
     print("\nWaht do you want to do?")
     print("1. Assay Lookup")
     
@@ -31,10 +29,12 @@ def show_main_menu():
     print("3. Lookup Last 15 Experiments")
     print("4. Lookup All Experiments")
     print()
-    print("q. Exit")
 
     print("8. Add a QC")
     print("9. Lookup a QC")
+    print()
+    print("q. Exit")
+    print()
 
 def main_menu_flow(db_path):
     """
