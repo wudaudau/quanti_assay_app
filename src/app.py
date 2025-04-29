@@ -11,6 +11,7 @@ from src.database.db_data_loader import load_all_data_from_csv
 
 
 # Call the controllers
+from src.controllers.main_menu_controller import show_main_menu
 from src.controllers.assay_lookup_controller import (
     lookup_assay_details_full,
     lookup_assay_details_step_by_step,
@@ -26,16 +27,6 @@ def show_welcome():
 def show_goodbye():
     print("Goodbye!")
 
-
-def show_main_menu():
-    print("\nWaht do you want to do?")
-    print("1. Lookup Assay (Full List)")
-    print("2. Lookup Assay (Step-by-Step Filter)")
-    print("3. Lookup Assay (Filter by Species and Analyte)")
-    print("4. Log Experiment")
-    print("5. Lookup Last 15 Experiments")
-    print("6. Lookup All Experiments")
-    print("7. Exit")
 
 def ask_user_choice():
     return input("Enter your choice: ").strip()
