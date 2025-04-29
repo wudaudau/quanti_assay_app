@@ -13,6 +13,10 @@ def add_qc_flow(db_path):
     print("Adding a QC...")
     # Implement the logic to add a QC here
 
+
+
+    # Ask QC basic information
+
     qc_type = ask_a_choice("Select QC type", ["Purchased", "Home made"])
 
     if qc_type == "Purchased":
@@ -24,55 +28,56 @@ def add_qc_flow(db_path):
 
         qc_name = ask_for_string("Enter QC name")
 
-        is_multiplex = ask_yes_no("Is this a multiplex QC?") 
-        if is_multiplex:
-            print("Multiplex QC functionality is not implemented yet.")
-            
-            # TODO: Develop multiplex QC functionality
-            # anlyte_count = ask_for_number("Enter number of analytes")
-            anlyte_count = 1
-        else:
-            anlyte_count = 1
-
-        for i in range(anlyte_count):
-            analyte_name = ask_a_choice(f"Select analyte name for analyte {i+1}", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
-            conc = ask_for_number("Enter concentration")
-        
-        unit = ask_a_choice("Select unit", ["Unit A", "Unit B"]) # TODO: obtain list of units from the database
+        unit = ask_a_choice("Select unit", ["pg/ml", "ng/ml"]) # TODO: obtain list of units from the database
         expiration_date = ask_for_string("Enter expiration date (YYYY-MM-DD)") # TODO: Validate date format
         preparation_date = None
-        
-
-        # TODO: Link to assay? 
-            # Probably in another many-to-many table to link QC to assay
-            # Because QC could be used in different assays (e.g. MSD U-PLEX assays)
-
-        print("Linking QC to assay is not implemented yet.")
+    
     elif qc_type == "Home made":
         manufacturer = None
         qc_cat_number = None
 
         # QC Lot Nº (UNIQUE) # TODO: Need a convention for this
-        qc_lot_number = ask_for_string("Enter QC Lot Nº")
-        
-        is_multiplex = ask_yes_no("Is this a multiplex QC?")
-        if is_multiplex:
-            print("Multiplex QC functionality is not implemented yet.")
-            
-            # TODO: Develop multiplex QC functionality
-            # anlyte_count = ask_for_number("Enter number of analytes")
-        else:
-            anlyte_count = 1
+        qc_lot_number = ask_for_string("Enter QC Lot Nº")    
 
-        for i in range(anlyte_count):
-            analyte_name = ask_a_choice(f"Select analyte name for analyte {i+1}", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
-            conc = ask_for_number("Enter concentration")
+        qc_name = ask_for_string("Enter QC name")    
 
-        unit = ask_a_choice("Select unit", ["Unit A", "Unit B"]) # TODO: obtain list of units from the database
+        unit = ask_a_choice("Select unit", ["pg/ml", "ng/ml"]) # TODO: obtain list of units from the database
         expiration_date = None
         preparation_date = ask_for_string("Enter preparation date (YYYY-MM-DD)") # TODO: Validate date format
+
+
+
+
+
+    # Deal with analyte levels and 
+        # One QC can have multiple analytes
+
+    is_multiplex = ask_yes_no("Is this a multiplex QC?") 
+    if is_multiplex:
+        print("Multiplex QC functionality is not implemented yet.")
         
-        print("Linking QC to assay is not implemented yet.")
+        # TODO: Develop multiplex QC functionality
+        anlyte_count = ask_for_number("Enter number of analytes")
+    else:
+        anlyte_count = 1
+
+    analyte_and_conc = []
+    for i in range(anlyte_count):
+        analyte_name = ask_a_choice(f"Select analyte name for analyte {i+1}", ["Analyte A", "Analyte B", "Analyte C", "Analyte D"]) # TODO: obtain list of analytes from the database
+        conc = ask_for_number("Enter concentration")
+    
+        analyte_and_conc.append((analyte_name, conc))
+    
+
+
+    # TODO: Link to assay? 
+        # Probably in another many-to-many table to link QC to assay
+        # Because QC could be used in different assays (e.g. MSD U-PLEX assays)
+
+    print("Linking QC to assay is not implemented yet.")
+    
+
+
 
     # Preview the QC details
     print("\nQC Details:")
@@ -81,32 +86,38 @@ def add_qc_flow(db_path):
     print(f"\t- QC Cat Nº: {qc_cat_number}")
     print(f"\t- QC Lot Nº: {qc_lot_number}")
     print(f"\t- QC Name: {qc_name}")
-    # TODO: Refactor this to show analytes in a table or make the entire details a table to be add to the database
-    print(f"\t- Analyte Name: {analyte_name}")
-    print(f"\t- Concentration: {conc}")
-    print(f"\t- Unit: {unit}")
+    print()
+    print("\tQC concentration details:")
+    for analyte_name, conc in analyte_and_conc:
+        print(f"\t\t- {analyte_name}\t {conc} {unit}")
+    print()
+
+    
     print(f"\t- Expiration Date: {expiration_date}")
     print(f"\t- Preparation Date: {preparation_date}")
 
-    print("-" * 50)
+    print()
     # Ask for confirmation
     confirm = ask_yes_no("Do you want to add this QC?")
     if confirm:
-        insert_qc(
-            db_path,
-            qc_type,
-            qc_name,
-            qc_lot_number,
-            manufacturer,
-            qc_cat_number,
-            unit,
-            expiration_date,
-            preparation_date,
-            [(analyte_name, conc)]
-        )
+        for analyte_name, conc in analyte_and_conc:
+            insert_qc(
+                db_path,
+                qc_type,
+                qc_name,
+                qc_lot_number,
+                manufacturer,
+                qc_cat_number,
+                unit,
+                expiration_date,
+                preparation_date,
+                [(analyte_name, conc)]
+            )
         print("QC added successfully!")
+        print("-" * 50)
     else:
         print("QC addition cancelled.")
+        print("-" * 50)
     
     
 
