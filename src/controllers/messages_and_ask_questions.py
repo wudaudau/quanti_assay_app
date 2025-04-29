@@ -9,6 +9,7 @@ def show_welcome():
     print("Welcome to QuantiApp - Assay Management System!")
 
 def show_goodbye():
+    print("Thank you for using QuantiApp!")
     print("Goodbye!")
 
 
