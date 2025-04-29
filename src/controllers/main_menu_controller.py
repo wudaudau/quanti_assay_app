@@ -47,6 +47,10 @@ def main_menu_flow(db_path):
         show_main_menu()
         choice = ask_a_menu_choice()
 
+        while choice not in ["1", "2", "3", "4", "q", "8", "9"]:
+            print("Invalid choice. Please try again.")
+            choice = ask_a_menu_choice()
+
         if choice == "1":
             assay_lookup_flow(db_path)
         
@@ -58,16 +62,13 @@ def main_menu_flow(db_path):
         elif choice == "4":
             lookup_experiments_flow(db_path)
 
-        elif choice == "q":
-            show_goodbye()
-            break
         
-
         elif choice == "8":
             add_qc_flow(db_path)
         elif choice == "9":
             lookup_qc_flow(db_path)
 
-            
-        else:
-            print("Invalid choice. Please try again.")
+        elif choice == "q":
+            show_goodbye()
+            break
+        
