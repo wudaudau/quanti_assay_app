@@ -1,10 +1,17 @@
 """
-There are three functions in this module:
-- lookup_assay_details_full(db_path): This function lets the user select an assay from the full list and view its details.
-- lookup_assay_details_step_by_step(db_path): This function guides the user through selecting a species, assay type, and assay name to view details.
-- lookup_assay_details_by_species_and_analyte(db_path): This function lets the user filter assays by species and analyte to view details.
+This module provides functions to interact with the assay lookup database.
 
-Use them in app.py to provide different ways for the user to lookup assay details.
+There are currently three lookup methods (basic into)
+TODO: Move to a separate module: assay_lookup/basic_info.py
+
+
+TODO: Add more Assay Lookup functions
+- [ ] assay_lookup/reagent_info.py
+- [ ] assay_lookup/steps_overview.py
+- [ ] assay_lookup/protocols.py
+- [ ] assay_lookup/sds_info.py
+
+
 """
 
 
