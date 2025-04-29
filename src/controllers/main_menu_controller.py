@@ -32,9 +32,10 @@ def show_main_menu():
     print("\nWaht do you want to do?")
     print("1. Assay Lookup")
     
-    print("4. Log Experiment")
-    print("5. Lookup Last 15 Experiments")
-    print("6. Lookup All Experiments")
+    print("2. Log Experiment")
+    print("3. Lookup Last 15 Experiments")
+    print("4. Lookup All Experiments")
+    print()
     print("7. Exit")
 
 def main_menu_flow(db_path):
@@ -50,12 +51,13 @@ def main_menu_flow(db_path):
             assay_lookup_flow(db_path)
         
             
-        elif choice == "4":
+        elif choice == "2":
             log_experiment_flow(db_path)
-        elif choice == "5":
+        elif choice == "3":
             lookup_experiments_flow(db_path, 15) # Limit to last 15 experiments
-        elif choice == "6":
+        elif choice == "4":
             lookup_experiments_flow(db_path)
+
         elif choice == "7":
             show_goodbye()
             break
