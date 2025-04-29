@@ -61,7 +61,7 @@ def select_manipulator(db_path):
 
 
 
-def log_experiment(db_path, species_id, assay_type_id, assay_id, sample_type_id, manipulator_ids, exp_date:str):
+def log_experiment(db_path, species_id, assay_type_id, assay_id, sample_type_id, manipulator_ids, exp_date:str): # TODO: Rename to insert_experiment()
 
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
