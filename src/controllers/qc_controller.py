@@ -55,7 +55,7 @@ def add_qc_flow(db_path):
         for i in range(anlyte_count):
             analyte_name = ask_a_choice(f"Select analyte name for analyte {i+1}", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
             conc = ask_for_number("Enter concentration")
-            
+
         unit = ask_a_choice("Select unit", ["Unit A", "Unit B"]) # TODO: obtain list of units from the database
         expiration_date = None
         preparation_date = ask_for_string("Enter preparation date (YYYY-MM-DD)") # TODO: Validate date format
@@ -69,6 +69,7 @@ def add_qc_flow(db_path):
     print(f"\t- QC Cat Nº: {qc_cat_number}")
     print(f"\t- QC Lot Nº: {qc_lot_number}")
     print(f"\t- QC Name: {qc_name}")
+    # TODO: Refactor this to show analytes in a table
     print(f"\t- Analyte Name: {analyte_name}")
     print(f"\t- Concentration: {conc}")
     print(f"\t- Unit: {unit}")
