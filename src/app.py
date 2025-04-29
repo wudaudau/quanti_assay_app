@@ -10,32 +10,20 @@ from src.database.db_core import create_database
 from src.database.db_data_loader import load_all_data_from_csv
 
 
-# Call the controllers
-from src.controllers.main_menu_controller import show_main_menu
-from src.controllers.assay_lookup_controller import (
-    lookup_assay_details_full,
-    lookup_assay_details_step_by_step,
-    lookup_assay_details_by_species_and_analyte
-)
-from src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
+# Call main controller
+from src.controllers.main_menu_controller import main_menu_flow
 
 
 
-def show_welcome():
-    print("Welcome to QuantiApp - Assay Management System!")
-
-def show_goodbye():
-    print("Goodbye!")
 
 
-def ask_user_choice():
-    return input("Enter your choice: ").strip()
-                
 
 
 
 
 def run_app():
+
+    # Database setup
     db_path = os.path.join("data", "quanti_assay.sqlite") # Path to the SQLite database file
     create_database(db_path)
     load_all_data_from_csv(db_path)
@@ -43,25 +31,6 @@ def run_app():
 
 
     show_welcome()
-    while True:
-        show_main_menu()
-        choice = ask_user_choice()
-
-        if choice == "1":
-            lookup_assay_details_full(db_path)
-        elif choice == "2":
-            lookup_assay_details_step_by_step(db_path)
-        elif choice == "3":
-            lookup_assay_details_by_species_and_analyte(db_path)
-        elif choice == "4":
-            log_experiment_flow(db_path)
-        elif choice == "5":
-            lookup_experiments_flow(db_path, 15) # Limit to last 15 experiments
-        elif choice == "6":
-            lookup_experiments_flow(db_path)
-        elif choice == "7":
-            break
-        else:
-            print("Invalid choice. Please try again.")
+    main_menu_flow(db_path)
     show_goodbye()
 
