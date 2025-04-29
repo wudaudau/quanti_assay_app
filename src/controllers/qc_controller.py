@@ -18,8 +18,17 @@ def add_qc_flow(db_path):
         qc_lot_number = ask_for_string("Enter QC Lot Nº")
 
         qc_name = ask_for_string("Enter QC name")
-        analyte_name = ask_a_choice("Select analyte name", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
-        conc = ask_for_number("Enter concentration")
+
+        is_multiplex = ask_yes_no("Is this a multiplex QC?")
+        if is_multiplex:
+            anlyte_count = ask_for_number("Enter number of analytes")
+        else:
+            anlyte_count = 1
+
+        for i in range(anlyte_count):
+            analyte_name = ask_a_choice(f"Select analyte name for analyte {i+1}", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
+            conc = ask_for_number("Enter concentration")
+        
         unit = ask_a_choice("Select unit", ["Unit A", "Unit B"]) # TODO: obtain list of units from the database
         expiration_date = ask_for_string("Enter expiration date (YYYY-MM-DD)") # TODO: Validate date format
         preparation_date = None
@@ -37,9 +46,16 @@ def add_qc_flow(db_path):
         # QC Lot Nº (UNIQUE) # TODO: Need a convention for this
         qc_lot_number = ask_for_string("Enter QC Lot Nº")
         
-        qc_name = ask_for_string("Enter QC name")
-        analyte_name = ask_a_choice("Select analyte name", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
-        conc = ask_for_number("Enter concentration")
+        is_multiplex = ask_yes_no("Is this a multiplex QC?")
+        if is_multiplex:
+            anlyte_count = ask_for_number("Enter number of analytes")
+        else:
+            anlyte_count = 1
+
+        for i in range(anlyte_count):
+            analyte_name = ask_a_choice(f"Select analyte name for analyte {i+1}", ["Analyte A", "Analyte B"]) # TODO: obtain list of analytes from the database
+            conc = ask_for_number("Enter concentration")
+            
         unit = ask_a_choice("Select unit", ["Unit A", "Unit B"]) # TODO: obtain list of units from the database
         expiration_date = None
         preparation_date = ask_for_string("Enter preparation date (YYYY-MM-DD)") # TODO: Validate date format
