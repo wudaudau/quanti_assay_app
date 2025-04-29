@@ -79,8 +79,15 @@ CREATE TABLE IF NOT EXISTS qc_analyte (
     concentration REAL NOT NULL,
     unit TEXT NOT NULL,
     FOREIGN KEY (qc_id) REFERENCES qc(id),
-    FOREIGN KEY (analyte_id) REFERENCES analyte(id)
+    FOREIGN KEY (analyte_id) REFERENCES analyte(id),
+    UNIQUE (qc_id, assay_id)  -- Avoid duplicate links
 );
+
+
+
+
+
+
 
 -- experiment log
 
