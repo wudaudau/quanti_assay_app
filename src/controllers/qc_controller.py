@@ -81,17 +81,17 @@ def add_qc_flow(db_path):
 
     # Preview the QC details
     print("\nQC Details:")
-    print(f"\t- QC Type: {qc_type}")
-    print(f"\t- Manufacturer: {manufacturer}")
-    print(f"\t- QC Cat Nº: {qc_cat_number}")
-    print(f"\t- QC Lot Nº: {qc_lot_number}")
-    print(f"\t- QC Name: {qc_name}")
-    print(f"\t- Expiration Date: {expiration_date}")
-    print(f"\t- Preparation Date: {preparation_date}")
+    print(f"- QC Type: {qc_type}")
+    print(f"- Manufacturer: {manufacturer}")
+    print(f"- QC Cat Nº: {qc_cat_number}")
+    print(f"- QC Lot Nº: {qc_lot_number}")
+    print(f"- QC Name: {qc_name}")
+    print(f"- Expiration Date: {expiration_date}")
+    print(f"- Preparation Date: {preparation_date}")
     print()
-    print("\tQC concentration details:")
+    print("QC concentration details:")
     for analyte_name, conc in analyte_and_conc:
-        print(f"\t\t- {analyte_name}\t {conc} {unit}")
+        print(f"\t- {analyte_name}\t {conc} {unit}")
     print()
 
     
