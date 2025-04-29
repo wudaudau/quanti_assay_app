@@ -7,6 +7,7 @@ from src.controllers.assay_lookup_controller import assay_lookup_flow
 
 from src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
 
+from src.controllers.qc_controller import (add_qc_flow, lookup_qc_flow)
 
 
 
@@ -48,6 +49,9 @@ def show_main_menu():
 >>>>>>> FEAT: Add option for new QC functionality in main menu
     print("7. Exit")
 
+    print("8. Add a QC")
+    print("9. Lookup a QC")
+
 def main_menu_flow(db_path):
     """
     Main menu loop.
@@ -71,7 +75,9 @@ def main_menu_flow(db_path):
         elif choice == "7":
             show_goodbye()
             break
-        elif choice == "new":
-            print("New QC functionality is not implemented yet.")
+        elif choice == "8":
+            add_qc_flow(db_path)
+        elif choice == "9":
+            lookup_qc_flow(db_path)
         else:
             print("Invalid choice. Please try again.")
