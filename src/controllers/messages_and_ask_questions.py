@@ -2,6 +2,7 @@
 There are functions to set up the welcome and goodbye messages, and to ask the user for input.
 """
 
+import datetime
 
 
 def show_welcome():
@@ -70,3 +71,15 @@ def ask_for_number(question:str):
             return answer
         except ValueError:
             print("Invalid input. Please enter a number.")
+
+def ask_for_date(question:str) -> datetime.date:
+    """
+    Ask the user for a date input.
+    """
+    while True:
+        answer = input(f"{question} (YYYY-MM-DD): ").strip()
+        try:
+            year, month, day = map(int, answer.split('-'))
+            return datetime.date(year, month, day)
+        except ValueError:
+            print("Invalid date format. Please enter a date in YYYY-MM-DD format.")
