@@ -18,11 +18,16 @@ def check_exists(cursor, table:str, conditions:dict):
     cursor.execute(query, values)
     return cursor.fetchone()
 
-def get_or_insert(cursor, table, data):
+def get_or_insert(cursor, table:str, data:dict):
     """
-    Generic get_or_insert for tables with one or more unique columns.
-    table: str
+    cursor: sqlite3.Cursor
+    table: str. Table name to check.
     data: dict {column: value}
+
+    Generic get_or_insert for tables with one or more unique columns.
+    Checks if a row exists based on provided data.
+    If it exists, returns the row ID. 
+    If not, inserts the data and returns the new row ID.
     """
     row = check_exists(cursor, table, data)
     if row:
