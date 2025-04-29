@@ -30,7 +30,6 @@ def run_app():
 
 
 
-    show_welcome()
     main_menu_flow(db_path)
     show_goodbye()
 

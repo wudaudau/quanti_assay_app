@@ -29,6 +29,9 @@ def ask_user_choice():
 
 
 def show_main_menu():
+
+    show_welcome()
+
     print("\nWaht do you want to do?")
     print("1. Lookup Assay (Full List)")
     print("2. Lookup Assay (Step-by-Step Filter)")
