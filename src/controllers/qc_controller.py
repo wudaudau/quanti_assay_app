@@ -21,9 +21,13 @@ def add_qc_flow(db_path):
 
         qc_name = ask_for_string("Enter QC name")
 
-        is_multiplex = ask_yes_no("Is this a multiplex QC?") # TODO: Develop multiplex QC functionality
+        is_multiplex = ask_yes_no("Is this a multiplex QC?") 
         if is_multiplex:
-            anlyte_count = ask_for_number("Enter number of analytes")
+            print("Multiplex QC functionality is not implemented yet.")
+            
+            # TODO: Develop multiplex QC functionality
+            # anlyte_count = ask_for_number("Enter number of analytes")
+            anlyte_count = 1
         else:
             anlyte_count = 1
 
@@ -48,9 +52,12 @@ def add_qc_flow(db_path):
         # QC Lot Nº (UNIQUE) # TODO: Need a convention for this
         qc_lot_number = ask_for_string("Enter QC Lot Nº")
         
-        is_multiplex = ask_yes_no("Is this a multiplex QC?") # TODO: Develop multiplex QC functionality
+        is_multiplex = ask_yes_no("Is this a multiplex QC?")
         if is_multiplex:
-            anlyte_count = ask_for_number("Enter number of analytes")
+            print("Multiplex QC functionality is not implemented yet.")
+            
+            # TODO: Develop multiplex QC functionality
+            # anlyte_count = ask_for_number("Enter number of analytes")
         else:
             anlyte_count = 1
 
@@ -82,16 +89,23 @@ def add_qc_flow(db_path):
     # Ask for confirmation
     confirm = ask_yes_no("Do you want to add this QC?")
     if confirm:
-        # Implement the logic to add the QC to the database here
-        # For example, you can call the add_qc function from the qc_controller module
-        # and pass the necessary parameters.
-        # Example:
-        # add_qc(db_path, qc_type, manufacturer, qc_cat_number, qc_lot_number, qc_name, analyte_name, conc, unit, expiration_date, preparation_date)
-        print("Adding QC to the database... (not implemented yet)")
+        insert_qc(
+            db_path,
+            qc_type,
+            qc_name,
+            qc_lot_number,
+            manufacturer,
+            qc_cat_number,
+            unit,
+            expiration_date,
+            preparation_date,
+            [(analyte_name, conc)]
+        )
+        print("QC added successfully!")
     else:
         print("QC addition cancelled.")
     
-    print("QC added successfully!")
+    
 
 def lookup_qc_flow(db_path):
     """
