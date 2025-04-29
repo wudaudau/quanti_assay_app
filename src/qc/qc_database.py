@@ -4,6 +4,8 @@
 
 import sqlite3
 
+from src.database.db_utils import check_exists, get_or_insert
+
 def insert_qc(
     db_path,
     qc_type,
@@ -14,7 +16,6 @@ def insert_qc(
     unit=None,
     expiration_date=None,
     preparation_date=None,
-    analytes=None  # List of tuples: [(analyte_name, concentration), ...]
 ):
     """
     Insert a QC (purchased or homemade) and its analytes into the database.
@@ -37,17 +38,12 @@ def insert_qc(
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
+    # Check if QC lot number already exists in qc table
+    if check_exists(cursor, "qc", {"lot_number": qc_lot_number}):
+        raise ValueError(f"QC lot number '{qc_lot_number}' already exists in the database.") # TODO: Handle this case better
+
     # Get or insert manufacture
-    if manufacture_name:
-        cursor.execute("SELECT id FROM manufacture WHERE name = ?", (manufacture_name,))
-        row = cursor.fetchone()
-        if row:
-            manufacture_id = row[0]
-        else:
-            cursor.execute("INSERT INTO manufacture (name) VALUES (?)", (manufacture_name,))
-            manufacture_id = cursor.lastrowid
-    else:
-        manufacture_id = None
+    manufacture_id = get_or_insert(cursor, "manufacture", {"name": manufacture_name}) if manufacture_name else None
 
     # Insert into qc table
     cursor.execute("""
