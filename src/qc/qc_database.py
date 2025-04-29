@@ -80,3 +80,33 @@ def insert_qc(
     conn.close()
 
     return qc_id
+
+def insert_qc_analyte(db_path, qc_id, analyte_name, concentration, unit):
+    """
+    Insert a QC analyte into the database.
+    Parameters:
+        db_path (str): Path to the database.
+        qc_id (int): ID of the QC.
+        analyte_name (str): Name of the analyte.
+        concentration (float): Concentration of the analyte.
+        unit (str): Unit of measurement.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Get or insert analyte
+    analyte_id = get_or_insert(cursor, "analyte", {"name": analyte_name})
+
+    # Check existence
+    if check_exists(cursor, "qc_analyte", {"qc_id": qc_id, "analyte_id": analyte_id}):
+        raise ValueError(f"QC analyte '{analyte_name}' already exists for QC ID {qc_id}.") # TODO: Handle this case better
+
+
+    # Insert into qc_analyte
+    cursor.execute("""
+        INSERT INTO qc_analyte (qc_id, analyte_id, concentration, unit)
+        VALUES (?, ?, ?, ?)
+    """, (qc_id, analyte_id, concentration, unit))
+
+    conn.commit()
+    conn.close()
