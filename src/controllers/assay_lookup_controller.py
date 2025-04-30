@@ -14,6 +14,7 @@ TODO: Add more Assay Lookup functions
 
 """
 
+from src.controllers.messages_and_ask_questions import show_flow_title
 
 from src.assay_lookup.assay_lookup import (
     get_assay_details_by_name, get_analytes_for_assay,
@@ -28,7 +29,18 @@ from src.assay_lookup.assay_lookup import (
 
 
 def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_assay_results()?
+
+    show_flow_title("Assay Lookup - Full List")
+
+    # Ask user for the input TODO: Move this to a separate module?
     assay_name = select_assay_name(db_path)
+
+
+
+
+    # Review the selected options
+
+    # Show the results
     if assay_name:
         showing_assay_results(db_path, assay_name)
 
@@ -93,6 +105,10 @@ def assay_lookup_flow_details_step_by_step(db_path):
     Full interactive lookup - species -> assay type -> assay name -> show details.
     Uses new showing_assay_results() which now takes assay_name directly.
     """
+    show_flow_title("Assay Lookup - Step-by-Step Filter")
+
+
+    # Ask user for the input TODO: Move this to a separate module?
     species = select_species(db_path)
     if not species:
         return
@@ -111,9 +127,14 @@ def assay_lookup_flow_details_step_by_step(db_path):
 
     assay_id, assay_name = assay
 
+
+
+    # Review the selected options
     print(f"\nYou selected: {species_name} > {assay_type_name} > {assay_name}")
     print("Fetching assay details...\n")
 
+
+    # Show the results
     showing_assay_results(db_path, assay_name)  # Now takes `assay_name` directly
 
 
@@ -128,8 +149,14 @@ def assay_lookup_flow_details_step_by_step(db_path):
 
 def assay_lookup_flow_details_by_species_and_analyte(db_path):
     """
-    Species -> Analyte -> Assay -> Details
+    Use species and analyte to filter the assay list.
+    Species + Analyte -> Assay -> Details
+    Uses new showing_assay_results() which now takes assay_name directly.
     """
+    show_flow_title("Assay Lookup - Filter by Species and Analyte")
+
+
+    # Ask user for the input TODO: Move this to a separate module?
     species = select_species(db_path)
     if not species:
         return
@@ -148,7 +175,12 @@ def assay_lookup_flow_details_by_species_and_analyte(db_path):
 
     _, assay_name = assay
 
+
+
+    # Review the selected options
     print(f"\nYou selected: {species_name} > {analyte_name} > {assay_name}")
     print("Fetching assay details...\n")
 
+
+    # Show the results
     showing_assay_results(db_path, assay_name) # TODO: Refactor this to do lookup and show results in different functions
