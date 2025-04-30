@@ -153,7 +153,8 @@ def assay_lookup_flow_details_by_species_and_analyte(db_path):
     Species + Analyte -> Assay -> Details
     Uses new showing_assay_results() which now takes assay_name directly.
     """
-    show_flow_title_and_descriptions("Assay Lookup - Filter by Species and Analyte", "...") # TODO: Add description
+    show_flow_title_and_descriptions("Assay Lookup - Filter by Species and Analyte", 
+                                     "Use Species and Analyte to filter the assay options.")
 
 
     # Ask user for the input TODO: Move this to a separate module?
