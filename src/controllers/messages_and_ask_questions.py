@@ -22,13 +22,18 @@ def show_menu_title(msg:str):
     print(f"{msg:^60}")
     print("=" * 60)
 
-def show_flow_title(msg:str):
+def show_flow_title_and_descriptions(title:str, description:str):
     """
-    msg: str. Message to show in the flow title.
+    title: str. Text to show in the flow title.
+    description: str. Text to show in the flow description.
     This function will print a title for the flow.
     """
     print()
-    print(f"{msg:=^60}")
+    print(f"{title:=^60}")
+    print()
+    print("Description:")
+    print(description)
+    print()
 
 
 def ask_a_menu_choice():
