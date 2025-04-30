@@ -9,10 +9,10 @@ from src.controllers.messages_and_ask_questions import show_menu_title, ask_a_me
 
 
 from src.controllers.assay_menu_controller import assay_menu_flow
+from src.controllers.qc_menu_controller import qc_menu_flow
 
 from src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
 
-from src.controllers.qc_controller import (add_qc_flow, lookup_qc_flow)
 
 
 
@@ -25,11 +25,10 @@ def show_main_menu():
     print("\nWaht do you want to do?")
 
     print("1. Assay Menu")
+    print("2. QC Menu")
     print()
     
-    print("2. Add a QC") # TODO: Make this "QC Menu"
-    print("3. Lookup a QC")
-    print()
+    
     
     print("4. Log Experiment") # TODO: Make this "Experiment Menu"
     print("5. Lookup Last 15 Experiments")
@@ -57,13 +56,11 @@ def main_menu_flow(db_path):
         if choice == "1":
             assay_menu_flow(db_path)
             # TODO: Move this to assay_lookup_controller: assay_lookup_flow(db_path)
+        elif choice == "2":
+            qc_menu_flow(db_path)
 
         
-        # TODO: Make this "QC Menu"
-        elif choice == "2":
-            add_qc_flow(db_path)
-        elif choice == "3":
-            lookup_qc_flow(db_path)
+        
         
         # TODO: Make this "Experiment Menu"    
         elif choice == "4":
