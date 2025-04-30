@@ -18,7 +18,7 @@ def assay_menu():
     """
     Display the assay lookup menu.
     """
-    print("\nAssay Menu")
+    print("\nWhat do you want to do?")
     # TODO: Add "new assay" option
     print("1. Lookup Assay (Full List)")
     print("2. Lookup Assay (Step-by-Step Filter)")
