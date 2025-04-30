@@ -1,5 +1,6 @@
 """
-
+This module provides functions to look up assay details in a SQLite database.
+This module connects between the database and the user interface (assay_lookup_controller).
 """
 
 
