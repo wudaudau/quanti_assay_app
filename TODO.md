@@ -4,10 +4,10 @@
 
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
-  - [x] Update main_menu_controller.py
-  - [ ] Create assay_menu_contoller.py
-  - [ ] Update qc_menu_controller.py
-  - [ ] Update exp_menu_controller.py
+  - [x] Update main_menu_controller.py and make it work
+  - [x] Create assay_menu_contoller.py and make it work
+  - [x] Create qc_menu_controller.py and make it work
+  - [ ] Create exp_menu_controller.py and make it work
 
 - [ ] Refactor the app into `feature/refactor-app` branch.
   - [ ] Add function-related documentations.
