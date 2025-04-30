@@ -7,7 +7,8 @@
   - [x] Update main_menu_controller.py and make it work
   - [x] Create assay_menu_contoller.py and make it work
   - [x] Create qc_menu_controller.py and make it work
-  - [ ] Create exp_menu_controller.py and make it work
+  - [x] Create exp_menu_controller.py and make it work
+  - [ ] What to do next? Develop the submenu and ensure the functionality? Add data to the database? More complex function such as asking password to access the log function?
 
 - [ ] Refactor the app into `feature/refactor-app` branch.
   - [ ] Add function-related documentations.
