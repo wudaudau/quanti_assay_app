@@ -11,7 +11,7 @@
   - [x] Create assay_menu_contoller.py and make it work
   - [x] Create qc_menu_controller.py and make it work
   - [x] Create exp_menu_controller.py and make it work
-  - [ ] Create flow_title() in messages_and_ask_questions.py and applys to flows.
+  - [x] Create show_flow_title_and_descriptions() in messages_and_ask_questions.py and applys to flows.
   - [ ] Rename assay_loopup_controller.py to controller_utils.py
   - [ ] What to do next? Develop the submenu and ensure the functionality? Add data to the database? More complex function such as asking password to access the log function?
 
