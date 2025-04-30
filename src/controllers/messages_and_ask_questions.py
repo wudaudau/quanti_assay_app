@@ -26,7 +26,7 @@ def show_flow_title_and_descriptions(title:str, description:str):
     """
     title: str. Text to show in the flow title.
     description: str. Text to show in the flow description.
-    This function will print a title for the flow.
+    This function will print a title and the description for the flow.
     """
     print()
     print(f"{title:=^60}")
