@@ -4,10 +4,15 @@
 
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
+    - Main menu
+      - Sub menus (e.g. Assay Menu) (Use "menu" in the names)
+        - Functional flows (e.g. xxx_lookup_flow, xxx_log_flow)
   - [x] Update main_menu_controller.py and make it work
   - [x] Create assay_menu_contoller.py and make it work
   - [x] Create qc_menu_controller.py and make it work
   - [x] Create exp_menu_controller.py and make it work
+  - [ ] Create flow_title() in messages_and_ask_questions.py and applys to flows.
+  - [ ] Rename assay_loopup_controller.py to controller_utils.py
   - [ ] What to do next? Develop the submenu and ensure the functionality? Add data to the database? More complex function such as asking password to access the log function?
 
 - [ ] Refactor the app into `feature/refactor-app` branch.
