@@ -44,7 +44,7 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
     if assay_name:
         showing_assay_results(db_path, assay_name)
 
-def showing_assay_results(db_path, assay_name:str):
+def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let assay_lookup_flow functions stay together
     """
     This function obtains assay details using the assay name.
     It then displays the details in a user-friendly format.
