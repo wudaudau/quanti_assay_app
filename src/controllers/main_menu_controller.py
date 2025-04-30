@@ -8,7 +8,7 @@ from src.controllers.messages_and_ask_questions import show_goodbye # TODO: Move
 from src.controllers.messages_and_ask_questions import show_menu_title, ask_a_menu_choice
 
 
-from src.controllers.assay_lookup_controller import assay_lookup_flow
+from src.controllers.assay_menu_controller import assay_menu_flow
 
 from src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
 
@@ -24,7 +24,7 @@ def show_main_menu():
 
     print("\nWaht do you want to do?")
 
-    print("1. Assay Lookup") # TODO: Make this "Assay Menu"
+    print("1. Assay Menu")
     print()
     
     print("2. Add a QC") # TODO: Make this "QC Menu"
@@ -55,7 +55,7 @@ def main_menu_flow(db_path):
             choice = ask_a_menu_choice()
 
         if choice == "1":
-            assay_lookup_flow(db_path)
+            assay_menu_flow(db_path)
 
         
         elif choice == "2":
