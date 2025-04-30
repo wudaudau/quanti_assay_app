@@ -56,14 +56,16 @@ def main_menu_flow(db_path):
 
         if choice == "1":
             assay_menu_flow(db_path)
+            # TODO: Move this to assay_lookup_controller: assay_lookup_flow(db_path)
 
         
+        # TODO: Make this "QC Menu"
         elif choice == "2":
             add_qc_flow(db_path)
         elif choice == "3":
             lookup_qc_flow(db_path)
         
-            
+        # TODO: Make this "Experiment Menu"    
         elif choice == "4":
             log_experiment_flow(db_path)
         elif choice == "5":
