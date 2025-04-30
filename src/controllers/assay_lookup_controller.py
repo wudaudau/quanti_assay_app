@@ -157,22 +157,29 @@ def assay_lookup_flow_details_by_species_and_analyte(db_path):
                                      "Use Species and Analyte to filter the assay options.")
 
 
-    # Ask user for the input TODO: Move this to a separate module?
+    # Ask user for the input 
+        # TODO: Move this to a separate module? or use the asking functions from messages_and_ask_questions.py?
+
+        # We need to:
+            # - Ask species
+                # - 
+            
+
     species = select_species(db_path)
     if not species:
-        return
+        return # TODO: Add safe exit
 
     species_id, species_name = species
 
     analyte = select_analyte_for_species(db_path, species_id)
     if not analyte:
-        return
+        return # TODO: Add safe exit
 
     analyte_id, analyte_name = analyte
 
     assay = select_assay_for_species_and_analyte(db_path, species_id, analyte_id)
     if not assay:
-        return
+        return # TODO: Add safe exit
 
     _, assay_name = assay
 
@@ -180,6 +187,9 @@ def assay_lookup_flow_details_by_species_and_analyte(db_path):
 
     # Review the selected options
     print(f"\nYou selected: {species_name} > {analyte_name} > {assay_name}")
+    # TODO: Add a confirmation step before fetching details
+
+
     print("Fetching assay details...\n")
 
 
