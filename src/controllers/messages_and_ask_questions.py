@@ -18,16 +18,17 @@ def show_menu_title(msg:str):
     msg: str. Message to show in the menu title.
     This function will print a title for the menu.
     """
-    print("\n" + "=" * 40)
-    print(f"{msg:^40}")
-    print("=" * 40)
+    print("\n" + "=" * 60)
+    print(f"{msg:^60}")
+    print("=" * 60)
 
 def show_flow_title(msg:str):
     """
     msg: str. Message to show in the flow title.
     This function will print a title for the flow.
     """
-    print(f"{msg:=^40}")
+    print()
+    print(f"{msg:=^60}")
 
 
 def ask_a_menu_choice():
