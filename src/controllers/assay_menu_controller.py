@@ -8,9 +8,9 @@ There are assay_menu and assay_menu_flow functions to display the assay menu and
 from src.controllers.messages_and_ask_questions import show_menu_title
 
 from src.controllers.assay_lookup_controller import (
-    lookup_assay_details_full,
-    lookup_assay_details_step_by_step,
-    lookup_assay_details_by_species_and_analyte
+    assay_lookup_flow_details_full,
+    assay_lookup_flow_details_step_by_step,
+    assay_lookup_flow_details_by_species_and_analyte
 )
 
 
@@ -36,11 +36,11 @@ def assay_menu_flow(db_path):
         choice = input("Enter your choice: ").strip()
 
         if choice == "1":
-            lookup_assay_details_full(db_path) # TODO: Rename it to flow or controller
+            assay_lookup_flow_details_full(db_path)
         elif choice == "2":
-            lookup_assay_details_step_by_step(db_path) # TODO: Rename it to flow or controller
+            assay_lookup_flow_details_step_by_step(db_path)
         elif choice == "3":
-            lookup_assay_details_by_species_and_analyte(db_path) # TODO: Rename it to flow or controller
+            assay_lookup_flow_details_by_species_and_analyte(db_path)
         elif choice == "4":
             print("Returning to Main Menu...")
             break

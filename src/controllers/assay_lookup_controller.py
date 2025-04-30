@@ -27,7 +27,7 @@ from src.assay_lookup.assay_lookup import (
 
 
 
-def lookup_assay_details_full(db_path):
+def assay_lookup_flow_details_full(db_path): # TODO: Combine it with lookup_assay_details()?
     assay_name = select_assay_name(db_path)
     if assay_name:
         lookup_assay_details(db_path, assay_name)
@@ -81,7 +81,7 @@ def lookup_assay_details(db_path, assay_name):
 
 
 
-def lookup_assay_details_step_by_step(db_path):
+def assay_lookup_flow_details_step_by_step(db_path):
     """
     Full interactive lookup - species -> assay type -> assay name -> show details.
     Uses new lookup_assay_details() which now takes assay_name directly.
@@ -119,7 +119,7 @@ def lookup_assay_details_step_by_step(db_path):
 
 
 
-def lookup_assay_details_by_species_and_analyte(db_path):
+def assay_lookup_flow_details_by_species_and_analyte(db_path):
     """
     Species -> Analyte -> Assay -> Details
     """
