@@ -25,37 +25,6 @@ from src.assay_lookup.assay_lookup import (
 
 
 
-def assay_lookup_menu():
-    """
-    Display the assay lookup menu.
-    """
-    print("\nAssay Lookup Menu")
-    print("1. Lookup Assay (Full List)")
-    print("2. Lookup Assay (Step-by-Step Filter)")
-    print("3. Lookup Assay (Filter by Species and Analyte)")
-    print("4. Back to Main Menu")
-
-def assay_lookup_flow(db_path):
-    """
-    Main menu loop.
-    """
-    while True:
-        assay_lookup_menu()
-        choice = input("Enter your choice: ").strip()
-
-        if choice == "1":
-            lookup_assay_details_full(db_path)
-        elif choice == "2":
-            lookup_assay_details_step_by_step(db_path)
-        elif choice == "3":
-            lookup_assay_details_by_species_and_analyte(db_path)
-        elif choice == "4":
-            print("Returning to Main Menu...")
-            break
-
-
-
-
 
 
 def lookup_assay_details_full(db_path):
