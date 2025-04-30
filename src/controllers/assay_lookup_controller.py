@@ -14,7 +14,7 @@ TODO: Add more Assay Lookup functions
 
 """
 
-from src.controllers.messages_and_ask_questions import show_flow_title
+from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions
 
 from src.assay_lookup.assay_lookup import (
     get_assay_details_by_name, get_analytes_for_assay,
@@ -30,7 +30,7 @@ from src.assay_lookup.assay_lookup import (
 
 def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_assay_results()?
 
-    show_flow_title("Assay Lookup - Full List")
+    show_flow_title_and_descriptions("Assay Lookup - Full List", "...") # TODO: Add description
 
     # Ask user for the input TODO: Move this to a separate module?
     assay_name = select_assay_name(db_path)
@@ -105,7 +105,7 @@ def assay_lookup_flow_details_step_by_step(db_path):
     Full interactive lookup - species -> assay type -> assay name -> show details.
     Uses new showing_assay_results() which now takes assay_name directly.
     """
-    show_flow_title("Assay Lookup - Step-by-Step Filter")
+    show_flow_title_and_descriptions("Assay Lookup - Step-by-Step Filter", "...") # TODO: Add description
 
 
     # Ask user for the input TODO: Move this to a separate module?
@@ -153,7 +153,7 @@ def assay_lookup_flow_details_by_species_and_analyte(db_path):
     Species + Analyte -> Assay -> Details
     Uses new showing_assay_results() which now takes assay_name directly.
     """
-    show_flow_title("Assay Lookup - Filter by Species and Analyte")
+    show_flow_title_and_descriptions("Assay Lookup - Filter by Species and Analyte", "...") # TODO: Add description
 
 
     # Ask user for the input TODO: Move this to a separate module?
