@@ -27,12 +27,12 @@ from src.assay_lookup.assay_lookup import (
 
 
 
-def assay_lookup_flow_details_full(db_path): # TODO: Combine it with lookup_assay_details()?
+def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_assay_results()?
     assay_name = select_assay_name(db_path)
     if assay_name:
-        lookup_assay_details(db_path, assay_name)
+        showing_assay_results(db_path, assay_name)
 
-def lookup_assay_details(db_path, assay_name):
+def showing_assay_results(db_path, assay_name):
     """
     Combined function to let user select an assay and display all related details.
     Species, assay type, and manufacture are shown once.
@@ -84,7 +84,7 @@ def lookup_assay_details(db_path, assay_name):
 def assay_lookup_flow_details_step_by_step(db_path):
     """
     Full interactive lookup - species -> assay type -> assay name -> show details.
-    Uses new lookup_assay_details() which now takes assay_name directly.
+    Uses new showing_assay_results() which now takes assay_name directly.
     """
     species = select_species(db_path)
     if not species:
@@ -107,7 +107,7 @@ def assay_lookup_flow_details_step_by_step(db_path):
     print(f"\nYou selected: {species_name} > {assay_type_name} > {assay_name}")
     print("Fetching assay details...\n")
 
-    lookup_assay_details(db_path, assay_name)  # Now takes `assay_name` directly
+    showing_assay_results(db_path, assay_name)  # Now takes `assay_name` directly
 
 
 
@@ -144,4 +144,4 @@ def assay_lookup_flow_details_by_species_and_analyte(db_path):
     print(f"\nYou selected: {species_name} > {analyte_name} > {assay_name}")
     print("Fetching assay details...\n")
 
-    lookup_assay_details(db_path, assay_name)
+    showing_assay_results(db_path, assay_name) # TODO: Refactor this to do lookup and show results in different functions
