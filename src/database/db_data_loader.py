@@ -23,7 +23,7 @@ def load_all_data_from_csv(db_path):
     print("\n--- Importing Initial Data from CSV Files ---")
 
     add_assays_from_csv(db_path, 'data/assays.csv')
-    add_kits_from_csv(db_path, 'data/kits.csv')
+    add_assay_kits_from_csv(db_path, 'data/assay_kits.csv')
     add_assay_analytes_from_csv(db_path, 'data/assay_analytes.csv')
     add_sample_types_from_csv(db_path, 'data/sample_types.csv')
     add_manipulators_from_csv(db_path, 'data/manipulators.csv')
