@@ -2,6 +2,11 @@
 
 ## In Progress
 
+- [ ] "refactor/db-schema-kit-assay"
+  - [ ] Refactor database schema
+  - [ ] Refactor related python functions
+    - [ ] Any code that used kit.assay_id
+    - [ ] Any queries, data creation, and form submissions
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
