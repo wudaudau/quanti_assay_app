@@ -11,7 +11,7 @@ There are following csv files to import:
 
 import sqlite3
 import csv
-from src.database.db_utils import get_or_insert
+from src.database.db_utils import get_or_insert, update_row
 
 
 
@@ -86,11 +86,13 @@ def add_assays_kits_from_csv(db_path, csv_file):
             kit_format = row.get('format', None)  # Safe handling if 'format' is missing
 
 
-            # Obtain ids
+            # Obtain ids (on unique columns)
             assay_id = get_or_insert(cursor, 'assay', {'name': assay_name})
             manufacture_id = get_or_insert(cursor, 'manufacture', {'name': manufacture})
+            kit_id = get_or_insert(cursor, 'kit', {'manufacture_id': manufacture_id, 'cat_number': kit_cat_number})
 
-            kit_id = get_or_insert(cursor, 'kit', {'manufacture_id': manufacture_id, 'cat_number': kit_cat_number, 'format': kit_format})
+            # Update kit format if provided
+            update_row(cursor, 'kit', kit_id, {'format': kit_format}) if kit_format else None
 
             # Insert into assays_kits table
             cursor.execute("""
