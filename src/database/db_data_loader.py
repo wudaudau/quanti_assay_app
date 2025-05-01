@@ -62,8 +62,14 @@ def add_assays_from_csv(db_path, csv_file):
     conn.close()
     print(f"Assays from {csv_file} imported.")
 
-def add_kits_from_csv(db_path, csv_file):
-    """kits.csv: assay_name, manufacture, kit_cat_number"""
+def add_assay_kits_from_csv(db_path, csv_file):
+    """
+    assay_kits.csv: assay_name, manufacture, kit_cat_number
+    
+    We need to
+    1. Insert kit into the kit table
+    2. Insert assay_id and kit_id into the assay_kits table
+    """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -71,30 +77,40 @@ def add_kits_from_csv(db_path, csv_file):
         reader = csv.DictReader(f)
 
         for row in reader:
-            assay_name = row['assay_name']
-            manufacture = row['manufacture']
+            # Assay information
+            assay_name = row['assay_name'] # Need to obtain the assay_id from the assay table
+
+            # Kit information
+            manufacture = row['manufacture'] # Need to obtain the manufacture_id from the manufacture table
             kit_cat_number = row['kit_cat_number']
             kit_format = row.get('format', None)  # Safe handling if 'format' is missing
 
-            # Lookup the assay_id (must already exist from the first file import)
-            cursor.execute("SELECT id FROM assay WHERE name = ?", (assay_name,))
-            assay_row = cursor.fetchone()
 
-            if assay_row:
-                assay_id = assay_row[0]
-                manufacture_id = get_or_insert(cursor, 'manufacture', {'name': manufacture})
+            # Obtain ids
+            assay_id = get_or_insert(cursor, 'assay', {'name': assay_name})
+            manufacture_id = get_or_insert(cursor, 'manufacture', {'name': manufacture})
 
-                # Insert into kit table
-                cursor.execute("""
-                    INSERT OR IGNORE INTO kit (assay_id, manufacture_id, kit_cat_number, format)
-                    VALUES (?, ?, ?, ?)
-                """, (assay_id, manufacture_id, kit_cat_number, kit_format))
-            else:
-                print(f"Warning: Assay '{assay_name}' not found when adding kit.")
+
+            # Insert into kit table
+            cursor.execute("""
+                INSERT OR IGNORE INTO kit (manufacture_id, kit_cat_number, format)
+                VALUES (?, ?, ?)
+            """, (manufacture_id, kit_cat_number, kit_format))
+
+            # Obtain the kit_id
+            kit_id = get_or_insert(cursor, 'kit', {'manufacture_id': manufacture_id, 'kit_cat_number': kit_cat_number})
+
+            # Insert into assay_kits table
+            cursor.execute("""
+                INSERT OR IGNORE INTO assay_kits (assay_id, kit_id)
+                VALUES (?, ?)
+            """, (assay_id, kit_id))
 
     conn.commit()
     conn.close()
     print(f"Kits from {csv_file} imported.")
+
+
 
 def add_assay_analytes_from_csv(db_path, csv_file):
     """
