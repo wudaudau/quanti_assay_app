@@ -158,11 +158,13 @@ def assay_lookup_flow_details_by_species_and_analyte(db_path):
 
 
     # Ask user for the input 
+        # TODO: I feel that I need to refactor the database schema to make this easier.
+            # Remove assay_id from the kit table and create a assay_kits table to link kits to assays.
         # TODO: Move this to a separate module? or use the asking functions from messages_and_ask_questions.py?
 
-        # We need to:
-            # - Ask species
-                # - 
+        # Ask species:
+            # - obtain species list from the database
+            # - use ask_a_choice() to show the list and get the user's choice
             
 
     species = select_species(db_path)
