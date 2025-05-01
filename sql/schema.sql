@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS assay (
 CREATE TABLE IF NOT EXISTS kit (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     manufacture_id INTEGER NOT NULL,
-    kit_cat_number TEXT NOT NULL,
-    kit_format TEXT,   -- New column to store kit format like '1-plate', '5-plate', etc.
+    cat_number TEXT NOT NULL,
+    format TEXT,   -- New column to store kit format like '1-plate', '5-plate', etc.
     UNIQUE(manufacture_id, kit_cat_number),  -- To avoid duplicates
     FOREIGN KEY (manufacture_id) REFERENCES manufacture(id)
 );
