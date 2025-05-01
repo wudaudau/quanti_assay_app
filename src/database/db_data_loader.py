@@ -98,7 +98,7 @@ def add_assays_kits_from_csv(db_path, csv_file):
             """, (manufacture_id, kit_cat_number, kit_format))
 
             # Obtain the kit_id
-            kit_id = get_or_insert(cursor, 'kit', {'manufacture_id': manufacture_id, 'kit_cat_number': kit_cat_number})
+            kit_id = get_or_insert(cursor, 'kit', {'manufacture_id': manufacture_id, 'kit_cat_number': kit_cat_number, 'kit_format': kit_format})
 
             # Insert into assays_kits table
             cursor.execute("""
