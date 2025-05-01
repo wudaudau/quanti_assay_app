@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS kit (
     manufacture_id INTEGER NOT NULL,
     cat_number TEXT NOT NULL,
     format TEXT,   -- New column to store kit format like '1-plate', '5-plate', etc.
-    UNIQUE(manufacture_id, kit_cat_number),  -- To avoid duplicates
+    UNIQUE(manufacture_id, cat_number),  -- To avoid duplicates
     FOREIGN KEY (manufacture_id) REFERENCES manufacture(id)
 );
 
