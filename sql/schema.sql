@@ -143,13 +143,15 @@ CREATE TABLE IF NOT EXISTS exp_log (
 
 -- Assay Lookup View (For assay_lookup)
 -- This view summarizes the assay information, including assay_name, species, assay_type, manufacture, kit_cat_number, format
+DROP VIEW IF EXISTS assay_lookup_view;
+
 CREATE VIEW assay_lookup_view AS
 SELECT 
-    a.name, 
+    a.name AS assay_name, 
     s.name AS species, 
     t.name AS assay_type, 
     m.name AS manufacture, 
-    k.cat_number, 
+    k.cat_number AS kit_cat_number, 
     k.format
 FROM assay a
 JOIN species s ON a.species_id = s.id
