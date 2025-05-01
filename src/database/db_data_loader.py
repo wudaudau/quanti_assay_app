@@ -93,7 +93,7 @@ def add_assays_kits_from_csv(db_path, csv_file):
 
             # Insert into kit table
             cursor.execute("""
-                INSERT OR IGNORE INTO kit (manufacture_id, kit_cat_number, format)
+                INSERT OR IGNORE INTO kit (manufacture_id, kit_cat_number, kit_format)
                 VALUES (?, ?, ?)
             """, (manufacture_id, kit_cat_number, kit_format))
 
