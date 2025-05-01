@@ -3,7 +3,7 @@ Functions responsible for reading CSV files and bulk-inserting data into tables.
 
 There are following csv files to import:
 - assays.csv: assay_name, assay_type, species -> 
-- kits.csv: assay_name, manufacture, kit_cat_number ->
+- assays_kits.csv: assay_name, manufacture, kit_cat_number ->
 - assay_analytes.csv: assay_name, spot_number, analyte_name -> 
 - sample_types.csv: name ->
 - manipulators.csv: first_name, last_name ->
