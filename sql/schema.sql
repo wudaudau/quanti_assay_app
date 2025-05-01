@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS qc_analyte (
     unit TEXT NOT NULL,
     FOREIGN KEY (qc_id) REFERENCES qc(id),
     FOREIGN KEY (analyte_id) REFERENCES analyte(id),
-    UNIQUE (qc_id, assay_id)  -- Avoid duplicate links
+    UNIQUE (qc_id, analyte_id)  -- Avoid duplicate links
 );
 
 
