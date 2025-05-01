@@ -2,6 +2,9 @@
 
 ## In Progress
 
+- [ ] "refactor/assay-lookup-func"
+  - [x] Create a VIEW for assay_lookup
+  - [ ] Use assay_lookup_view in assay_lookup.py
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
@@ -14,7 +17,6 @@
   - [x] Create exp_menu_controller.py and make it work
   - [x] Create show_flow_title_and_descriptions() in messages_and_ask_questions.py and applys to flows.
   - [ ] Enhance the flow functionality using "1. Assay Menu -> 3. Lookup Assay (Filter by Species and Analyte)".
-  - [ ] Create a VIEW for assay_lookup
   - [ ] Rename assay_loopup_controller.py to controller_utils.py
   - [ ] What to do next? Develop the submenu and ensure the functionality? Add data to the database? More complex function such as asking password to access the log function?
 - [x] "refactor/db-schema-kit-assay"
