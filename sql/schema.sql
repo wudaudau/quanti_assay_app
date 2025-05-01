@@ -26,16 +26,24 @@ CREATE TABLE IF NOT EXISTS assay (
     FOREIGN KEY (assay_type_id) REFERENCES assay_type(id)
 );
 
--- Kit Table (links kit to assays, with manufacture and catalog number)
+-- Kit Table (with manufacture and catalog number)
 CREATE TABLE IF NOT EXISTS kit (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    assay_id INTEGER NOT NULL,
     manufacture_id INTEGER NOT NULL,
     kit_cat_number TEXT NOT NULL,
     format TEXT,   -- New column to store kit format like '1-plate', '5-plate', etc.
-    UNIQUE(assay_id, manufacture_id, kit_cat_number),  -- To avoid duplicates
-    FOREIGN KEY (assay_id) REFERENCES assay(id),
+    UNIQUE(manufacture_id, kit_cat_number),  -- To avoid duplicates
     FOREIGN KEY (manufacture_id) REFERENCES manufacture(id)
+);
+
+-- Assay-Kit Link Table (associates assays with kits)
+CREATE TABLE IF NOT EXISTS assays_kits (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    assay_id INTEGER NOT NULL,
+    kit_id INTEGER NOT NULL,
+    FOREIGN KEY (assay_id) REFERENCES assay(id),
+    FOREIGN KEY (kit_id) REFERENCES kit(id),
+    UNIQUE (assay_id, kit_id)  -- Avoid duplicate links
 );
 
 -- Analyte Table (basic list of analytes)
