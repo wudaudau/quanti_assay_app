@@ -23,8 +23,8 @@ def load_all_data_from_csv(db_path):
     print("\n--- Importing Initial Data from CSV Files ---")
 
     add_assays_from_csv(db_path, 'data/assays.csv')
-    add_assay_kits_from_csv(db_path, 'data/assay_kits.csv')
-    add_assay_analytes_from_csv(db_path, 'data/assay_analytes.csv')
+    add_assays_kits_from_csv(db_path, 'data/assays_kits.csv')
+    add_assays_analytes_from_csv(db_path, 'data/assays_analytes.csv')
     add_sample_types_from_csv(db_path, 'data/sample_types.csv')
     add_manipulators_from_csv(db_path, 'data/manipulators.csv')
 
@@ -62,13 +62,13 @@ def add_assays_from_csv(db_path, csv_file):
     conn.close()
     print(f"Assays from {csv_file} imported.")
 
-def add_assay_kits_from_csv(db_path, csv_file):
+def add_assays_kits_from_csv(db_path, csv_file):
     """
-    assay_kits.csv: assay_name, manufacture, kit_cat_number
+    assays_kits.csv: assay_name, manufacture, kit_cat_number
     
     We need to
     1. Insert kit into the kit table
-    2. Insert assay_id and kit_id into the assay_kits table
+    2. Insert assay_id and kit_id into the assays_kits table
     """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
@@ -100,9 +100,9 @@ def add_assay_kits_from_csv(db_path, csv_file):
             # Obtain the kit_id
             kit_id = get_or_insert(cursor, 'kit', {'manufacture_id': manufacture_id, 'kit_cat_number': kit_cat_number})
 
-            # Insert into assay_kits table
+            # Insert into assays_kits table
             cursor.execute("""
-                INSERT OR IGNORE INTO assay_kits (assay_id, kit_id)
+                INSERT OR IGNORE INTO assays_kits (assay_id, kit_id)
                 VALUES (?, ?)
             """, (assay_id, kit_id))
 
@@ -112,7 +112,7 @@ def add_assay_kits_from_csv(db_path, csv_file):
 
 
 
-def add_assay_analytes_from_csv(db_path, csv_file):
+def add_assays_analytes_from_csv(db_path, csv_file):
     """
     Read assay_analytes.csv and insert assay-analyte mappings into the database.
     Includes spot_number to handle multi-analyte panels.
