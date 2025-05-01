@@ -1,0 +1,14 @@
+# schema_changes.log
+
+[2025-05-01] Removed assay_id from kit table; created assay_kit table
+- Normalized many-to-many relationship between assays and kits
+- Updated schema.sql accordingly
+- No data migration needed since app is still in early development
+
+[2025-04-15] Added qc and qc_analyte tables
+- Created qc table to store quality control information
+- Created qc_analyte table to store analyte-specific QC information
+- Updated schema.sql to reflect new tables
+- Added foreign key constraints to ensure data integrity
+- No data migration needed since app is still in early development
+
