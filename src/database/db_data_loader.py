@@ -66,9 +66,9 @@ def add_assays_kits_from_csv(db_path, csv_file):
     """
     assays_kits.csv: assay_name, manufacture, kit_cat_number
     
-    We need to
-    1. Insert kit into the kit table
-    2. Insert assay_id and kit_id into the assays_kits table
+    We need to:
+    1. Obtain (or insert) the assay_id, manufacture_id, and kit_id from the respective tables.
+    2. Insert the mapping into the assays_kits table.
     """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
