@@ -2,13 +2,6 @@
 
 ## In Progress
 
-- [ ] "refactor/db-schema-kit-assay"
-  - [x] Refactor database schema
-  - [ ] Refactor related python functions
-    - [x] Add a table update function in db_utils.py
-    - [ ] assay_analyte -> assays_analyte table related
-    - [ ] Any code that used kit.assay_id
-    - [ ] Any queries, data creation, and form submissions
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
@@ -21,8 +14,16 @@
   - [x] Create exp_menu_controller.py and make it work
   - [x] Create show_flow_title_and_descriptions() in messages_and_ask_questions.py and applys to flows.
   - [ ] Enhance the flow functionality using "1. Assay Menu -> 3. Lookup Assay (Filter by Species and Analyte)".
+  - [ ] Create a VIEW for assay_lookup
   - [ ] Rename assay_loopup_controller.py to controller_utils.py
   - [ ] What to do next? Develop the submenu and ensure the functionality? Add data to the database? More complex function such as asking password to access the log function?
+- [x] "refactor/db-schema-kit-assay"
+  - [x] Refactor database schema
+  - [ ] Refactor related python functions
+    - [x] Add a table update function in db_utils.py
+    - [ ] assay_analyte -> assays_analyte table related
+    - [ ] Any code that used kit.assay_id
+    - [ ] Any queries, data creation, and form submissions
 
 - [ ] Refactor the app into `feature/refactor-app` branch.
   - [ ] Add function-related documentations.
