@@ -5,6 +5,8 @@
 - [ ] "refactor/db-schema-kit-assay"
   - [x] Refactor database schema
   - [ ] Refactor related python functions
+    - [ ] Add a table update function in db_utils.py
+    - [ ] assay_analyte -> assays_analyte table related
     - [ ] Any code that used kit.assay_id
     - [ ] Any queries, data creation, and form submissions
 - [ ] "refactor/update-menus"
