@@ -14,11 +14,12 @@ def get_assay_details_by_name(db_path, assay_name):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT a.name, s.name AS species, t.name AS assay_type, m.name AS manufacture, k.kit_cat_number, k.format
+        SELECT a.name, s.name AS species, t.name AS assay_type, m.name AS manufacture, k.cat_number, k.format
         FROM assay a
         JOIN species s ON a.species_id = s.id
         JOIN assay_type t ON a.assay_type_id = t.id
-        LEFT JOIN kit k ON a.id = k.assay_id
+        LEFT JOIN assays_kits ak ON a.id = ak.assay_id
+        LEFT JOIN kit k ON ak.kit_id = k.id
         LEFT JOIN manufacture m ON k.manufacture_id = m.id
         WHERE a.name = ?
     """, (assay_name,))
