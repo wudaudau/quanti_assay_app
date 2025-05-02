@@ -39,9 +39,13 @@ def show_flow_title_and_descriptions(title:str, description:str):
 def ask_a_menu_choice():
     return input("Enter your choice: ").strip()
                 
-def ask_a_choice(question:str, choices:list):
+def ask_a_choice(question:str, choices:list) -> str:
     """
+    question: str. The question to ask the user.
+    choices: list. A list of choices to present to the user.
+    
     Ask the user a question and return their choice.
+    Returns the selected choice from the list.
     """
     print(question)
     for i, choice in enumerate(choices, start=1):
