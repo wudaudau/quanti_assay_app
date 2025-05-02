@@ -16,8 +16,8 @@ TODO: Add more Assay Lookup functions
 
 from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions, ask_a_choice
 
-from src.controllers.assay_menu_controller import assay_menu_flow
-from src.controllers.main_menu_controller import main_menu_flow
+# from src.controllers.assay_menu_controller import assay_menu_flow
+# from src.controllers.main_menu_controller import main_menu_flow
 
 from src.assay_lookup.assay_lookup import (
     get_assay_details_by_name, get_analytes_for_assay,
@@ -33,47 +33,51 @@ from src.assay_lookup.assay_lookup import (
 
 def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_assay_results()?
 
-    show_flow_title_and_descriptions("Assay Lookup - Full List", "Show assay details by selecting an assay name.") # TODO: Add description
+    while True:
 
-    # Ask user for the input TODO: Move this to a separate module?
+        show_flow_title_and_descriptions("Assay Lookup - Full List", "Show assay details by selecting an assay name.") # TODO: Add description
 
-    # 1) Ask an assay name:
-        # Obtain the list of assay names from the database
-        # Prepare the list of assay names
-        # Question to ask the user to select one option from the list
-    ls_assays = fetch_ls_assays_from_db(db_path)
+        # Ask user for the input TODO: Move this to a separate module?
 
-    if len(ls_assays) == 0:
-        print("No assays found in the database.")
+        # 1) Ask an assay name:
+            # Obtain the list of assay names from the database
+            # Prepare the list of assay names
+            # Question to ask the user to select one option from the list
+        ls_assays = fetch_ls_assays_from_db(db_path)
+
+        if len(ls_assays) == 0:
+            print("No assays found in the database.")
+            
+            # TODO: Add more msg to show the user this flow is terminated
+        else:
+            assay_name = ask_a_choice("\nAvailable Assays:", ls_assays)
+
         
-        # TODO: Add more msg to show the user this flow is terminated
-    else:
-        assay_name = ask_a_choice("\nAvailable Assays:", ls_assays)
 
-    
+        # Review the selected options
+        print(f"\nYou selected: {assay_name}")
 
-    # Review the selected options
-    print(f"\nYou selected: {assay_name}")
-
-    # Ask for confirmation before fetching details
-    is_confirmed = ask_a_choice("Do you want to fetch the details for this assay? (yes/no)", ["yes", "no"])
-    if is_confirmed == "no":
-        print("Assay details fetching cancelled.")
-        print("Back to the Assay Menu...")
-        return # TODO: Add safe exit
-    elif is_confirmed == "yes":
-        print("Fetching assay details...\n")
-        showing_assay_results(db_path, assay_name)
+        # Ask for confirmation before fetching details
+        is_confirmed = ask_a_choice("Do you want to fetch the details for this assay? (yes/no)", ["yes", "no"])
+        if is_confirmed == "no":
+            print("Assay details fetching cancelled.")
+            print("Back to the Assay Menu...")
+            return # TODO: Add safe exit
+        elif is_confirmed == "yes":
+            print("Fetching assay details...\n")
+            showing_assay_results(db_path, assay_name)
 
 
-    # Ask next step
-    next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
-    if next_step == "Start a new assay lookup":
-        assay_lookup_flow_details_full(db_path)
-    elif next_step == "Go back to the Assay Mene":
-        assay_menu_flow(db_path)
-    elif next_step == "Go back to the Main Mene":
-        main_menu_flow(db_path)
+        # Ask next step
+        next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
+        if next_step == "Start a new assay lookup":
+            assay_lookup_flow_details_full(db_path) # TODO: Remove it or Add a safe exit?
+        elif next_step == "Go back to the Assay Mene":
+            print("Not implemented yet.")
+            # assay_menu_flow(db_path)
+        elif next_step == "Go back to the Main Mene":
+            print("Not implemented yet.")
+            # main_menu_flow(db_path)
 
 
 
