@@ -49,9 +49,7 @@ def main_menu_flow(db_path):
             choice = ask_a_menu_choice()
 
         if choice == "1":
-            result = assay_menu_flow(db_path)
-            if result == "main menu":
-                continue
+            assay_menu_flow(db_path)
         elif choice == "2":
             qc_menu_flow(db_path)
         elif choice == "3":

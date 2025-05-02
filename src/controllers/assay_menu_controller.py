@@ -28,7 +28,8 @@ def assay_menu():
 
 def assay_menu_flow(db_path):
     """
-    Main menu loop.
+    Assay menu flow.
+    The parent flow is main_menu_flow().
     """
     while True:
         show_menu_title("Assay Lookup Menu")
@@ -38,14 +39,14 @@ def assay_menu_flow(db_path):
         if choice == "1":
             result = assay_lookup_flow_details_full(db_path)
             if result is "assay menu":
-                continue
+                continue # restart the loop
             elif result is "main menu":
-                return result # back to main_menu_flow()
+                break # back to main_menu_flow()
         elif choice == "2":
             assay_lookup_flow_details_step_by_step(db_path)
         elif choice == "3":
             assay_lookup_flow_details_by_species_and_analyte(db_path)
         elif choice == "4":
             print("Returning to Main Menu...")
-            break
+            break # back to main_menu_flow()
 
