@@ -45,11 +45,10 @@ def assay_lookup_flow_no_filter(db_path): # TODO: Combine it with showing_assay_
 
         # 1) Ask an assay name:
             # Obtain the list of assay names from the database
-            # Prepare the list of assay names
-            # Question to ask the user to select one option from the list
+            # Use ask_a_choice() to show the list and get the user's choice
         ls_assays = fetch_ls_assays_from_db(db_path)
 
-        if len(ls_assays) == 0:
+        if len(ls_assays) == 0: # TODO: We need to test this case
             print("No assays found in the database.")
             return "assay menu" # Back to assay_menu_flow()
         else:
@@ -97,7 +96,7 @@ def assay_lookup_flow_filter_by_species_and_assay_type(db_path):
         # Obtain species list from the database
         # Use ask_a_choice() to show the list and get the user's choice
     ls_species = fetch_ls_species_from_db(db_path)
-    if len(ls_species) == 0:
+    if len(ls_species) == 0: # TODO: We need to test this case
         print("No species found in the database.")
         return "assay menu"
     else:
