@@ -4,7 +4,8 @@
 
 - [ ] "refactor/assay-lookup-func"
   - [x] Create a VIEW for assay_lookup
-  - [ ] Use assay_lookup_view in assay_lookup.py
+  - [ ] Use assay_lookup_view in assay_lookup.py -> Not sure if we need or not.
+  - [ ] Refactor the lookup flows to make them easy to understad and use.
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
