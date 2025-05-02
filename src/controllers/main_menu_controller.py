@@ -49,8 +49,9 @@ def main_menu_flow(db_path):
             choice = ask_a_menu_choice()
 
         if choice == "1":
-            assay_menu_flow(db_path)
-            # TODO: Move this to assay_lookup_controller: assay_lookup_flow(db_path)
+            result = assay_menu_flow(db_path)
+            if result == "main menu":
+                continue
         elif choice == "2":
             qc_menu_flow(db_path)
         elif choice == "3":
