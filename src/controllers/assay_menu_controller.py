@@ -38,15 +38,15 @@ def assay_menu_flow(db_path):
 
         if choice == "1":
             result = assay_lookup_flow_details_full(db_path)
-            if result is "assay menu":
+            if result == "assay menu":
                 continue # restart the loop
-            elif result is "main menu":
-                break # back to main_menu_flow()
+            elif result == "main menu":
+                return result # back to main_menu_flow()
         elif choice == "2":
             assay_lookup_flow_details_step_by_step(db_path)
         elif choice == "3":
             assay_lookup_flow_details_by_species_and_analyte(db_path)
         elif choice == "4":
             print("Returning to Main Menu...")
-            break # back to main_menu_flow()
+            return "main menu" # back to main_menu_flow()
 
