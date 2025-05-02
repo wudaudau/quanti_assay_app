@@ -20,8 +20,8 @@ def assay_menu():
     """
     print("\nWhat do you want to do?")
     # TODO: Add "new assay" option
-    print("1. Lookup Assay (Full List)")
-    print("2. Lookup Assay (Step-by-Step Filter)")
+    print("1. Lookup Assay (No Filter)")
+    print("2. Lookup Assay (Filter by Species and Assay Type)")
     print("3. Lookup Assay (Filter by Species and Analyte)")
     print()
     print("4. Back to Main Menu")
