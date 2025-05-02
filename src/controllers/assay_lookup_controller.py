@@ -60,7 +60,7 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
         print(f"\nYou selected: {assay_name}")
 
         # Ask for confirmation before fetching details
-        is_confirmed = ask_yes_no("Do you want to fetch the details for this assay? (yes/no)")
+        is_confirmed = ask_yes_no("Do you want to fetch the details for this assay?")
         if not is_confirmed:
             print("Assay details fetching cancelled.")
             print("Back to the Assay Menu...")
