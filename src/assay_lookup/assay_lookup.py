@@ -84,35 +84,25 @@ def fetch_ls_assays_from_db(db_path) -> list:
 ######
 # Lookup Assay (Filter by Species and Assay Type)
 ######
-# This is a new feature that allows the user to filter assays by species and assay type.
-# The user can then select an assay from the filtered list and view its details.
-# This is a more guided approach to finding an assay compared to the full list lookup.
+def fetch_ls_species_from_db(db_path) -> list:
+    """
+    db_path: str. Path to the SQLite database.
 
-def select_species(db_path):
+    Fetch all species names in alphabetic order from the database.
+    Extract the species names into a list.
+
+    Return a list of species names.
+    """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    cursor.execute("SELECT id, name FROM species ORDER BY name;")
+    cursor.execute("SELECT name FROM species ORDER BY name;")
     species = cursor.fetchall()
     conn.close()
 
-    if not species:
-        print("No species found in the database.")
-        return None
+    ls_species = [spec[0] for spec in species]  # Extract names from tuples
 
-    print("\nAvailable Species:")
-    for i, (species_id, species_name) in enumerate(species, 1):
-        print(f"{i}. {species_name}")
-
-    while True:
-        try:
-            choice = int(input("\nSelect a species by number: "))
-            if 1 <= choice <= len(species):
-                return species[choice - 1]  # (id, name)
-            else:
-                print("Invalid selection. Try again.")
-        except ValueError:
-            print("Please enter a valid number.")
+    return ls_species
 
 
 def select_assay_type_by_species(db_path, species_id):
