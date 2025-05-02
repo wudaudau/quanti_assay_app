@@ -95,7 +95,7 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
 
     if not details:
         print(f"No details found for assay '{assay_name}'.")
-        return
+        return # TODO: Add safe exit
 
     # Extract common details from the first row
     first_row = details[0]
