@@ -55,9 +55,14 @@ def get_analytes_for_assay(db_path, assay_name):
 ######
 
 
-def select_assay_name(db_path):
+def fetch_ls_assays_from_db(db_path) -> list:
     """
-    CLI function to list and let user select an assay name.
+    db_path: str. Path to the SQLite database.
+
+    Fetch all assay names in alphabetic order from the database.
+    Extract the assay names into a list.
+
+    Return a list of assay names.
     """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
@@ -66,23 +71,9 @@ def select_assay_name(db_path):
     assays = cursor.fetchall()
     conn.close()
 
-    if not assays:
-        print("No assays found in the database.")
-        return None
+    ls_assays = [assay[0] for assay in assays]  # Extract names from tuples
 
-    print("\nAvailable Assays:")
-    for i, (assay_name,) in enumerate(assays, 1):
-        print(f"{i}. {assay_name}")
-
-    while True:
-        try:
-            choice = int(input("\nSelect an assay by number: "))
-            if 1 <= choice <= len(assays):
-                return assays[choice - 1][0]
-            else:
-                print("Invalid selection. Try again.")
-        except ValueError:
-            print("Please enter a valid number.")
+    return ls_assays
 
 
 

@@ -14,11 +14,11 @@ TODO: Add more Assay Lookup functions
 
 """
 
-from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions
+from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions, ask_a_choice
 
 from src.assay_lookup.assay_lookup import (
     get_assay_details_by_name, get_analytes_for_assay,
-    select_assay_name, select_species, select_assay_type_by_species, select_assay_by_species_and_type,
+    fetch_ls_assays_from_db, select_species, select_assay_type_by_species, select_assay_by_species_and_type,
     select_analyte_for_species, select_assay_for_species_and_analyte
 )
 
@@ -30,19 +30,49 @@ from src.assay_lookup.assay_lookup import (
 
 def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_assay_results()?
 
-    show_flow_title_and_descriptions("Assay Lookup - Full List", "...") # TODO: Add description
+    show_flow_title_and_descriptions("Assay Lookup - Full List", "Show assay details by selecting an assay name.") # TODO: Add description
 
     # Ask user for the input TODO: Move this to a separate module?
-    assay_name = select_assay_name(db_path)
 
+    # 1) Ask an assay name:
+        # Obtain the list of assay names from the database
+        # Prepare the list of assay names
+        # Question to ask the user to select one option from the list
+    ls_assays = fetch_ls_assays_from_db(db_path)
 
+    if len(ls_assays) == 0:
+        print("No assays found in the database.")
+        
+        # TODO: Add more msg to show the user this flow is terminated
+    else:
+        assay_name = ask_a_choice("\nAvailable Assays:", ls_assays)
 
+    
 
     # Review the selected options
+    print(f"\nYou selected: {assay_name}")
 
-    # Show the results
-    if assay_name:
+    # Ask for confirmation before fetching details
+    is_confirmed = ask_a_choice("Do you want to fetch the details for this assay? (yes/no)", ["yes", "no"])
+    if is_confirmed == "no":
+        print("Assay details fetching cancelled.")
+        print("Back to the Assay Menu...")
+        return # TODO: Add safe exit
+    elif is_confirmed == "yes":
+        print("Fetching assay details...\n")
         showing_assay_results(db_path, assay_name)
+
+
+
+
+
+
+
+
+
+
+
+
 
 def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let assay_lookup_flow functions stay together
     """
