@@ -46,7 +46,12 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
 
 def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let assay_lookup_flow functions stay together
     """
-    This function obtains assay details using the assay name.
+    This function obtains assay details using ONE assay name.
+
+    The details are in 2 parts:
+    1. Assay details (species, assay type, manufacture, kit catalog number, format)
+    2. Analytes (with spot numbers) for the assay.
+
     It then displays the details in a user-friendly format.
     
     Combined function to let user select an assay and display all related details.
@@ -54,6 +59,7 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
     All kit catalog numbers and formats are shown.
     The analyte list (with spot numbers) for the assay is also shown.
     """
+    # Part 1: Assay details
     # Obtain assay details using the assay name
     details = get_assay_details_by_name(db_path, assay_name)
 
@@ -75,6 +81,10 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
     print(f"Assay Type: {assay_type}")
     print(f"Manufacture: {manufacture}")
 
+
+
+
+    # Part 2: Analytes
     # Get and display analytes with spot numbers
     analytes = get_analytes_for_assay(db_path, assay_name)
     if analytes:
