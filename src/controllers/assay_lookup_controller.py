@@ -14,7 +14,7 @@ TODO: Add more Assay Lookup functions
 
 """
 
-from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions, ask_a_choice
+from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions, ask_a_choice, ask_yes_no
 
 # from src.controllers.assay_menu_controller import assay_menu_flow
 # from src.controllers.main_menu_controller import main_menu_flow
@@ -58,12 +58,12 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
         print(f"\nYou selected: {assay_name}")
 
         # Ask for confirmation before fetching details
-        is_confirmed = ask_a_choice("Do you want to fetch the details for this assay? (yes/no)", ["yes", "no"])
-        if is_confirmed == "no":
+        is_confirmed = ask_yes_no("Do you want to fetch the details for this assay? (yes/no)")
+        if not is_confirmed:
             print("Assay details fetching cancelled.")
             print("Back to the Assay Menu...")
-            return # TODO: Add safe exit
-        elif is_confirmed == "yes":
+            return "assay menu" # Back to assay_menu_flow()
+        else:
             print("Fetching assay details...\n")
             showing_assay_results(db_path, assay_name)
 
