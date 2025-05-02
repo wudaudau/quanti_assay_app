@@ -16,6 +16,9 @@ TODO: Add more Assay Lookup functions
 
 from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions, ask_a_choice
 
+from src.controllers.assay_menu_controller import assay_menu_flow
+from src.controllers.main_menu_controller import main_menu_flow
+
 from src.assay_lookup.assay_lookup import (
     get_assay_details_by_name, get_analytes_for_assay,
     fetch_ls_assays_from_db, select_species, select_assay_type_by_species, select_assay_by_species_and_type,
@@ -63,6 +66,14 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
         showing_assay_results(db_path, assay_name)
 
 
+    # Ask next step
+    next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
+    if next_step == "Start a new assay lookup":
+        assay_lookup_flow_details_full(db_path)
+    elif next_step == "Go back to the Assay Mene":
+        assay_menu_flow(db_path)
+    elif next_step == "Go back to the Main Mene":
+        main_menu_flow(db_path)
 
 
 
