@@ -81,6 +81,50 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
 
 
 
+def assay_lookup_flow_details_step_by_step(db_path):
+    """
+    Full interactive lookup - species -> assay type -> assay name -> show details.
+    Uses new showing_assay_results() which now takes assay_name directly.
+    """
+    show_flow_title_and_descriptions("Assay Lookup - Step-by-Step Filter", "...") # TODO: Add description
+
+
+    # Ask user for the input TODO: Move this to a separate module?
+    species = select_species(db_path)
+    if not species:
+        return
+
+    species_id, species_name = species
+
+    assay_type = select_assay_type_by_species(db_path, species_id)
+    if not assay_type:
+        return
+
+    assay_type_id, assay_type_name = assay_type
+
+    assay = select_assay_by_species_and_type(db_path, species_id, assay_type_id)
+    if not assay:
+        return
+
+    assay_id, assay_name = assay
+
+
+
+    # Review the selected options
+    print(f"\nYou selected: {species_name} > {assay_type_name} > {assay_name}")
+    print("Fetching assay details...\n")
+
+
+    # Show the results
+    showing_assay_results(db_path, assay_name)  # Now takes `assay_name` directly
+
+
+
+
+
+
+
+
 
 
 
@@ -148,50 +192,6 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
     print()
 
 
-
-
-
-
-
-
-
-
-def assay_lookup_flow_details_step_by_step(db_path):
-    """
-    Full interactive lookup - species -> assay type -> assay name -> show details.
-    Uses new showing_assay_results() which now takes assay_name directly.
-    """
-    show_flow_title_and_descriptions("Assay Lookup - Step-by-Step Filter", "...") # TODO: Add description
-
-
-    # Ask user for the input TODO: Move this to a separate module?
-    species = select_species(db_path)
-    if not species:
-        return
-
-    species_id, species_name = species
-
-    assay_type = select_assay_type_by_species(db_path, species_id)
-    if not assay_type:
-        return
-
-    assay_type_id, assay_type_name = assay_type
-
-    assay = select_assay_by_species_and_type(db_path, species_id, assay_type_id)
-    if not assay:
-        return
-
-    assay_id, assay_name = assay
-
-
-
-    # Review the selected options
-    print(f"\nYou selected: {species_name} > {assay_type_name} > {assay_name}")
-    print("Fetching assay details...\n")
-
-
-    # Show the results
-    showing_assay_results(db_path, assay_name)  # Now takes `assay_name` directly
 
 
 
