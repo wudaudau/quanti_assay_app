@@ -32,6 +32,9 @@ from src.assay_lookup.assay_lookup import (
 
 
 def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_assay_results()?
+    """
+    The parent flow is assay_menu_flow().
+    """
 
     while True:
 
@@ -47,8 +50,7 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
 
         if len(ls_assays) == 0:
             print("No assays found in the database.")
-            
-            # TODO: Add more msg to show the user this flow is terminated
+            return "assay menu" # Back to assay_menu_flow()
         else:
             assay_name = ask_a_choice("\nAvailable Assays:", ls_assays)
 
@@ -71,13 +73,11 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
         # Ask next step
         next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
         if next_step == "Start a new assay lookup":
-            assay_lookup_flow_details_full(db_path) # TODO: Remove it or Add a safe exit?
+            continue # Restart the loop
         elif next_step == "Go back to the Assay Mene":
-            print("Not implemented yet.")
-            # assay_menu_flow(db_path)
+            return "assay menu" # Back to assay_menu_flow() to restart the assay lookup
         elif next_step == "Go back to the Main Mene":
-            print("Not implemented yet.")
-            # main_menu_flow(db_path)
+            return "main menu" # Back to assay_menu_flow() to go main menu (main menu)
 
 
 
