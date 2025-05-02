@@ -53,7 +53,7 @@ def ask_a_choice(question:str, choices:list) -> str:
     
     while True:
         try:
-            user_choice = int(input("Enter your choice: "))
+            user_choice = int(input("\nEnter your choice: "))
             if 1 <= user_choice <= len(choices):
                 return choices[user_choice - 1]
             else:
