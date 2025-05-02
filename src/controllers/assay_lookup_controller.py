@@ -21,7 +21,7 @@ from src.controllers.messages_and_ask_questions import show_flow_title_and_descr
 
 from src.assay_lookup.assay_lookup import (
     get_assay_details_by_name, get_analytes_for_assay,
-    fetch_ls_assays_from_db, select_species, select_assay_type_by_species, select_assay_by_species_and_type,
+    fetch_ls_assays_from_db, fetch_ls_species_from_db, select_assay_type_by_species, select_assay_by_species_and_type,
     select_analyte_for_species, select_assay_for_species_and_analyte
 )
 
@@ -92,13 +92,18 @@ def assay_lookup_flow_filter_by_species_and_assay_type(db_path):
 
 
     # Ask user for the input TODO: Move this to a separate module?
-    species = select_species(db_path)
-    if not species:
-        return
 
-    species_id, species_name = species
+    # 1) Ask species:
+        # Obtain species list from the database
+        # Use ask_a_choice() to show the list and get the user's choice
+    ls_species = fetch_ls_species_from_db(db_path)
+    if len(ls_species) == 0:
+        print("No species found in the database.")
+        return "assay menu"
+    else:
+        species_name = ask_a_choice("\nAvailable Species:", ls_species)
 
-    assay_type = select_assay_type_by_species(db_path, species_id)
+
     if not assay_type:
         return
 
