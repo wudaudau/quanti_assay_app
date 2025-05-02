@@ -36,7 +36,11 @@ def assay_menu_flow(db_path):
         choice = input("Enter your choice: ").strip()
 
         if choice == "1":
-            assay_lookup_flow_details_full(db_path)
+            result = assay_lookup_flow_details_full(db_path)
+            if result is "assay menu":
+                continue
+            elif result is "main menu":
+                return result # back to main_menu_flow()
         elif choice == "2":
             assay_lookup_flow_details_step_by_step(db_path)
         elif choice == "3":
