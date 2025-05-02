@@ -21,7 +21,7 @@ from src.controllers.messages_and_ask_questions import show_flow_title_and_descr
 
 from src.assay_lookup.assay_lookup import (
     get_assay_details_by_name, get_analytes_for_assay,
-    fetch_ls_assays_from_db, fetch_ls_species_from_db, select_assay_type_by_species, select_assay_by_species_and_type,
+    fetch_ls_assays_from_db, fetch_ls_species_from_db, fetch_ls_assay_types_from_db_based_on_species, select_assay_by_species_and_type,
     select_analyte_for_species, select_assay_for_species_and_analyte
 )
 
@@ -104,10 +104,15 @@ def assay_lookup_flow_filter_by_species_and_assay_type(db_path):
         species_name = ask_a_choice("\nAvailable Species:", ls_species)
 
 
-    if not assay_type:
-        return
+    # 2) Ask assay type:
+    ls_assay_type = fetch_ls_assay_types_from_db_based_on_species(db_path, species_name)
+    if len(ls_assay_type) == 0: # TODO: We need to test this case
+        print("No assay types found for this species.")
+        return "assay menu"
+    else:
+        assay_type = ask_a_choice("\nAvailable Assay Types:", ls_assay_type)
 
-    assay_type_id, assay_type_name = assay_type
+    
 
     assay = select_assay_by_species_and_type(db_path, species_id, assay_type_id)
     if not assay:
