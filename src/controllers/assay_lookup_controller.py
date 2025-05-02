@@ -145,6 +145,7 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
         print(f"  - Catalog #: {kit_cat_number}, Format: {kit_format}")
 
     print("-" * 50)
+    print()
 
 
 
