@@ -51,7 +51,7 @@ def get_analytes_for_assay(db_path, assay_name):
 
 
 ######
-# Assay Lookup
+# Lookup Assay (No Filter)
 ######
 
 
@@ -82,7 +82,7 @@ def fetch_ls_assays_from_db(db_path) -> list:
 
 
 ######
-# Step-by-Step Assay Lookup
+# Lookup Assay (Filter by Species and Assay Type)
 ######
 # This is a new feature that allows the user to filter assays by species and assay type.
 # The user can then select an assay from the filtered list and view its details.
@@ -189,7 +189,7 @@ def select_assay_by_species_and_type(db_path, species_id, assay_type_id):
 
 
 ######
-# Lookup Assay by Analyte (by Species -> Analyte)
+# Lookup Assay (Filter by Species and Analyte)
 ######
 
 # Use select_species() from step-by-step lookup
