@@ -38,7 +38,8 @@ def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_ass
 
     while True:
 
-        show_flow_title_and_descriptions("Assay Lookup - Full List", "Show assay details by selecting an assay name.") # TODO: Add description
+        show_flow_title_and_descriptions("Lookup Assay (No Filter)", 
+                                         "Show assay details by selecting an assay name.")
 
         # Ask user for the input TODO: Move this to a separate module?
 
@@ -86,7 +87,8 @@ def assay_lookup_flow_details_step_by_step(db_path):
     Full interactive lookup - species -> assay type -> assay name -> show details.
     Uses new showing_assay_results() which now takes assay_name directly.
     """
-    show_flow_title_and_descriptions("Assay Lookup - Step-by-Step Filter", "...") # TODO: Add description
+    show_flow_title_and_descriptions("Lookup Assay (Filter by Species and Assay Type)", 
+                                     "Use Species and Assay Type to filter the assay options.")
 
 
     # Ask user for the input TODO: Move this to a separate module?
@@ -209,7 +211,7 @@ def assay_lookup_flow_details_by_species_and_analyte(db_path):
     Species + Analyte -> Assay -> Details
     Uses new showing_assay_results() which now takes assay_name directly.
     """
-    show_flow_title_and_descriptions("Assay Lookup - Filter by Species and Analyte", 
+    show_flow_title_and_descriptions("Lookup Assay (Filter by Species and Analyte)", 
                                      "Use Species and Analyte to filter the assay options.")
 
 
