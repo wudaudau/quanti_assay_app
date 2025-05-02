@@ -6,7 +6,7 @@
   - [x] Create a VIEW for assay_lookup
   - [ ] Use `assay_lookup_view` in `assay_lookup.py` -> Not sure if we need or not.
   - [ ] Refactor the lookup flows to make them easy to understad and use.
-    - [x] `assay_lookup_flow_details_full()`
+    - [x] `assay_lookup_flow_no_filter()`
     - [ ] `assay_lookup_flow_details_step_by_step`
     - [ ] `assay_lookup_flow_details_by_species_and_analyte`
 - [ ] "refactor/update-menus"
