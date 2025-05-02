@@ -31,7 +31,7 @@ from src.assay_lookup.assay_lookup import (
 
 
 
-def assay_lookup_flow_details_full(db_path): # TODO: Combine it with showing_assay_results()?
+def assay_lookup_flow_no_filter(db_path): # TODO: Combine it with showing_assay_results()?
     """
     The parent flow is assay_menu_flow().
     """

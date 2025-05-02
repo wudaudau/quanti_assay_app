@@ -8,7 +8,7 @@ There are assay_menu and assay_menu_flow functions to display the assay menu and
 from src.controllers.messages_and_ask_questions import show_menu_title
 
 from src.controllers.assay_lookup_controller import (
-    assay_lookup_flow_details_full,
+    assay_lookup_flow_no_filter,
     assay_lookup_flow_details_step_by_step,
     assay_lookup_flow_details_by_species_and_analyte
 )
@@ -37,7 +37,7 @@ def assay_menu_flow(db_path):
         choice = input("Enter your choice: ").strip()
 
         if choice == "1":
-            result = assay_lookup_flow_details_full(db_path)
+            result = assay_lookup_flow_no_filter(db_path)
             if result == "assay menu":
                 continue # restart the loop
             elif result == "main menu":
