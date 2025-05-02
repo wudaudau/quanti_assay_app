@@ -82,7 +82,7 @@ def assay_lookup_flow_no_filter(db_path): # TODO: Combine it with showing_assay_
 
 
 
-def assay_lookup_flow_details_step_by_step(db_path):
+def assay_lookup_flow_filter_by_species_and_assay_type(db_path):
     """
     Full interactive lookup - species -> assay type -> assay name -> show details.
     Uses new showing_assay_results() which now takes assay_name directly.
@@ -205,7 +205,7 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
 
 
 
-def assay_lookup_flow_details_by_species_and_analyte(db_path):
+def assay_lookup_flow_filter_by_species_and_analyte(db_path):
     """
     Use species and analyte to filter the assay list.
     Species + Analyte -> Assay -> Details

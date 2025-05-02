@@ -9,8 +9,8 @@ from src.controllers.messages_and_ask_questions import show_menu_title
 
 from src.controllers.assay_lookup_controller import (
     assay_lookup_flow_no_filter,
-    assay_lookup_flow_details_step_by_step,
-    assay_lookup_flow_details_by_species_and_analyte
+    assay_lookup_flow_filter_by_species_and_assay_type,
+    assay_lookup_flow_filter_by_species_and_analyte
 )
 
 
@@ -43,9 +43,9 @@ def assay_menu_flow(db_path):
             elif result == "main menu":
                 return result # back to main_menu_flow()
         elif choice == "2":
-            assay_lookup_flow_details_step_by_step(db_path)
+            assay_lookup_flow_filter_by_species_and_assay_type(db_path)
         elif choice == "3":
-            assay_lookup_flow_details_by_species_and_analyte(db_path)
+            assay_lookup_flow_filter_by_species_and_analyte(db_path)
         elif choice == "4":
             print("Returning to Main Menu...")
             return "main menu" # back to main_menu_flow()
