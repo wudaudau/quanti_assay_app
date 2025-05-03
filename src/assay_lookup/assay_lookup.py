@@ -84,6 +84,7 @@ def fetch_ls_assays_from_db(db_path) -> list:
 ######
 # Lookup Assay (Filter by Species and Assay Type)
 ######
+
 def fetch_ls_species_from_db(db_path) -> list:
     """
     db_path: str. Path to the SQLite database.
