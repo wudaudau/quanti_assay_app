@@ -147,6 +147,7 @@ def lookup_experiments_flow(db_path, limit=None):
 
     date_filter = input("Filter by date (YYYY-MM-DD or leave blank): ").strip()
 
+    # TODO: Move this to a function in src.assay_logging.assay_logging?
     query = """
         SELECT e.exp_date, s.name, t.name, a.name, st.name,
                m1.first_name || ' ' || m1.last_name,
