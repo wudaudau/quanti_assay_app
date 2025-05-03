@@ -20,8 +20,8 @@ from src.controllers.messages_and_ask_questions import show_flow_title_and_descr
 # from src.controllers.main_menu_controller import main_menu_flow
 
 from src.assay_lookup.assay_lookup import (
-    get_assay_details_by_name, get_analytes_for_assay,
-    fetch_ls_assays_from_db, fetch_ls_species_from_db, fetch_ls_assay_types_from_db_based_on_species, select_assay_by_species_and_type,
+    fetch_ls_assays_from_db, 
+    fetch_ls_species_from_db, fetch_ls_assay_types_from_db_based_on_species, fetch_ls_assays_from_db_based_on_species_and_assay_type,
     select_analyte_for_species, select_assay_for_species_and_analyte
 )
 
@@ -86,48 +86,70 @@ def assay_lookup_flow_filter_by_species_and_assay_type(db_path):
     Full interactive lookup - species -> assay type -> assay name -> show details.
     Uses new showing_assay_results() which now takes assay_name directly.
     """
-    show_flow_title_and_descriptions("Lookup Assay (Filter by Species and Assay Type)", 
-                                     "Use Species and Assay Type to filter the assay options.")
+
+    while True:
+        show_flow_title_and_descriptions("Lookup Assay (Filter by Species and Assay Type)", 
+                                        "Use Species and Assay Type to filter the assay options.")
 
 
-    # Ask user for the input TODO: Move this to a separate module?
+        # Ask user for the input TODO: Move this to a separate module?
 
-    # 1) Ask species:
-        # Obtain species list from the database
-        # Use ask_a_choice() to show the list and get the user's choice
-    ls_species = fetch_ls_species_from_db(db_path)
-    if len(ls_species) == 0: # TODO: We need to test this case
-        print("No species found in the database.")
-        return "assay menu"
-    else:
-        species_name = ask_a_choice("\nAvailable Species:", ls_species)
-
-
-    # 2) Ask assay type:
-    ls_assay_type = fetch_ls_assay_types_from_db_based_on_species(db_path, species_name)
-    if len(ls_assay_type) == 0: # TODO: We need to test this case
-        print("No assay types found for this species.")
-        return "assay menu"
-    else:
-        assay_type = ask_a_choice("\nAvailable Assay Types:", ls_assay_type)
-
-    
-
-    assay = select_assay_by_species_and_type(db_path, species_id, assay_type_id)
-    if not assay:
-        return
-
-    assay_id, assay_name = assay
+        # 1) Ask species:
+            # Obtain species list from the database
+            # Use ask_a_choice() to show the list and get the user's choice
+        ls_species = fetch_ls_species_from_db(db_path)
+        if len(ls_species) == 0: # TODO: We need to test this case
+            print("No species found in the database.")
+            print("Back to the Assay Menu...")
+            return "assay menu"
+        else:
+            species_name = ask_a_choice("\nAvailable Species:", ls_species)
 
 
+        # 2) Ask assay type:
+        ls_assay_type = fetch_ls_assay_types_from_db_based_on_species(db_path, species_name)
+        if len(ls_assay_type) == 0: # TODO: We need to test this case
+            print("No assay types found for this species.")
+            print("Back to the Assay Menu...")
+            return "assay menu"
+        else:
+            assay_type = ask_a_choice("\nAvailable Assay Types:", ls_assay_type)
 
-    # Review the selected options
-    print(f"\nYou selected: {species_name} > {assay_type_name} > {assay_name}")
-    print("Fetching assay details...\n")
+        
+        # 3) Ask assay name:
+        ls_assays = fetch_ls_assays_from_db_based_on_species_and_assay_type(db_path, species_name, assay_type)
+        if len(ls_assays) == 0: # TODO: We need to test this case
+            print("No assays found for this species and assay type.")
+            print("Back to the Assay Menu...")
+            return "assay menu"
+        else:
+            assay_name = ask_a_choice("\nAvailable Assays:", ls_assays)
+        
 
 
-    # Show the results
-    showing_assay_results(db_path, assay_name)  # Now takes `assay_name` directly
+
+        # Review the selected options
+        print(f"\nYou selected: {species_name} > {assay_type} > {assay_name}")
+        
+        # Ask for confirmation before fetching details
+        is_confirmed = ask_yes_no("Do you want to fetch the details for this assay?")
+        if not is_confirmed:
+            print("Assay details fetching cancelled.")
+            print("Back to the Assay Menu...")
+            return "assay menu" # Back to assay_menu_flow()
+        else:
+            print("Fetching assay details...\n")
+            showing_assay_results(db_path, assay_name)
+
+
+        # Ask next step
+        next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
+        if next_step == "Start a new assay lookup":
+            continue # Restart the loop
+        elif next_step == "Go back to the Assay Mene":
+            return "assay menu" # Back to assay_menu_flow() to restart the assay lookup
+        elif next_step == "Go back to the Main Mene":
+            return "main menu" # Back to assay_menu_flow() to go main menu (main menu)
 
 
 
