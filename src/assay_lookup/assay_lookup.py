@@ -133,40 +133,35 @@ def fetch_ls_assay_types_from_db_based_on_species(db_path, species:str) -> list:
 
     return ls_assay_types
 
+def fetch_ls_assays_from_db_based_on_species_and_assay_type(db_path, species:str, assay_type:str) -> list:
+    """
+    db_path: str. Path to the SQLite database.
+    species: str. Species name.
+    assay_type: str. Assay type name.
 
+    Fetch all assay names linked to the given species and assay type in alphabetic order from the database.
+    Extract the assay names into a list.
 
-
-def select_assay_by_species_and_type(db_path, species_id, assay_type_id):
+    Return a list of assay names.
+    """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, name
+        SELECT DISTINCT assay.name
         FROM assay
-        WHERE species_id = ? AND assay_type_id = ?
-        ORDER BY name
-    """, (species_id, assay_type_id))
+        JOIN assay_type ON assay.assay_type_id = assay_type.id
+        JOIN species ON assay.species_id = species.id
+        WHERE species.name = ? AND assay_type.name = ?
+        ORDER BY assay.name;
+    """, (species, assay_type))
 
     assays = cursor.fetchall()
     conn.close()
 
-    if not assays:
-        print("No assays found for this species and assay type.")
-        return None
+    ls_assays = [assay[0] for assay in assays]  # Extract names from tuples
 
-    print("\nAvailable Assays:")
-    for i, (assay_id, assay_name) in enumerate(assays, 1):
-        print(f"{i}. {assay_name}")
-
-    while True:
-        try:
-            choice = int(input("\nSelect an assay by number: "))
-            if 1 <= choice <= len(assays):
-                return assays[choice - 1]  # (id, name)
-            else:
-                print("Invalid selection. Try again.")
-        except ValueError:
-            print("Please enter a valid number.")
+    return ls_assays
 
 
 
