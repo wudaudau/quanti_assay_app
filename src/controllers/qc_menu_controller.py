@@ -5,10 +5,8 @@ There are qc_menu and qc_menu_flow functions to display the QC menu and handle u
 
 from src.controllers.controller_utils import show_menu_title
 
-from src.controllers.qc_controller import (
-    add_qc_flow,
-    lookup_qc_flow
-)
+from src.controllers.qc_controller import add_qc_flow
+from src.controllers.qc_lookup_controller import lookup_qc_flow
 
 
 def qc_menu():
