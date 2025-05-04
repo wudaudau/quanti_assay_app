@@ -3,7 +3,7 @@
 
 from src.controllers.controller_utils import show_flow_title_and_descriptions, ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
 
-from src.qc.qc_lookup import fetch_ls_qc_lot_from_db, get_qc_details_by_lot_part_1, get_qc_details_by_lot_part_2
+from src.qc.qc_lookup import fetch_last_10_qc_lot_from_db, get_qc_details_by_lot_part_1, get_qc_details_by_lot_part_2
 
 
 def lookup_qc_flow_by_lot(db_path):
@@ -21,7 +21,7 @@ def lookup_qc_flow_by_lot(db_path):
         # Ask user for the input TODO: Move this to a separate module?
 
         # 1) Ask for QC Lot Nº
-        ls_qc_lot_numbers = fetch_ls_qc_lot_from_db(db_path) # TODO: Implement this function
+        ls_qc_lot_numbers = fetch_last_10_qc_lot_from_db(db_path) # TODO: Implement this function
 
         if len(ls_qc_lot_numbers) == 0: # TODO: We need to test this case
             print("No QC Lot Nº found in the database.")
@@ -29,7 +29,11 @@ def lookup_qc_flow_by_lot(db_path):
 
             return "qc menu"
         else:
-            qc_lot_number = ask_a_choice("Select a QC Lot Nº", ls_qc_lot_numbers)
+            # Show last 10 QC Lot Nº as a hint
+            print("Last 10 QC Lot Nº:")
+            print(ls_qc_lot_numbers[-10:])
+            print()
+            qc_lot_number = ask_for_string("Enter QC Lot Nº")
 
 
 
