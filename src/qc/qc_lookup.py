@@ -7,11 +7,11 @@ import sqlite3
 # Lookup QC by Lot Nº
 ######
 
-def fetch_ls_qc_lot_from_db(db_path) -> list:
+def fetch_last_10_qc_lot_from_db(db_path) -> list:
     """
     db_path: str. Path to the SQLite database.
 
-    Fetch all QC lot numbers in alphabetic order from the database.
+    Fetch the last 10 QC lot numbers in alphabetic order from the database.
     Extract the QC lot numbers into a list.
 
     Return a list of QC lot numbers.
@@ -19,7 +19,7 @@ def fetch_ls_qc_lot_from_db(db_path) -> list:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    cursor.execute("SELECT lot_number FROM qc ORDER BY lot_number;")
+    cursor.execute("SELECT lot_number FROM qc ORDER BY id DESC LIMIT 10;")
     qc_lots = cursor.fetchall()
     conn.close()
 
