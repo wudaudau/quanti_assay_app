@@ -3,7 +3,7 @@ This is the QC menu controller module.
 There are qc_menu and qc_menu_flow functions to display the QC menu and handle user input.
 """
 
-from src.controllers.controller_utils import show_menu_title
+from src.controllers.controller_utils import show_menu_title, ask_a_menu_choice
 
 from src.controllers.qc_controller import add_qc_flow
 from src.controllers.qc_lookup_controller import lookup_qc_flow
@@ -28,7 +28,7 @@ def qc_menu_flow(db_path):
         show_menu_title("QC Menu")
 
         qc_menu()
-        choice = input("Enter your choice: ").strip()
+        choice = ask_a_menu_choice(["1", "2", "3"])
 
         if choice == "1":
             result = add_qc_flow(db_path) # TODO: Update add_qc_flow to return "main menu" or "assay menu"
