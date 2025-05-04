@@ -25,7 +25,9 @@ def lookup_qc_flow_by_lot(db_path):
 
         if len(ls_qc_lot_numbers) == 0: # TODO: We need to test this case
             print("No QC Lot Nº found in the database.")
-            return "Back to QC Lookup Menu..."
+            print("Back to QC Menu...")
+
+            return "qc menu"
         else:
             qc_lot_number = ask_a_choice("Select a QC Lot Nº", ls_qc_lot_numbers)
 
