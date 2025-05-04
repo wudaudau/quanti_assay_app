@@ -1,5 +1,14 @@
 # schema_changes.log
 
+[2025-05-04] Added qc_lookup_view
+- Created a view to simplify querying QC data
+- The view combines data from the qc, manufacture, qc_analyte, and analyte tables
+- This allows for easier access to QC lookup functionality
+- Updated schema.sql to include the new view
+- No data migration needed since app is still in early development
+
+[2025-05-04] Added qc_analyte_lookup_view
+
 [2025-05-04] Refactored assay_lookup_view
 - Updated the assay_lookup_view to include additional fields for better data retrieval
 - Added fields for assay_name and spot_number
