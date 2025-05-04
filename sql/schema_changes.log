@@ -1,5 +1,9 @@
 # schema_changes.log
 
+[2025-05-04] Refactored assay_lookup_view
+- Updated the assay_lookup_view to include additional fields for better data retrieval
+- Added fields for assay_name and spot_number
+
 [2025-05-01] Added assay_lookup_view
 - Created a view to simplify querying assay data
 - The view combines data from the assay, analyte, and kit tables
