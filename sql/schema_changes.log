@@ -1,5 +1,11 @@
 # schema_changes.log
 
+[2025-05-04] Refactored qc table
+- Added note field to qc table
+- Updated schema.sql to reflect the new field
+- The note field is optional and can be used to store additional information about the QC
+- No data migration needed since app is still in early development
+
 [2025-05-04] Added qc_lookup_view
 - Created a view to simplify querying QC data
 - The view combines data from the qc, manufacture, qc_analyte, and analyte tables
