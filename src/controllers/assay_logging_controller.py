@@ -5,7 +5,7 @@ TODO: Rename this file to exp_logging_controller.py
 from datetime import datetime
 import sqlite3
 
-from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions, ask_a_choice, ask_yes_no
+from src.controllers.controller_utils import show_flow_title_and_descriptions, ask_a_choice, ask_yes_no
 from src.assay_logging.assay_logging import select_sample_type, select_manipulator, log_experiment
 from src.assay_lookup.assay_lookup import (fetch_ls_species_from_db, fetch_ls_assay_types_from_db_based_on_species, 
                                            fetch_ls_assays_from_db_based_on_species_and_assay_type

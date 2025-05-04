@@ -3,7 +3,7 @@ This is the Experiment menu controller module.
 There are exp_menu and exp_menu_flow functions to display the Experiment menu and handle user input.
 """
 
-from src.controllers.messages_and_ask_questions import show_menu_title
+from src.controllers.controller_utils import show_menu_title
 
 from src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
 

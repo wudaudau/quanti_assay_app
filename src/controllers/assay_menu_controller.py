@@ -5,7 +5,7 @@ There are assay_menu and assay_menu_flow functions to display the assay menu and
 """
 
 
-from src.controllers.messages_and_ask_questions import show_menu_title
+from src.controllers.controller_utils import show_menu_title
 
 from src.controllers.assay_lookup_controller import (
     assay_lookup_flow_no_filter,

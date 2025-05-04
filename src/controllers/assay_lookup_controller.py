@@ -14,12 +14,13 @@ TODO: Add more Assay Lookup functions
 
 """
 
-from src.controllers.messages_and_ask_questions import show_flow_title_and_descriptions, ask_a_choice, ask_yes_no
+from src.controllers.controller_utils import show_flow_title_and_descriptions, ask_a_choice, ask_yes_no
 
 # from src.controllers.assay_menu_controller import assay_menu_flow
 # from src.controllers.main_menu_controller import main_menu_flow
 
 from src.assay_lookup.assay_lookup import (
+    get_assay_details_by_name, get_analytes_for_assay, # TODO: Redundant function?
     fetch_ls_assays_from_db, 
     fetch_ls_species_from_db, fetch_ls_assay_types_from_db_based_on_species, fetch_ls_assays_from_db_based_on_species_and_assay_type,
     fetch_ls_analytes_from_db_based_on_species, fetch_ls_assays_from_db_based_on_species_and_analyte
@@ -50,6 +51,7 @@ def assay_lookup_flow_no_filter(db_path): # TODO: Combine it with showing_assay_
 
         if len(ls_assays) == 0: # TODO: We need to test this case
             print("No assays found in the database.")
+            print("Back to the Assay Menu...")
             return "assay menu" # Back to assay_menu_flow()
         else:
             assay_name = ask_a_choice("\nAvailable Assays:", ls_assays)
