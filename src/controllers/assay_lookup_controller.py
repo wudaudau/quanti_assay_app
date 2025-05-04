@@ -22,7 +22,7 @@ from src.controllers.messages_and_ask_questions import show_flow_title_and_descr
 from src.assay_lookup.assay_lookup import (
     fetch_ls_assays_from_db, 
     fetch_ls_species_from_db, fetch_ls_assay_types_from_db_based_on_species, fetch_ls_assays_from_db_based_on_species_and_assay_type,
-    select_analyte_for_species, select_assay_for_species_and_analyte
+    fetch_ls_analytes_from_db_based_on_species, fetch_ls_assays_from_db_based_on_species_and_analyte
 )
 
 
@@ -151,9 +151,77 @@ def assay_lookup_flow_filter_by_species_and_assay_type(db_path):
         elif next_step == "Go back to the Main Mene":
             return "main menu" # Back to assay_menu_flow() to go main menu (main menu)
 
+def assay_lookup_flow_filter_by_species_and_analyte(db_path):
+    """
+    Use species and analyte to filter the assay list.
+    Species + Analyte -> Assay -> Details
+    Uses new showing_assay_results() which now takes assay_name directly.
+    """
+
+    while True:
+        show_flow_title_and_descriptions("Lookup Assay (Filter by Species and Analyte)", 
+                                        "Use Species and Analyte to filter the assay options.")
+
+
+        # Ask user for the input TODO: Move this to a separate module?
+
+        # 1) Ask species:
+            # Obtain species list from the database
+            # Use ask_a_choice() to show the list and get the user's choice
+        ls_species = fetch_ls_species_from_db(db_path)
+        if len(ls_species) == 0: # TODO: We need to test this case
+            print("No species found in the database.")
+            print("Back to the Assay Menu...")
+            return "assay menu"
+        else:
+            species_name = ask_a_choice("\nAvailable Species:", ls_species)
 
 
 
+        # 2) Ask analyte:
+        ls_analytes = fetch_ls_analytes_from_db_based_on_species(db_path, species_name)
+        if len(ls_analytes) == 0: # TODO: We need to test this case
+            print("No analytes found for this species.")
+            print("Back to the Assay Menu...")
+            return "assay menu"
+        else:
+            analyte_name = ask_a_choice("\nAvailable Analytes:", ls_analytes)
+        
+        # 3) Ask assay name:
+        ls_assays = fetch_ls_assays_from_db_based_on_species_and_analyte(db_path, species_name, analyte_name)
+        if len(ls_assays) == 0:
+            print("No assays found for this species and analyte.")
+            print("Back to the Assay Menu...")
+            return "assay menu"
+        else:
+            assay_name = ask_a_choice("\nAvailable Assays:", ls_assays)
+
+        
+
+
+
+        # Review the selected options
+        print(f"\nYou selected: {species_name} > {analyte_name} > {assay_name}")
+
+       # Ask for confirmation before fetching details
+        is_confirmed = ask_yes_no("Do you want to fetch the details for this assay?")
+        if not is_confirmed:
+            print("Assay details fetching cancelled.")
+            print("Back to the Assay Menu...")
+            return "assay menu" # Back to assay_menu_flow()
+        else:
+            print("Fetching assay details...\n")
+            showing_assay_results(db_path, assay_name)
+
+
+        # Ask next step
+        next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
+        if next_step == "Start a new assay lookup":
+            continue # Restart the loop
+        elif next_step == "Go back to the Assay Mene":
+            return "assay menu" # Back to assay_menu_flow() to restart the assay lookup
+        elif next_step == "Go back to the Main Mene":
+            return "main menu" # Back to assay_menu_flow() to go main menu (main menu)
 
 
 
@@ -236,53 +304,3 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
 
 
 
-def assay_lookup_flow_filter_by_species_and_analyte(db_path):
-    """
-    Use species and analyte to filter the assay list.
-    Species + Analyte -> Assay -> Details
-    Uses new showing_assay_results() which now takes assay_name directly.
-    """
-    show_flow_title_and_descriptions("Lookup Assay (Filter by Species and Analyte)", 
-                                     "Use Species and Analyte to filter the assay options.")
-
-
-    # Ask user for the input 
-        # TODO: I feel that I need to refactor the database schema to make this easier.
-            # Remove assay_id from the kit table and create a assay_kits table to link kits to assays.
-        # TODO: Move this to a separate module? or use the asking functions from messages_and_ask_questions.py?
-
-        # Ask species:
-            # - obtain species list from the database
-            # - use ask_a_choice() to show the list and get the user's choice
-            
-
-    species = select_species(db_path)
-    if not species:
-        return # TODO: Add safe exit
-
-    species_id, species_name = species
-
-    analyte = select_analyte_for_species(db_path, species_id)
-    if not analyte:
-        return # TODO: Add safe exit
-
-    analyte_id, analyte_name = analyte
-
-    assay = select_assay_for_species_and_analyte(db_path, species_id, analyte_id)
-    if not assay:
-        return # TODO: Add safe exit
-
-    _, assay_name = assay
-
-
-
-    # Review the selected options
-    print(f"\nYou selected: {species_name} > {analyte_name} > {assay_name}")
-    # TODO: Add a confirmation step before fetching details
-
-
-    print("Fetching assay details...\n")
-
-
-    # Show the results
-    showing_assay_results(db_path, assay_name) # TODO: Refactor this to do lookup and show results in different functions
