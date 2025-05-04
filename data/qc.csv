@@ -1,4 +1,4 @@
-"lot_number","qc_name","analyte","concentration","unit","qc_type","manufacture","cat_number","expiration_date","preparation_date","note"
+"lot_number","qc_name","analyte","concentration","unit","qc_type","manufacturer","cat_number","expiration_date","preparation_date","note"
 "A00C0646","V-PLEX Cytokine P1 QC1 (H)","GM-CSF","394","pg/ml","Purchased","Mesoscale","C4050-1","","",""
 "A00C0646","V-PLEX Cytokine P1 QC1 (H)","IL-1a","174","pg/ml","Purchased","Mesoscale","C4050-1","","",""
 "A00C0646","V-PLEX Cytokine P1 QC1 (H)","IL-5","326","pg/ml","Purchased","Mesoscale","C4050-1","","",""
