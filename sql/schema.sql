@@ -69,11 +69,11 @@ CREATE TABLE IF NOT EXISTS assays_analytes (
 -- QC Table (Quality Control)
 CREATE TABLE IF NOT EXISTS qc (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    lot_number TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL,
     qc_type TEXT NOT NULL CHECK (qc_type IN ('Purchased', 'Home made')),
     manufacturer_id INTEGER,  -- NULL if home-made
     cat_number TEXT,         -- NULL if home-made
-    lot_number TEXT NOT NULL UNIQUE,
     preparation_date TEXT,
     expiration_date TEXT,
     note TEXT,  -- Optional note field
