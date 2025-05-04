@@ -176,7 +176,7 @@ def fetch_ls_assays_from_db_based_on_species_and_assay_type(db_path, species:str
 # Lookup Assay (Filter by Species and Analyte)
 ######
 
-# Use select_species() from step-by-step lookup
+# Use fetch_ls_species_from_db() from "Filter by Species and Assay Type" lookup
 
 def select_analyte_for_species(db_path, species_id):
     """
