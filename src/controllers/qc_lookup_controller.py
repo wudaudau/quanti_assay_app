@@ -1,6 +1,9 @@
 """
 """
 
+from src.controllers.controller_utils import ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
+
+from src.qc.qc_lookup import get_qc_details_by_lot
 
 
 def lookup_qc_flow(db_path):
