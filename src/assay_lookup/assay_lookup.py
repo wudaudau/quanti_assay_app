@@ -17,7 +17,7 @@ def get_assay_details_by_name(db_path, assay_name):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT assay_name, species, assay_type, manufacture, kit_cat_number, kit_format, analyte_name, spot_number 
+        SELECT DISTINCT assay_name, species, assay_type, manufacture, kit_cat_number, kit_format
         FROM assay_lookup_view
         WHERE assay_name = ?
     """, (assay_name,))
@@ -25,8 +25,9 @@ def get_assay_details_by_name(db_path, assay_name):
     results = cursor.fetchall()
     conn.close()
 
-    return results # Returns a list of (assay_name, species, assay_type, manufacture, kit_cat_number, format, kit_format, analyte_name, spot_number)
+    return results # Returns a list of (assay_name, species, assay_type, manufacture, kit_cat_number, format)
 
+# TODO: Delete this function?
 def get_analytes_for_assay(db_path, assay_name):
     """
     Retrieve all analytes linked to the given assay name, with spot numbers. Ordered by spot number.
@@ -35,10 +36,8 @@ def get_analytes_for_assay(db_path, assay_name):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT analyte.name, assays_analytes.spot_number
-        FROM assay
-        JOIN assays_analytes ON assay.id = assays_analytes.assay_id
-        JOIN analyte ON assays_analytes.analyte_id = analyte.id
+        SELECT analyte_name, spot_number
+        FROM assay_lookup_view
         WHERE assay.name = ?
         ORDER BY assays_analytes.spot_number
     """, (assay_name,))
