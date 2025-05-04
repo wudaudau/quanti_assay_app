@@ -3,8 +3,8 @@ from src.controllers.controller_utils import ask_a_choice, ask_for_string, ask_f
 
 from src.qc.qc_database import insert_qc, insert_qc_analyte
 
-from src.qc.qc_lookup import get_qc_details_by_lot
 
+# TODO: Move this function to a separate module
 def add_qc_flow(db_path):
     """
     Flow for adding a QC.
