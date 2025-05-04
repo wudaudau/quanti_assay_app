@@ -5,7 +5,8 @@
 - [ ] "refactor/assay-lookup-func"
   - [x] Create a VIEW for assay_lookup
   - [ ] Use `assay_lookup_view` in `assay_lookup.py` -> Not sure if we need or not.
-  - [ ] Refactor the lookup flows to make them easy to understad and use.
+    - [ ] Update assay_lookup_view schema to have analyte and spot
+  - [x] Refactor the lookup flows to make them easy to understad and use.
     - [x] `assay_lookup_flow_no_filter()`
     - [x] `assay_lookup_flow_filter_by_species_and_assay_type`
     - [x] `assay_lookup_flow_filter_by_species_and_analyte`
