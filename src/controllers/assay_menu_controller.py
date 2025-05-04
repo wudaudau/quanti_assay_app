@@ -49,7 +49,11 @@ def assay_menu_flow(db_path):
             elif result == "main menu":
                 return result
         elif choice == "3":
-            assay_lookup_flow_filter_by_species_and_analyte(db_path)
+            result = assay_lookup_flow_filter_by_species_and_analyte(db_path)
+            if result == "assay menu":
+                continue
+            elif result == "main menu":
+                return result
         elif choice == "4":
             print("Returning to Main Menu...")
             return "main menu" # back to main_menu_flow()
