@@ -6,6 +6,9 @@ This module connects between the database and the user interface (assay_lookup_c
 
 import sqlite3
 
+# TODO: Should we include the analyte and spot number in the assay_lookup_view?
+    # Can we use SELECT DISTINCT to get unique assay names?
+
 def get_assay_details_by_name(db_path, assay_name):
     """
     Fetch assay details including species, assay type, and linked kits.
