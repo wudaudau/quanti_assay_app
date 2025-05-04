@@ -302,13 +302,12 @@ def review_and_confirm_selections(selections:list) -> str:
 def handle_next_step() -> str:
     """
     It's a helper function to ask the user what they want to do next.
-    Ask the user what they want to do next.
     """
     next_step = ask_a_choice("What do you want to do next?", 
                              ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
     
     if next_step == "Start a new assay lookup":
-        return # Restart the loop
+        return "restart" # Restart the loop
     elif next_step == "Go back to the Assay Mene":
         return "assay menu" # Back to assay_menu_flow() to restart the assay lookup
     elif next_step == "Go back to the Main Mene":
