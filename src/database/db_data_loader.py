@@ -188,22 +188,27 @@ def add_qc_from_csv(db_path, csv_file):
             analyte = row['analyte']
             concentration = row['concentration']
             unit = row['unit']
+
             qc_type = row['qc_type'] # "Purchased" or "Home made"
-            manufacturer = row['manufacturer'] # TODO: Use row.get()?
-            cat_number = row['cat_number'] # TODO: Use row.get()?
-            expiration_date = row['expiration_date']
-            preparation_date = row['preparation_date']
-            note = row['note']
+
+            manufacturer = row.get('manufacturer', None) # Safe handling if 'manufacturer' is missing
+            cat_number = row.get('cat_number', None) # Safe handling if 'cat_number' is missing
+            expiration_date = row.get('expiration_date', None) # Safe handling if 'expiration_date' is missing
+
+            preparation_date = row.get('preparation_date', None) # Safe handling if 'preparation_date' is missing
+
+            note = row.get('note', None) # Safe handling if 'note' is missing
 
             # Obtain ids (on unique columns)
             analyte_id = get_or_insert(cursor, 'analyte', {'name': analyte})
-            manufacturer_id = get_or_insert(cursor, 'manufacturer', {'name': manufacturer})
+            manufacturer_id = get_or_insert(cursor, 'manufacturer', {'name': manufacturer}) if manufacturer else None
 
 
             qc_id = get_or_insert(cursor, 'qc', {'lot_number': lot_number, 'name': qc_name, 'qc_type': qc_type})
             # TODO: We may need to check if the lot_number already exists in the qc table to handle duplicates from the CSV file
 
             # Updeate qc table with additional information
+            # TODO: Why Null values are '' in the database (except manufacturer_id)?
             update_row(cursor, 'qc', qc_id, {
                 'manufacturer_id': manufacturer_id,
                 'cat_number': cat_number,
