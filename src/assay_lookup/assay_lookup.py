@@ -9,7 +9,7 @@ import sqlite3
 # TODO: Should we include the analyte and spot number in the assay_lookup_view?
     # Can we use SELECT DISTINCT to get unique assay names?
 
-def get_assay_details_by_name(db_path, assay_name):
+def get_assay_details_part_1(db_path, assay_name):
     """
     Fetch assay details including species, assay type, and linked kits.
     """
@@ -27,7 +27,7 @@ def get_assay_details_by_name(db_path, assay_name):
 
     return results # Returns a list of (assay_name, species, assay_type, manufacture, kit_cat_number, format)
 
-def get_analytes_for_assay(db_path, assay_name):
+def get_assay_details_part_2(db_path, assay_name):
     """
     Retrieve all analytes linked to the given assay name, with spot numbers. Ordered by spot number.
     """

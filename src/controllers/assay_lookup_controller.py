@@ -20,7 +20,7 @@ from src.controllers.controller_utils import show_flow_title_and_descriptions, a
 # from src.controllers.main_menu_controller import main_menu_flow
 
 from src.assay_lookup.assay_lookup import (
-    get_assay_details_by_name, get_analytes_for_assay, # TODO: Redundant function?
+    get_assay_details_part_1, get_assay_details_part_2, # TODO: Redundant function?
     fetch_ls_assays_from_db, 
     fetch_ls_species_from_db, fetch_ls_assay_types_from_db_based_on_species, fetch_ls_assays_from_db_based_on_species_and_assay_type,
     fetch_ls_analytes_from_db_based_on_species, fetch_ls_assays_from_db_based_on_species_and_analyte
@@ -233,7 +233,7 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
     """
     # Part 1: Assay details
     # Obtain assay details using the assay name
-    details = get_assay_details_by_name(db_path, assay_name)
+    details = get_assay_details_part_1(db_path, assay_name)
 
     if not details:
         print(f"No details found for assay '{assay_name}'.")
@@ -258,7 +258,7 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
 
     # Part 2: Analytes
     # Get and display analytes with spot numbers
-    analytes = get_analytes_for_assay(db_path, assay_name)
+    analytes = get_assay_details_part_2(db_path, assay_name)
     if analytes:
         print("\nAnalytes (with spot numbers):")
         for analyte_name, spot_number in analytes:
