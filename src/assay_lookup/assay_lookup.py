@@ -17,7 +17,7 @@ def get_assay_details_by_name(db_path, assay_name):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT assay_name, species, assay_type, manufacture, kit_cat_number, format 
+        SELECT assay_name, species, assay_type, manufacture, kit_cat_number, kit_format, analyte_name, spot_number 
         FROM assay_lookup_view
         WHERE assay_name = ?
     """, (assay_name,))
@@ -25,7 +25,7 @@ def get_assay_details_by_name(db_path, assay_name):
     results = cursor.fetchall()
     conn.close()
 
-    return results # Returns a list of (assay_name, species, assay_type, manufacture, kit_cat_number, format)
+    return results # Returns a list of (assay_name, species, assay_type, manufacture, kit_cat_number, format, kit_format, analyte_name, spot_number)
 
 def get_analytes_for_assay(db_path, assay_name):
     """
