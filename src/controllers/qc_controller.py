@@ -1,5 +1,5 @@
 
-from src.controllers.messages_and_ask_questions import ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
+from src.controllers.controller_utils import ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
 
 from src.qc.qc_database import insert_qc, insert_qc_analyte
 

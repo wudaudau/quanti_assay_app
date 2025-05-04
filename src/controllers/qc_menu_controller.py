@@ -3,7 +3,7 @@ This is the QC menu controller module.
 There are qc_menu and qc_menu_flow functions to display the QC menu and handle user input.
 """
 
-from src.controllers.messages_and_ask_questions import show_menu_title
+from src.controllers.controller_utils import show_menu_title
 
 from src.controllers.qc_controller import (
     add_qc_flow,

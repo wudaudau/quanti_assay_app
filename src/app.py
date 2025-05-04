@@ -11,7 +11,7 @@ from src.database.db_data_loader import load_all_data_from_csv
 
 
 # Call main controller
-from src.controllers.messages_and_ask_questions import show_welcome
+from src.controllers.controller_utils import show_welcome
 from src.controllers.main_menu_controller import main_menu_flow
 
 
