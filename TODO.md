@@ -7,7 +7,7 @@
   - [ ] Develop qc lookup functions
     - [ ] Make a qc_loopup_menu
     - [ ] Refactor Add a QC function
-    - [ ] Import QC data
+    - [x] Import QC data
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
