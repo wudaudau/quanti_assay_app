@@ -1,3 +1,4 @@
+# TODO: Discard this module after all functions are moved to the new module
 
 from src.controllers.controller_utils import ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
 
