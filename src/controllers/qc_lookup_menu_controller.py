@@ -3,6 +3,8 @@
 
 from src.controllers.controller_utils import show_menu_title, ask_a_menu_choice, ask_a_menu_choice
 
+from src.controllers.qc_lookup_controller import lookup_qc_flow_by_lot, lookup_qc_flow_by_assay, lookup_qc_flow_by_analyte
+
 def qc_lookup_menu():
     """
     Display the QC lookup menu.
