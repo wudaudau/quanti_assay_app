@@ -17,7 +17,7 @@ def get_assay_details_part_1(db_path, assay_name):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT DISTINCT assay_name, species, assay_type, manufacture, kit_cat_number, kit_format
+        SELECT DISTINCT assay_name, species, assay_type, manufacturer, kit_cat_number, kit_format
         FROM assay_lookup_view
         WHERE assay_name = ?
     """, (assay_name,))
@@ -25,7 +25,7 @@ def get_assay_details_part_1(db_path, assay_name):
     results = cursor.fetchall()
     conn.close()
 
-    return results # Returns a list of (assay_name, species, assay_type, manufacture, kit_cat_number, format)
+    return results # Returns a list of (assay_name, species, assay_type, manufacturer, kit_cat_number, format)
 
 def get_assay_details_part_2(db_path, assay_name):
     """

@@ -221,13 +221,13 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
     This function obtains assay details using ONE assay name.
 
     The details are in 2 parts:
-    1. Assay details (species, assay type, manufacture, kit catalog number, format)
+    1. Assay details (species, assay type, manufacturer, kit catalog number, format)
     2. Analytes (with spot numbers) for the assay.
 
     It then displays the details in a user-friendly format.
     
     Combined function to let user select an assay and display all related details.
-    Species, assay type, and manufacture are shown once.
+    Species, assay type, and manufacturer are shown once.
     All kit catalog numbers and formats are shown.
     The analyte list (with spot numbers) for the assay is also shown.
     """
@@ -241,7 +241,7 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
 
     # Extract common details from the first row
     first_row = details[0]
-    _, species, assay_type, manufacture, _, _ = first_row
+    _, species, assay_type, manufacturer, _, _ = first_row
 
 
 
@@ -251,7 +251,7 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
     print("-" * 50)
     print(f"Species: {species}")
     print(f"Assay Type: {assay_type}")
-    print(f"Manufacture: {manufacture}")
+    print(f"Manufacturer: {manufacturer}")
 
 
 
