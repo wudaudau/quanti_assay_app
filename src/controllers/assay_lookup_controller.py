@@ -59,27 +59,20 @@ def assay_lookup_flow_no_filter(db_path): # TODO: Combine it with showing_assay_
         
 
         # Review the selected options
-        print(f"\nYou selected: {assay_name}")
+        confirm_action = review_and_confirm_selections([assay_name])
 
-        # Ask for confirmation before fetching details
-        is_confirmed = ask_yes_no("Do you want to fetch the details for this assay?")
-        if not is_confirmed:
-            print("Assay details fetching cancelled.")
-            print("Back to the Assay Menu...")
-            return "assay menu" # Back to assay_menu_flow()
-        else:
-            print("Fetching assay details...\n")
+        if confirm_action == "fetch details":
             showing_assay_results(db_path, assay_name)
+        elif confirm_action == "assay menu":
+            return confirm_action
 
 
         # Ask next step
-        next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
-        if next_step == "Start a new assay lookup":
-            continue # Restart the loop
-        elif next_step == "Go back to the Assay Mene":
-            return "assay menu" # Back to assay_menu_flow() to restart the assay lookup
-        elif next_step == "Go back to the Main Mene":
-            return "main menu" # Back to assay_menu_flow() to go main menu (main menu)
+        next_action = handle_next_step()
+        if next_action == "restart":
+            continue
+        else:
+            return next_action # Return to the caller function (assay_menu_flow() or main_menu_flow())
 
 
 
@@ -131,27 +124,20 @@ def assay_lookup_flow_filter_by_species_and_assay_type(db_path):
 
 
         # Review the selected options
-        print(f"\nYou selected: {species_name} > {assay_type} > {assay_name}")
+        confirm_action = review_and_confirm_selections([species_name, assay_type, assay_name])
         
-        # Ask for confirmation before fetching details
-        is_confirmed = ask_yes_no("Do you want to fetch the details for this assay?")
-        if not is_confirmed:
-            print("Assay details fetching cancelled.")
-            print("Back to the Assay Menu...")
-            return "assay menu" # Back to assay_menu_flow()
-        else:
-            print("Fetching assay details...\n")
+        if confirm_action == "fetch details":
             showing_assay_results(db_path, assay_name)
+        elif confirm_action == "assay menu":
+            return confirm_action
 
 
         # Ask next step
-        next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
-        if next_step == "Start a new assay lookup":
-            continue # Restart the loop
-        elif next_step == "Go back to the Assay Mene":
-            return "assay menu" # Back to assay_menu_flow() to restart the assay lookup
-        elif next_step == "Go back to the Main Mene":
-            return "main menu" # Back to assay_menu_flow() to go main menu (main menu)
+        next_action = handle_next_step()
+        if next_action == "restart":
+            continue
+        else:
+            return next_action # Return to the caller function (assay_menu_flow() or main_menu_flow())
 
 def assay_lookup_flow_filter_by_species_and_analyte(db_path):
     """
@@ -203,27 +189,21 @@ def assay_lookup_flow_filter_by_species_and_analyte(db_path):
 
 
         # Review the selected options
-        print(f"\nYou selected: {species_name} > {analyte_name} > {assay_name}")
+        confirm_action = review_and_confirm_selections([species_name, analyte_name, assay_name])
 
-       # Ask for confirmation before fetching details
-        is_confirmed = ask_yes_no("Do you want to fetch the details for this assay?")
-        if not is_confirmed:
-            print("Assay details fetching cancelled.")
-            print("Back to the Assay Menu...")
-            return "assay menu" # Back to assay_menu_flow()
-        else:
-            print("Fetching assay details...\n")
+        if confirm_action == "fetch details":
             showing_assay_results(db_path, assay_name)
+        elif confirm_action == "assay menu":
+            return confirm_action
+
 
 
         # Ask next step
-        next_step = ask_a_choice("What do you want to do next?", ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
-        if next_step == "Start a new assay lookup":
-            continue # Restart the loop
-        elif next_step == "Go back to the Assay Mene":
-            return "assay menu" # Back to assay_menu_flow() to restart the assay lookup
-        elif next_step == "Go back to the Main Mene":
-            return "main menu" # Back to assay_menu_flow() to go main menu (main menu)
+        next_action = handle_next_step()
+        if next_action == "restart":
+            continue
+        else:
+            return next_action # Return to the caller function (assay_menu_flow() or main_menu_flow())
 
 
 
@@ -294,9 +274,45 @@ def showing_assay_results(db_path, assay_name:str): # TODO: Move this to let ass
     print("-" * 50)
     print()
 
+def review_and_confirm_selections(selections:list) -> str:
+    """
+    selections: list. A list of selections to review.
+
+    It's a helper function to review and confirm their selection.
+
+    Returns a string indicating the next action.
+    """
+
+    # Review the selected options
+    selections_str = " > ".join(selections)
+    print(f"\nYou selected: {selections_str}")
 
 
+    # Ask for confirmation before fetching details
+    is_confirmed = ask_yes_no("Do you want to fetch the details for this assay?")
+    if not is_confirmed:
+        print("Assay details fetching cancelled.")
+        print("Back to the Assay Menu...")
+        return "assay menu" # Back to assay_menu_flow()
+    else:
+        print("Fetching assay details...\n")
+        return "fetch details" # Proceed to fetch details
 
+
+def handle_next_step() -> str:
+    """
+    It's a helper function to ask the user what they want to do next.
+    Ask the user what they want to do next.
+    """
+    next_step = ask_a_choice("What do you want to do next?", 
+                             ["Start a new assay lookup", "Go back to the Assay Mene", "Go back to the Main Mene"])
+    
+    if next_step == "Start a new assay lookup":
+        return # Restart the loop
+    elif next_step == "Go back to the Assay Mene":
+        return "assay menu" # Back to assay_menu_flow() to restart the assay lookup
+    elif next_step == "Go back to the Main Mene":
+        return "main menu" # Back to assay_menu_flow() to go main menu (main menu)
 
 
 
