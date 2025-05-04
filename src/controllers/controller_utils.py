@@ -36,9 +36,16 @@ def show_flow_title_and_descriptions(title:str, description:str):
     print()
 
 
-def ask_a_menu_choice():
-    return input("Enter your choice: ").strip()
-                
+def ask_a_menu_choice(menu_options:list) -> str:
+
+    while True:
+        choice = input("Enter your choice: ").strip()    
+
+        if choice in menu_options:
+            return choice
+        else:
+            print("Invalid choice. Please try again.")
+                        
 def ask_a_choice(question:str, choices:list) -> str:
     """
     question: str. The question to ask the user.
