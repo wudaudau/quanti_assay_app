@@ -38,8 +38,8 @@
 
 ## Next Up
 
-- [ ] Remove "Manipulators" data from the repo. 
-- [ ] Add tools or modules to ensre the app can run correctly. E.g. set different combination of input as scenarios. 
+- [ ] Remove "Manipulators" data from the repo.
+- [ ] Add tools or modules to ensre the app can run correctly. E.g. set different combination of input as scenarios.
 - [ ] Create the unittests.
 
 ## Wishlist
