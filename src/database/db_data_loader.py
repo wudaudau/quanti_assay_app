@@ -1,5 +1,6 @@
 """
 Functions responsible for reading CSV files and bulk-inserting data into tables.
+CSV files are saved as 
 
 There are following csv files to import:
 - assays.csv: assay_name, assay_type, species -> 
@@ -26,6 +27,7 @@ def load_all_data_from_csv(db_path):
     add_assays_kits_from_csv(db_path, 'data/assays_kits.csv')
     add_assays_analytes_from_csv(db_path, 'data/assays_analytes.csv')
     add_sample_types_from_csv(db_path, 'data/sample_types.csv')
+    add_qc_from_csv(db_path, 'data/qc.csv')
     add_manipulators_from_csv(db_path, 'data/manipulators.csv')
 
     print("--- Data Import Complete ---\n")
@@ -165,6 +167,64 @@ def add_sample_types_from_csv(db_path, csv_file):
     conn.commit()
     conn.close()
     print(f"Sample types from {csv_file} imported.")
+
+def add_qc_from_csv(db_path, csv_file):
+    """
+    qc.csv: lot_number, qc_name, analyte, concentration, unit, qc_type, manufacturer, cat_number, expiration_date, preparation_date, note
+
+    We need to:
+    1. Obtain (or insert) the analyte_id, and sample_type_id from the respective tables.
+    2. Insert the mapping into the qc_analytes table.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    with open(csv_file, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            lot_number = row['lot_number']
+            qc_name = row['qc_name']
+            analyte = row['analyte']
+            concentration = row['concentration']
+            unit = row['unit']
+            qc_type = row['qc_type'] # "Purchased" or "Home made"
+            manufacture = row['manufacture'] # TODO: Use row.get()?
+            cat_number = row['cat_number'] # TODO: Use row.get()?
+            expiration_date = row['expiration_date']
+            preparation_date = row['preparation_date']
+            note = row['note']
+
+            # Obtain ids (on unique columns)
+            analyte_id = get_or_insert(cursor, 'analyte', {'name': analyte})
+            manufacturer_id = get_or_insert(cursor, 'manufacturer', {'name': manufacturer})
+
+
+            qc_id = get_or_insert(cursor, 'qc', {'lot_number': lot_number})
+            # TODO: We may need to check if the lot_number already exists in the qc table to handle duplicates from the CSV file
+
+            # Updeate qc table with additional information
+            update_row(cursor, 'qc', qc_id, {
+                'name': qc_name,
+                'qc_type': qc_type,
+                'manufacturer_id': manufacturer_id,
+                'cat_number': cat_number,
+                'expiration_date': expiration_date,
+                'preparation_date': preparation_date,
+                'note': note 
+            })
+
+
+            # Insert into qc table (skip if exists due to UNIQUE constraint on lot_number)
+            cursor.execute("""
+                INSERT OR IGNORE INTO qc_analyte (qc_id, analyte_id, concentration, unit)
+                VALUES (?, ?, ?, ?)
+            """, (qc_id, analyte_id, concentration, unit))
+                
+    conn.commit()
+    conn.close()
+    print(f"QC data from {csv_file} imported.")
+
 
 def add_manipulators_from_csv(db_path, csv_file):
     """Read manipulators.csv and insert manipulators into the database."""
