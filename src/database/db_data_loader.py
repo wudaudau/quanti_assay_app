@@ -200,13 +200,11 @@ def add_qc_from_csv(db_path, csv_file):
             manufacturer_id = get_or_insert(cursor, 'manufacturer', {'name': manufacturer})
 
 
-            qc_id = get_or_insert(cursor, 'qc', {'lot_number': lot_number, 'name': qc_name})
+            qc_id = get_or_insert(cursor, 'qc', {'lot_number': lot_number, 'name': qc_name, 'qc_type': qc_type})
             # TODO: We may need to check if the lot_number already exists in the qc table to handle duplicates from the CSV file
 
             # Updeate qc table with additional information
             update_row(cursor, 'qc', qc_id, {
-                'name': qc_name,
-                'qc_type': qc_type,
                 'manufacturer_id': manufacturer_id,
                 'cat_number': cat_number,
                 'expiration_date': expiration_date,
