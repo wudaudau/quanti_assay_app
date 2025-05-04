@@ -6,7 +6,7 @@ There are qc_menu and qc_menu_flow functions to display the QC menu and handle u
 from src.controllers.controller_utils import show_menu_title, ask_a_menu_choice
 
 from src.controllers.qc_controller import add_qc_flow
-from src.controllers.qc_lookup_controller import lookup_qc_flow
+from src.controllers.qc_lookup_menu_controller import qc_lookup_menu_flow
 
 
 def qc_menu():
@@ -33,7 +33,7 @@ def qc_menu_flow(db_path):
         if choice == "1":
             result = add_qc_flow(db_path) # TODO: Update add_qc_flow to return "main menu" or "assay menu"
         elif choice == "2":
-            result = lookup_qc_flow(db_path) # TODO: Update add_qc_flow to return "main menu" or "assay menu"
+            result = qc_lookup_menu_flow(db_path) # TODO: Review the return value of this function
         elif choice == "3":
             result = "main menu"
             print("Returning to Main Menu...")
