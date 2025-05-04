@@ -120,12 +120,10 @@ def fetch_ls_assay_types_from_db_based_on_species(db_path, species:str) -> list:
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT DISTINCT assay_type.name
-        FROM assay
-        JOIN assay_type ON assay.assay_type_id = assay_type.id
-        JOIN species ON assay.species_id = species.id
-        WHERE species.name = ?
-        ORDER BY assay_type.name;
+        SELECT DISTINCT assay_type
+        FROM assay_lookup_view
+        WHERE species = ?
+        ORDER BY assay_type;
     """, (species,))
 
     assay_types = cursor.fetchall()
@@ -150,12 +148,10 @@ def fetch_ls_assays_from_db_based_on_species_and_assay_type(db_path, species:str
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT DISTINCT assay.name
-        FROM assay
-        JOIN assay_type ON assay.assay_type_id = assay_type.id
-        JOIN species ON assay.species_id = species.id
-        WHERE species.name = ? AND assay_type.name = ?
-        ORDER BY assay.name;
+        SELECT DISTINCT assay_name
+        FROM assay_lookup_view
+        WHERE species = ? AND assay_type = ?
+        ORDER BY assay_name;
     """, (species, assay_type))
 
     assays = cursor.fetchall()
@@ -193,13 +189,10 @@ def fetch_ls_analytes_from_db_based_on_species(db_path, species:str) -> list:
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT DISTINCT analyte.name
-        FROM assay
-        JOIN assays_analytes ON assay.id = assays_analytes.assay_id
-        JOIN analyte ON assays_analytes.analyte_id = analyte.id
-        JOIN species ON assay.species_id = species.id
-        WHERE species.name = ?
-        ORDER BY analyte.name;
+        SELECT DISTINCT analyte_name
+        FROM assay_lookup_view
+        WHERE species = ?
+        ORDER BY analyte_name;
     """, (species,))
 
     analytes = cursor.fetchall()
@@ -224,13 +217,10 @@ def fetch_ls_assays_from_db_based_on_species_and_analyte(db_path, species:str, a
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT DISTINCT assay.name
-        FROM assay
-        JOIN assays_analytes ON assay.id = assays_analytes.assay_id
-        JOIN analyte ON assays_analytes.analyte_id = analyte.id
-        JOIN species ON assay.species_id = species.id
-        WHERE species.name = ? AND analyte.name = ?
-        ORDER BY assay.name;
+        SELECT DISTINCT assay_name
+        FROM assay_lookup_view
+        WHERE species = ? AND analyte_name = ?
+        ORDER BY assay_name;
     """, (species, analyte))
     assays = cursor.fetchall()
     conn.close()
