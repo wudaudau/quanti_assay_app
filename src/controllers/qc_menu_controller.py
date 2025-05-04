@@ -28,14 +28,23 @@ def qc_menu_flow(db_path):
     """
     while True:
         show_menu_title("QC Menu")
+
         qc_menu()
         choice = input("Enter your choice: ").strip()
 
         if choice == "1":
-            add_qc_flow(db_path)
+            result = add_qc_flow(db_path) # TODO: Update add_qc_flow to return "main menu" or "assay menu"
         elif choice == "2":
-            lookup_qc_flow(db_path)
+            result = lookup_qc_flow(db_path) # TODO: Update add_qc_flow to return "main menu" or "assay menu"
         elif choice == "3":
+            result = "main menu"
             print("Returning to Main Menu...")
-            break
+
+
+
+        # Handle the result of the assay lookup
+        if result == "assay menu":
+            continue # restart the loop
+        elif result == "main menu":
+            return result # back to main_menu_flow()
 
