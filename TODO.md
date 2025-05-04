@@ -2,15 +2,6 @@
 
 ## In Progress
 
-- [x] "refactor/assay-lookup-func"
-  - [x] Create a VIEW for assay_lookup
-  - [x] Use `assay_lookup_view` in `assay_lookup.py`
-    - [x] Update assay_lookup_view schema to have analyte and spot
-    - [x] Use updated view in `assay_loopup.py`
-  - [x] Refactor the lookup flows to make them easy to understad and use.
-    - [x] `assay_lookup_flow_no_filter()`
-    - [x] `assay_lookup_flow_filter_by_species_and_assay_type`
-    - [x] `assay_lookup_flow_filter_by_species_and_analyte`
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
@@ -58,3 +49,12 @@
   - [x] Move `main.py`, `src/app.py`, and related elements (py modules, db schema in sql, data in csv to initiate the database, etc).
   - [x] Add function discriptions in `README.md`.
 - [x] Create unittest into `text/db_utils` branch.
+- [x] "refactor/assay-lookup-func"
+  - [x] Create a VIEW for assay_lookup
+  - [x] Use `assay_lookup_view` in `assay_lookup.py`
+    - [x] Update assay_lookup_view schema to have analyte and spot
+    - [x] Use updated view in `assay_loopup.py`
+  - [x] Refactor the lookup flows to make them easy to understad and use.
+    - [x] `assay_lookup_flow_no_filter()`
+    - [x] `assay_lookup_flow_filter_by_species_and_assay_type`
+    - [x] `assay_lookup_flow_filter_by_species_and_analyte`
