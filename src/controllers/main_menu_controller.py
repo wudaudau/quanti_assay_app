@@ -44,7 +44,6 @@ def main_menu_flow(db_path):
         show_main_menu()
         choice = ask_a_menu_choice(["1", "2", "3", "q"])
 
-
         if choice == "1":
             result = assay_menu_flow(db_path)
         elif choice == "2":
@@ -59,6 +58,7 @@ def main_menu_flow(db_path):
             print("Invalid choice. Please try again.")
             continue
         
+
 
         # Handle the result of the assay lookup
         if result == "main menu":
