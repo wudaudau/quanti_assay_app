@@ -2,28 +2,69 @@
 import sqlite3
 
 
-def get_qc_details_by_lot(db_path, qc_lot_number:str):
+
+######
+# Lookup QC by Lot Nº
+######
+
+def fetch_ls_qc_lot_from_db(db_path) -> list:
     """
-    Fetch QC details by lot number.
+    db_path: str. Path to the SQLite database.
+
+    Fetch all QC lot numbers in alphabetic order from the database.
+    Extract the QC lot numbers into a list.
+
+    Return a list of QC lot numbers.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT lot_number FROM qc ORDER BY lot_number;")
+    qc_lots = cursor.fetchall()
+    conn.close()
+
+    ls_qc_lots = [qc_lot[0] for qc_lot in qc_lots]  # Extract names from tuples
+
+    return ls_qc_lots
+
+def get_qc_details_by_lot_part_1(db_path, qc_lot_number):
+    """
+    db_path: str. Path to the SQLite database.
+    qc_lot_number: str. QC lot number to look up.
+
+    Fetch QC details by lot number from the database.
+    Return a list of tuples with QC details part 1.
     """
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT qc.name, qc.lot_number, qc.cat_number, qc.expiration_date, qc.preparation_date,
-               m.name AS manufacture_name, a.name AS analyte_name, qa.concentration, qa.unit
-        FROM qc
-        LEFT JOIN manufacture m ON qc.manufacture_id = m.id
-        LEFT JOIN qc_analyte qa ON qc.id = qa.qc_id
-        LEFT JOIN analyte a ON qa.analyte_id = a.id
-        WHERE qc.lot_number = ?
+        SELECT DISTINCT lot_number, qc_name, qc_type, manufacturer, cat_number, expiration_date, preparation_date
+        FROM qc_lookup_view
+        WHERE lot_number = ?;
     """, (qc_lot_number,))
-
-    results = cursor.fetchall() # qc_lot is unique, so this should return at most one row per analyte
-            # However, it can return multiple rows if there are multiple analytes for the same QC lot number
-            # No multiplex QC for now, so this should be fine
+    qc_details = cursor.fetchall() # TODO: Make sure only one row is returned
     conn.close()
 
-    
-    # qc_name, lot_number, cat_number, expiration_date, preparation_date, manufacture_name, analyte_name, concentration, unit
-    return results  # Returns a list of tuples with QC details
+    return qc_details # Return a list of tuples with QC details
+
+def get_qc_details_by_lot_part_2(db_path, qc_lot_number):
+    """
+    db_path: str. Path to the SQLite database.
+    qc_lot_number: str. QC lot number to look up.
+
+    Fetch QC details by lot number from the database.
+    Return a list of tuples with QC details part 2.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT DISTINCT analyte_name, concentration, unit
+        FROM qc_lookup_view
+        WHERE lot_number = ?;
+    """, (qc_lot_number,))
+    qc_details = cursor.fetchall() # TODO: Make sure only one row is returned
+    conn.close()
+
+    return qc_details # Return a list of tuples with QC details
