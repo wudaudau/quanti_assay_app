@@ -4,7 +4,10 @@
 
 - [ ] "refactor/qc-menu-funcs" from "refactor/update-menus"
   - [x] Create "refactor/qc-menu-funcs" branch
-  - [ ] 
+  - [ ] Develop qc lookup functions
+    - [ ] Make a qc_loopup_menu
+    - [ ] Refactor Add a QC function
+    - [ ] Import QC data
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
