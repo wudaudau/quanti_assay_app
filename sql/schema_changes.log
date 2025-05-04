@@ -1,5 +1,12 @@
 # schema_changes.log
 
+[2025-05-01] Added assay_lookup_view
+- Created a view to simplify querying assay data
+- The view combines data from the assay, analyte, and kit tables
+- This allows for easier access to assay lookup functionality 
+- Updated schema.sql to include the new view
+- No data migration needed since app is still in early development
+
 [2025-05-01] Removed assay_id from kit table; created assay_kit table
 - Normalized many-to-many relationship between assays and kits
 - Updated schema.sql accordingly
