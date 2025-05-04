@@ -164,3 +164,25 @@ LEFT JOIN manufacture m ON k.manufacture_id = m.id
 LEFT JOIN assays_analytes aa ON a.id = aa.assay_id
 LEFT JOIN analyte ana ON aa.analyte_id = ana.id
 ORDER BY a.name, s.name, t.name, m.name, k.cat_number, k.format, aa.spot_number;
+
+-- QC Lookup View (For qc_lookup)
+-- This view summarizes the QC information, including qc_name, qc_type, manufacture, cat_number, lot_number, preparation_date, expiration_date
+DROP VIEW IF EXISTS qc_lookup_view;
+
+
+CREATE VIEW qc_lookup_view AS
+SELECT
+    qc.lot_number AS lot_number,
+    qc.name AS qc_name,  
+    a.name AS analyte_name, 
+    qa.concentration AS concentration, 
+    qa.unit AS unit,
+    qc,qc_type AS qc_type,
+    m.name AS manufacture_name, 
+    qc.cat_number AS cat_number, 
+    qc.expiration_date AS expiration_date, 
+    qc.preparation_date AS preparation_date
+FROM qc
+LEFT JOIN manufacture m ON qc.manufacture_id = m.id
+LEFT JOIN qc_analyte qa ON qc.id = qa.qc_id
+LEFT JOIN analyte a ON qa.analyte_id = a.id
