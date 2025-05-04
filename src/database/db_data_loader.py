@@ -4,7 +4,7 @@ CSV files are saved as
 
 There are following csv files to import:
 - assays.csv: assay_name, assay_type, species -> 
-- assays_kits.csv: assay_name, manufacture, kit_cat_number ->
+- assays_kits.csv: assay_name, manufacturer, kit_cat_number ->
 - assay_analytes.csv: assay_name, spot_number, analyte_name -> 
 - sample_types.csv: name ->
 - manipulators.csv: first_name, last_name ->
@@ -66,10 +66,10 @@ def add_assays_from_csv(db_path, csv_file):
 
 def add_assays_kits_from_csv(db_path, csv_file):
     """
-    assays_kits.csv: assay_name, manufacture, kit_cat_number
+    assays_kits.csv: assay_name, manufacturer, kit_cat_number
     
     We need to:
-    1. Obtain (or insert) the assay_id, manufacture_id, and kit_id from the respective tables.
+    1. Obtain (or insert) the assay_id, manufacturer_id, and kit_id from the respective tables.
     2. Insert the mapping into the assays_kits table.
     """
     conn = sqlite3.connect(db_path)
@@ -83,15 +83,15 @@ def add_assays_kits_from_csv(db_path, csv_file):
             assay_name = row['assay_name'] # Need to obtain the assay_id from the assay table
 
             # Kit information
-            manufacture = row['manufacture'] # Need to obtain the manufacture_id from the manufacture table
+            manufacturer = row['manufacturer'] # Need to obtain the manufacturer_id from the manufacturer table
             kit_cat_number = row['kit_cat_number']
             kit_format = row.get('format', None)  # Safe handling if 'format' is missing
 
 
             # Obtain ids (on unique columns)
             assay_id = get_or_insert(cursor, 'assay', {'name': assay_name})
-            manufacture_id = get_or_insert(cursor, 'manufacture', {'name': manufacture})
-            kit_id = get_or_insert(cursor, 'kit', {'manufacture_id': manufacture_id, 'cat_number': kit_cat_number})
+            manufacturer_id = get_or_insert(cursor, 'manufacturer', {'name': manufacturer})
+            kit_id = get_or_insert(cursor, 'kit', {'manufacturer_id': manufacturer_id, 'cat_number': kit_cat_number})
 
             # Update kit format if provided
             update_row(cursor, 'kit', kit_id, {'format': kit_format}) if kit_format else None
@@ -189,7 +189,7 @@ def add_qc_from_csv(db_path, csv_file):
             concentration = row['concentration']
             unit = row['unit']
             qc_type = row['qc_type'] # "Purchased" or "Home made"
-            manufacture = row['manufacture'] # TODO: Use row.get()?
+            manufacturer = row['manufacturer'] # TODO: Use row.get()?
             cat_number = row['cat_number'] # TODO: Use row.get()?
             expiration_date = row['expiration_date']
             preparation_date = row['preparation_date']
