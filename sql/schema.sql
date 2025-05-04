@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS qc (
     lot_number TEXT NOT NULL UNIQUE,
     preparation_date TEXT,
     expiration_date TEXT,
+    note TEXT,  -- Optional note field
     FOREIGN KEY (manufacture_id) REFERENCES manufacture(id)
 );
 
