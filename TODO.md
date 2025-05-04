@@ -2,6 +2,9 @@
 
 ## In Progress
 
+- [ ] "refactor/qc-menu-funcs" from "refactor/update-menus"
+  - [x] Create "refactor/qc-menu-funcs" branch
+  - [ ] 
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
