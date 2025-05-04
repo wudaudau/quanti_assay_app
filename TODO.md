@@ -7,8 +7,8 @@
   - [ ] Use `assay_lookup_view` in `assay_lookup.py` -> Not sure if we need or not.
   - [ ] Refactor the lookup flows to make them easy to understad and use.
     - [x] `assay_lookup_flow_no_filter()`
-    - [ ] `assay_lookup_flow_filter_by_species_and_assay_type`
-    - [ ] `assay_lookup_flow_filter_by_species_and_analyte`
+    - [x] `assay_lookup_flow_filter_by_species_and_assay_type`
+    - [x] `assay_lookup_flow_filter_by_species_and_analyte`
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
     - Main menu
