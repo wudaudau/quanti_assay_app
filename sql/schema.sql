@@ -152,10 +152,15 @@ SELECT
     t.name AS assay_type, 
     m.name AS manufacture, 
     k.cat_number AS kit_cat_number, 
-    k.format
+    k.format AS kit_format,
+    ana.analyte_name AS analyte_name,
+    aa.spot_number AS spot_number,
 FROM assay a
 JOIN species s ON a.species_id = s.id
 JOIN assay_type t ON a.assay_type_id = t.id
 LEFT JOIN assays_kits ak ON a.id = ak.assay_id
 LEFT JOIN kit k ON ak.kit_id = k.id
 LEFT JOIN manufacture m ON k.manufacture_id = m.id
+LEFT JOIN assays_analytes aa ON a.id = aa.assay_id
+LEFT JOIN analyte ana ON aa.analyte_id = ana.id
+ORDER BY a.name, s.name, t.name, m.name, k.cat_number, k.format, aa.spot_number;
