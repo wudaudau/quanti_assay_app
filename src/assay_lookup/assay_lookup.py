@@ -35,7 +35,7 @@ def get_analytes_for_assay(db_path, assay_name):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT analyte_name, spot_number
+        SELECT DISTINCT analyte_name, spot_number
         FROM assay_lookup_view
         WHERE assay_name = ?
         ORDER BY spot_number
