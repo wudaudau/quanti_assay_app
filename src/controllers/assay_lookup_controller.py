@@ -62,7 +62,7 @@ def assay_lookup_flow_no_filter(db_path): # TODO: Combine it with showing_assay_
         confirm_action = review_and_confirm_selections([assay_name])
 
         if confirm_action == "fetch details":
-            showing_assay_results(db_path, assay_name)
+            showing_assay_results(db_path, assay_name) # TODO: Need a return value?
         elif confirm_action == "assay menu":
             return confirm_action
 
