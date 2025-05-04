@@ -2,11 +2,11 @@
 
 ## In Progress
 
-- [ ] "refactor/assay-lookup-func"
+- [x] "refactor/assay-lookup-func"
   - [x] Create a VIEW for assay_lookup
-  - [ ] Use `assay_lookup_view` in `assay_lookup.py` -> Not sure if we need or not.
+  - [x] Use `assay_lookup_view` in `assay_lookup.py`
     - [x] Update assay_lookup_view schema to have analyte and spot
-    - [ ] Use updated view in `assay_loopup.py`
+    - [x] Use updated view in `assay_loopup.py`
   - [x] Refactor the lookup flows to make them easy to understad and use.
     - [x] `assay_lookup_flow_no_filter()`
     - [x] `assay_lookup_flow_filter_by_species_and_assay_type`
