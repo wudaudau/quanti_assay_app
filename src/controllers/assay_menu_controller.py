@@ -5,7 +5,7 @@ There are assay_menu and assay_menu_flow functions to display the assay menu and
 """
 
 
-from src.controllers.controller_utils import show_menu_title
+from src.controllers.controller_utils import show_menu_title, ask_a_menu_choice
 
 from src.controllers.assay_lookup_controller import (
     assay_lookup_flow_no_filter,
@@ -26,35 +26,33 @@ def assay_menu():
     print()
     print("4. Back to Main Menu")
 
-def assay_menu_flow(db_path):
+def assay_menu_flow(db_path) -> str:
     """
     Assay menu flow.
     The parent flow is main_menu_flow().
+
+    This function will display the assay menu and handle user input.
+    Returns the result of the assay lookup.
     """
     while True:
         show_menu_title("Assay Lookup Menu")
+
         assay_menu()
-        choice = input("Enter your choice: ").strip()
+        choice = ask_a_menu_choice(["1", "2", "3", "4"])
 
         if choice == "1":
             result = assay_lookup_flow_no_filter(db_path)
-            if result == "assay menu":
-                continue # restart the loop
-            elif result == "main menu":
-                return result # back to main_menu_flow()
         elif choice == "2":
             result = assay_lookup_flow_filter_by_species_and_assay_type(db_path)
-            if result == "assay menu":
-                continue
-            elif result == "main menu":
-                return result
         elif choice == "3":
             result = assay_lookup_flow_filter_by_species_and_analyte(db_path)
-            if result == "assay menu":
-                continue
-            elif result == "main menu":
-                return result
         elif choice == "4":
+            result="main menu"
             print("Returning to Main Menu...")
-            return "main menu" # back to main_menu_flow()
+        
 
+        # Handle the result of the assay lookup
+        if result == "assay menu":
+            continue # restart the loop
+        elif result == "main menu":
+            return result # back to main_menu_flow()

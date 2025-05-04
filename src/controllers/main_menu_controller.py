@@ -42,24 +42,24 @@ def main_menu_flow(db_path):
         show_menu_title("Main Menu")
 
         show_main_menu()
-        choice = ask_a_menu_choice()
+        choice = ask_a_menu_choice(["1", "2", "3", "q"])
 
-        while choice not in ["1", "2", "3", "4", "q", "8", "9"]:
-            print("Invalid choice. Please try again.")
-            choice = ask_a_menu_choice()
 
         if choice == "1":
             result = assay_menu_flow(db_path)
-            if result == "main menu":
-                continue # restart the loop
         elif choice == "2":
-            qc_menu_flow(db_path)
+            result = qc_menu_flow(db_path)
         elif choice == "3":
-            exp_menu_flow(db_path)
-
+            result = exp_menu_flow(db_path) # TODO: Update exp_menu_flow to return "main menu"
     
-
         elif choice == "q":
             show_goodbye()
             break
+        else:
+            print("Invalid choice. Please try again.")
+            continue
         
+
+        # Handle the result of the assay lookup
+        if result == "main menu":
+            continue # restart the loop
