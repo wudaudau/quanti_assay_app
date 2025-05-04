@@ -27,7 +27,6 @@ def get_assay_details_by_name(db_path, assay_name):
 
     return results # Returns a list of (assay_name, species, assay_type, manufacture, kit_cat_number, format)
 
-# TODO: Delete this function?
 def get_analytes_for_assay(db_path, assay_name):
     """
     Retrieve all analytes linked to the given assay name, with spot numbers. Ordered by spot number.
@@ -38,8 +37,8 @@ def get_analytes_for_assay(db_path, assay_name):
     cursor.execute("""
         SELECT analyte_name, spot_number
         FROM assay_lookup_view
-        WHERE assay.name = ?
-        ORDER BY assays_analytes.spot_number
+        WHERE assay_name = ?
+        ORDER BY spot_number
     """, (assay_name,))
 
     analytes = cursor.fetchall()  # List of (analyte_name, spot_number)
