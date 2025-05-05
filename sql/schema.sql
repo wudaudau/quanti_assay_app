@@ -115,8 +115,7 @@ CREATE TABLE IF NOT EXISTS manipulator (
 );
 
 -- Experiment Log Table
--- TODO: Add more fields as needed: project_id, plate_id, qch_id, qcm_id, qcl_id, note, etc.
--- TODO: Update project_name, cohort_name, kit_cat_number, sd_cat_number, sd_lot_number, qc_h_lot_number, qc_m_lot_number, qc_l_lot_number to be foreign keys to a project table if needed.
+-- TODO: Update project_name, cohort_name, plate_layout_name, kit_cat_number, sd_cat_number, sd_lot_number, qc_h_lot_number, qc_m_lot_number, qc_l_lot_number to be foreign keys to a project table if needed.
 CREATE TABLE IF NOT EXISTS experiment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     exp_date TEXT NOT NULL,
