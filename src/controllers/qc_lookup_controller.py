@@ -56,12 +56,14 @@ def lookup_qc_flow_by_lot(db_path):
 
 def lookup_qc_flow_by_assay(db_path):
     """
+    The parent flow is qc_lookup_flow.
     """
     while True:
         show_flow_title_and_descriptions("Lookup QC by Assay", 
                                          "Show QC details by selecting an Assay.")
         
         print("This functionality is not implemented yet.")
+        return "qc lookup menu"
 
 def lookup_qc_flow_by_analyte(db_path):
     """
@@ -71,6 +73,7 @@ def lookup_qc_flow_by_analyte(db_path):
                                          "Show QC details by selecting an Analyte.")
         
         print("This functionality is not implemented yet.")
+        return "qc lookup menu"
 
 
 # TODO: Discard this function
