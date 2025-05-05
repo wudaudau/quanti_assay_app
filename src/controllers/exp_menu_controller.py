@@ -3,10 +3,10 @@ This is the Experiment menu controller module.
 There are exp_menu and exp_menu_flow functions to display the Experiment menu and handle user input.
 """
 
-from src.controllers.controller_utils import show_menu_title
+from src.controllers.controller_utils import show_menu_title, ask_a_menu_choice
 
-from src.controllers.assay_logging_controller import log_experiment_flow, lookup_experiments_flow
-
+from src.controllers.exp_logging_menu_controller import exp_logging_menu_flow
+from src.controllers.exp_lookup_menu_controller import exp_lookup_menu_flow
 
 
 def exp_menu():
@@ -14,30 +14,35 @@ def exp_menu():
     Display the QC menu.
     """
     print("\nWhat do you want to do?")
-    print("1. Log Experiment")
+    print("1. Experiment Logging Menu")
+    print("2. Experiment Lookup Menu")
     print()
-    print("2. Lookup Last 15 Experiments") # TODO: Make this a "Lookup menu"
-    print("3. Lookup All Experiments")
-    
-    print()
-    print("4. Back to Main Menu")
+    print("3. Back to Main Menu")
 
 def exp_menu_flow(db_path):
     """
-    Main menu loop.
+    Experiment menu flow.
+    The parent flow is main_menu_flow().
+    This function will display the Experiment menu and handle user input.
+    Returns the result of the Experiment menu.
     """
     while True:
         show_menu_title("Experiment Menu")
+
         exp_menu()
-        choice = input("Enter your choice: ").strip()
+        choice = ask_a_menu_choice(["1", "2", "3"])
 
         if choice == "1":
-            log_experiment_flow(db_path)
+            result = exp_logging_menu_flow(db_path)
         elif choice == "2":
-            lookup_experiments_flow(db_path, 15) # Limit to last 15 experiments
+            result = exp_lookup_menu_flow(db_path, 15) # Limit to last 15 experiments
         elif choice == "3":
-            lookup_experiments_flow(db_path)
-
-        elif choice == "4":
+            result="main menu"
             print("Returning to Main Menu...")
-            break
+
+
+        # Handle the result of the exp menu
+        if result == "exp menu":
+            continue
+        elif result == "main menu":
+            return result
