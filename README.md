@@ -73,6 +73,11 @@ quanti_assay_app/
 │   │
 │   ├── assay_logging/           # Logic for logging experiment entries
 │   │   └── assay_logging.py     # DB interactions to insert and fetch experiment logs
+│   ├── data_import/
+│   │   ├── __init__.py
+│   │   ├── exp_reader.py      # reads Excel files into structured dicts/dataframes
+│   │   ├── exp_parser.py      # converts those dicts to DB-ready formats
+│   │   └── exp_logger.py      # inserts data into the SQLite database
 │
 ├── sql/
 │   └── schema.sql               # SQL script to initialize the database schema
