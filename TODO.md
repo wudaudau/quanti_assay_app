@@ -2,6 +2,15 @@
 
 ## In Progress
 
+- [ ] "feat/exp-logging-from-excel" from "refactor/exp-menu-funcs"
+  - [ ] Design the new tables (experiments, wells, readouts, etc.)
+  - [ ] Add these to sql/schema.sql
+  - [ ] Create models / queries (or ORM if used)
+  - [ ] Integrate your existing Excel parsing (ExpInfoForm) to populate these tables
+  - [ ] Build a UI or CLI function to log a new experiment from files
+  - [ ] Add logging/feedback for successful import
+  - [ ] Build separate results table and use processing logic to populate it.
+  - [ ] Add views to display processed data.
 - [ ] "refactor/exp-menu-funcs" from "refactor/qc-menu-funcs"
   - [/] Develop Exp Menu, Exp Log Menu, and Exp Lookup Menu
   - [ ] Create function to add an exp from ExpInfoForm
