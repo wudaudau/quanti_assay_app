@@ -51,7 +51,7 @@ def assay_menu_flow(db_path) -> str:
             print("Returning to Main Menu...")
         
 
-        # Handle the result of the assay lookup
+        # Handle the result of the assay menu
         if result == "assay menu":
             continue # restart the loop
         elif result == "main menu":
