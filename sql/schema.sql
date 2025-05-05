@@ -178,7 +178,7 @@ SELECT
     a.name AS analyte_name, 
     qa.concentration AS concentration, 
     qa.unit AS unit,
-    qc,qc_type AS qc_type,
+    qc_type AS qc_type,
     m.name AS manufacturer_name, 
     qc.cat_number AS cat_number, 
     qc.expiration_date AS expiration_date, 
