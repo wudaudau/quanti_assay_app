@@ -2,6 +2,9 @@
 
 ## In Progress
 
+- [ ] "refactor/exp-menu-funcs" from "refactor/update-menus"
+  - [ ] Create function to add an exp from ExpInfoForm
+  - [ ] Develop a basic exp lookup function
 - [ ] "refactor/qc-menu-funcs" from "refactor/update-menus"
   - [x] Create "refactor/qc-menu-funcs" branch
   - [ ] Develop qc lookup functions
