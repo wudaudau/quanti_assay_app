@@ -62,6 +62,25 @@ def lookup_qc_flow_by_assay(db_path):
         show_flow_title_and_descriptions("Lookup QC by Assay", 
                                          "Show QC details by selecting an Assay.")
         
+
+        # Ask user for the input TODO: Move this to a separate module?
+        
+        # 1) Ask for Assay name
+        ls_assays = fetch_assays_from_db(db_path) # TODO: Implement this function
+        if len(ls_assays) == 0: # TODO: We need to test this case
+            print("No Assays found in the database.")
+            print("Back to QC Menu...")
+            return "qc menu"
+        else:
+            assay_name = ask_a_choice("\nAvailable Assays", ls_assays)
+
+
+
+        # TODO: We need to link the assay name to the QC Lot Nº
+            # I didn't do it because I wanted to link them at experiment log level
+
+
+
         print("This functionality is not implemented yet.")
         return "qc lookup menu"
 
