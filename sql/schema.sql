@@ -116,16 +116,28 @@ CREATE TABLE IF NOT EXISTS manipulator (
 
 -- Experiment Log Table
 -- TODO: Add more fields as needed: project_id, plate_id, qch_id, qcm_id, qcl_id, note, etc.
-CREATE TABLE IF NOT EXISTS exp_log (
+-- TODO: Update project_name, cohort_name, kit_cat_number, sd_cat_number, sd_lot_number, qc_h_lot_number, qc_m_lot_number, qc_l_lot_number to be foreign keys to a project table if needed.
+CREATE TABLE IF NOT EXISTS experiment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     exp_date TEXT NOT NULL,
     species_id INTEGER NOT NULL,
     assay_type_id INTEGER NOT NULL,
     assay_id INTEGER NOT NULL,
     sample_type_id INTEGER NOT NULL,
-    manipulator_1_id INTEGER,
+    manipulator_1_id INTEGER NOT NULL,
     manipulator_2_id INTEGER,
     manipulator_3_id INTEGER,
+    project_name TEXT,
+    cohort_name TEXT,
+    plate_layout_name TEXT,
+    plate_bar_code TEXT,
+    kit_cat_number TEXT NOT NULL,
+    sd_cat_number TEXT,
+    sd_lot_number TEXT,
+    qc_h_lot_number TEXT,
+    qc_m_lot_number TEXT,
+    qc_l_lot_number TEXT,
+    notes TEXT,
     FOREIGN KEY (species_id) REFERENCES species(id),
     FOREIGN KEY (assay_type_id) REFERENCES assay_type(id),
     FOREIGN KEY (assay_id) REFERENCES assay(id),
@@ -135,7 +147,73 @@ CREATE TABLE IF NOT EXISTS exp_log (
     FOREIGN KEY (manipulator_3_id) REFERENCES manipulator(id)
 );
 
+-- Table: well_data
+CREATE TABLE IF NOT EXISTS well_data (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    experiment_id INTEGER NOT NULL,
+    well_id TEXT NOT NULL,
+    sample_name TEXT,
+    sample_role TEXT,
+    dilution_factor REAL,
+    freeze_thaw_cycle INTEGER,
+    excluded BOOLEAN DEFAULT 0,
+    FOREIGN KEY (experiment_id) REFERENCES experiment(id),
+    UNIQUE (experiment_id, well_id)  -- Avoid duplicate wells in the same experiment
+);
 
+-- Table: readout
+CREATE TABLE IF NOT EXISTS readout (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    well_data_id INTEGER NOT NULL,
+    analyte_name TEXT NOT NULL,
+    value REAL,
+    unit TEXT,
+    readout_type TEXT DEFAULT 'raw',  -- e.g., 'OD', 'MSD intensity'
+    FOREIGN KEY (well_data_id) REFERENCES well_data(id)
+);
+
+-- Table: sd_preparation
+CREATE TABLE IF NOT EXISTS sd_preparation (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    experiment_id INTEGER NOT NULL,
+    sd7_concentration REAL,
+    serial_dilution_factor REAL,
+    sd7_unit TEXT,
+    FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+);
+
+-- Table: qc_concentration
+CREATE TABLE IF NOT EXISTS qc_concentration (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    experiment_id INTEGER NOT NULL,
+    qc_l_concentration REAL,
+    qc_m_concentration REAL,
+    qc_h_concentration REAL,
+    qc_unit TEXT,
+    FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+);
+
+-- Table: file
+CREATE TABLE IF NOT EXISTS file (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    experiment_id INTEGER NOT NULL,
+    file_type TEXT,
+    file_path TEXT,
+    sheet_name TEXT,
+    version TEXT,
+    FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+);
+
+-- Table: result (for processed values)
+CREATE TABLE IF NOT EXISTS result (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    well_data_id INTEGER NOT NULL,
+    analyte_name TEXT NOT NULL,
+    result_value REAL,
+    unit TEXT,
+    status TEXT,
+    FOREIGN KEY (well_data_id) REFERENCES well_data(id)
+);
 
 
 
