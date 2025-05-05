@@ -5,8 +5,12 @@
 - [ ] "refactor/qc-menu-funcs" from "refactor/update-menus"
   - [x] Create "refactor/qc-menu-funcs" branch
   - [ ] Develop qc lookup functions
-    - [ ] Make a qc_loopup_menu
+    - [x] Make a qc_loopup_menu
+    - [x] Develop "Lookup a QC by Lot Nº" -> basic function ok
+    - [ ] Develop ""
+    - [ ] Develop ""
     - [ ] Refactor Add a QC function
+    - [ ] Add a password before add QC
     - [x] Import QC data
 - [ ] "refactor/update-menus"
   - [ ] Draw menu structure
