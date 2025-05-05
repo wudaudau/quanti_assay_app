@@ -3,7 +3,7 @@
 
 from src.controllers.exp_menu_controller import show_menu_title, ask_a_menu_choice
 
-from src.controllers.assay_logging_controller import lookup_experiments_flow
+from src.controllers.exp_lookup_controller import lookup_experiments_flow
 
 
 def exp_lookup_menu():
