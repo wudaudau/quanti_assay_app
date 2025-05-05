@@ -69,14 +69,16 @@ def ask_experiment_date():
 
 def log_experiment_flow_manually(db_path):
     """
+
     (This function is similar to assay_lookup_flow_filter_by_species_and_assay_type() in assay_lookup_controller.py) # TODO: Refactor to avoid duplication using modules?
+
+    Before logging the experiment, we need to have qc data
     """
 
     while True:
+        show_flow_title_and_descriptions("Log an Experiment", 
+                                         "Please follow the prompts to log your experiment.")
 
-        # TODO: Use show_flow_title_and_descriptions() to show the title and description of the flow
-        print("\n--- Starting Experiment Logging Process ---")
-        print("Please follow the prompts to log your experiment.\n")
 
         # Placeholder for the upcoming steps (species selection, assay selection, etc.)
         # For now, just a simple message to confirm.
@@ -116,6 +118,7 @@ def log_experiment_flow_manually(db_path):
 
 
         # Select sample type
+        ls_sample_types = fetch_ls_sample_types_from_db(db_path, species_name, assay_type, assay_name)
         sample_type = select_sample_type(db_path)
         if not sample_type:
             return
@@ -127,6 +130,11 @@ def log_experiment_flow_manually(db_path):
 
 
         exp_date = ask_experiment_date()
+
+
+
+        # Review the selected options
+        # TODO: Add the review and confirmation step
             
                 
         # TODO: Refactor this
@@ -136,6 +144,50 @@ def log_experiment_flow_manually(db_path):
 def log_experiment_flow_from_file(db_path):
     """
     """
-    print("This function is not implemented yet.") # TODO: Implement this function
-    print("Back to the Experiment Logging Menu...")
-    return "exp logging menu"
+
+    while True:
+        show_flow_title_and_descriptions("Log an Experiment from File", 
+                                         "Please follow the prompts to log your experiment from a file.")
+
+        # Placeholder for the upcoming steps (species selection, assay selection, etc.)
+        # For now, just a simple message to confirm.
+    
+    
+        # 1) Ask species:
+            # Obtain species list from the database
+            # Use ask_a_choice() to show the list and get the user's choice
+        ls_species = fetch_ls_species_from_db(db_path)
+        if len(ls_species) == 0: # TODO: We need to test this case
+            print("No species found in the database.")
+            print("Back to the Assay Menu...")
+            return "assay menu"
+        else:
+            species_name = ask_a_choice("\nAvailable Species:", ls_species)
+
+
+        # 2) Ask assay type:
+        ls_assay_type = fetch_ls_assay_types_from_db_based_on_species(db_path, species_name)
+        if len(ls_assay_type) == 0: # TODO: We need to test this case
+            print("No assay types found for this species.")
+            print("Back to the Assay Menu...")
+            return "assay menu"
+        else:
+            assay_type = ask_a_choice("\nAvailable Assay Types:", ls_assay_type)
+    
+    
+        # 3) Ask ExpInfoForm version:
+            # TODO: Where to store this information?
+        # 4) Ask ExpInfoForm file path:
+        # 5) Read the file:
+        # 6) Review and confirm the 
+
+
+
+
+
+    
+    
+    
+        print("This function is not implemented yet.") # TODO: Implement this function
+        print("Back to the Experiment Logging Menu...")
+        return "exp logging menu"
