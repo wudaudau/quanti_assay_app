@@ -52,8 +52,7 @@ def main_menu_flow(db_path):
             result = exp_menu_flow(db_path) # TODO: Update exp_menu_flow to return "main menu"
     
         elif choice == "q":
-            show_goodbye()
-            break
+            result = "exit"
         
         
 
@@ -61,3 +60,6 @@ def main_menu_flow(db_path):
         # Handle the result of the assay lookup
         if result == "main menu":
             continue # restart the loop
+        elif result == "exit":
+            show_goodbye()
+            break
