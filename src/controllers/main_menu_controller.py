@@ -54,9 +54,7 @@ def main_menu_flow(db_path):
         elif choice == "q":
             show_goodbye()
             break
-        else:
-            print("Invalid choice. Please try again.")
-            continue
+        
         
 
 
