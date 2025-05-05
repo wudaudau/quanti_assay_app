@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS manipulator (
 );
 
 -- Experiment Log Table
+-- TODO: Add more fields as needed: project_id, plate_id, qch_id, qcm_id, qcl_id, note, etc.
 CREATE TABLE IF NOT EXISTS exp_log (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     exp_date TEXT NOT NULL,
