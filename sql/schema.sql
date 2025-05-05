@@ -179,7 +179,7 @@ SELECT
     qa.concentration AS concentration, 
     qa.unit AS unit,
     qc_type AS qc_type,
-    m.name AS manufacturer_name, 
+    m.name AS manufacturer, 
     qc.cat_number AS cat_number, 
     qc.expiration_date AS expiration_date, 
     qc.preparation_date AS preparation_date
