@@ -11,3 +11,66 @@ Outputs: dictionary or DataFrames like:
 }
 """
 
+import pandas as pd
+
+from src.data_import.exp_forms import (
+    ReadExpInfo,
+    ExpFormMsdV210305, ExpFormMsdV210310, ExpFormMsdV211019, ExpFormMsdV220907, ExpFormMsdV230306, ExpFormMsdV240104, ExpFormMsdV250227, 
+    ExpFormElisaV201222, ExpFormElisaV210310, ExpFormElisaV230228, ExpFormElisaV250227
+)
+
+
+FORM_CLASSES = {
+    ("MSD", "v20210305"): ExpFormMsdV210305,
+    ("MSD", "v20210310"): ExpFormMsdV210310,
+    ("MSD", "v20211019"): ExpFormMsdV211019,
+    ("MSD", "v20220907"): ExpFormMsdV220907,
+    ("MSD", "v20230306"): ExpFormMsdV230306,
+    ("MSD", "v20240104"): ExpFormMsdV240104,
+    ("MSD", "v20240227"): ExpFormMsdV250227,
+    ("ELISA", "v201222"): ExpFormElisaV201222,
+    ("ELISA", "v20210310"): ExpFormElisaV210310,
+    ("ELISA", "v20230228"): ExpFormElisaV230228,
+    ("ELISA", "v20240227"): ExpFormElisaV250227,
+}
+
+
+def load_exp_form(file_path):
+    temp_form = ReadExpInfo(file_path)
+    key = (temp_form.assay_type, temp_form.exp_form_version)
+    form_class = FORM_CLASSES.get(key)
+
+    if form_class is None:
+        raise ValueError(f"No form class for assay_type={key[0]}, version={key[1]}")
+
+    return form_class(file_path)
+
+
+def extract_exp_data(form):
+    """Returns all extracted data from the form as a dict."""
+    return {
+        "exp_log": {
+            "exp_date": form.expdate,
+            "project_name": form.project_name,
+            "assay_name": form.assay_name,
+            "sample_type": form.sampletype,
+            "plate_bar_code": form.plate_bar_code,
+            "manipulators": form.manipulators,
+            "kit_cat_number": form.kitcat if hasattr(form, "kitcat") else form._ws_form["B16"].value,
+            "sd_cat_number": form.sdcat if hasattr(form, "sdcat") else form._ws_form.get("B17", "").value,
+            "sd_lot_number": form.sdlots,
+            "qc_h_lot_number": form.qchlot,
+            "qc_m_lot_number": form.qcmlot,
+            "qc_l_lot_number": form.qcllot,
+            "notes": form.exp_note,
+        },
+        "sd_preparation": {
+            "sd7_concentration": form.sd7_dilu_factor,
+            "serial_dilution_factor": form.sd_serial_dilu_factor,
+        },
+        "well_data": form.sample_info_df,
+        "readouts": getattr(form, "readout_df", None),  # Optional for MSD
+    }
+
+
+
