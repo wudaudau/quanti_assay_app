@@ -81,7 +81,19 @@ class ReadExpInfo:
         return self._ws_form["B8"].value
 
     @property
-    def manipulators(self):
+    def manipulator_1(self):
+        return self._ws_form["B11"].value
+    
+    @property
+    def manipulator_2(self):
+        return self._ws_form["B12"].value
+    
+    @property
+    def manipulator_3(self):
+        return self._ws_form["B13"].value
+
+    @property
+    def manipulators(self): # TODO: We will discard this in the future
         expby1 = self._ws_form["B11"].value
         expby2 = self._ws_form["B12"].value
         expby3 = self._ws_form["B13"].value
@@ -391,6 +403,18 @@ class ExpFormMsdV240104(ReadExpInfo):
         return self._ws_form["B10"].value
 
     @property
+    def manipulator_1(self):
+        return self._ws_form["B13"].value
+    
+    @property
+    def manipulator_2(self):
+        return self._ws_form["B14"].value
+    
+    @property
+    def manipulator_3(self):
+        return self._ws_form["B15"].value
+
+    @property
     def manipulators(self):
         expby1 = self._ws_form["B13"].value
         expby2 = self._ws_form["B14"].value
@@ -489,6 +513,18 @@ class ExpFormMsdV250227(ReadExpInfo):
     def expinfo(self): # plate layout id, e.g. Soumia202312pl01, igive202312pl01
         return self._ws_form["B10"].value
 
+    @property
+    def manipulator_1(self):
+        return self._ws_form["B13"].value
+    
+    @property
+    def manipulator_2(self):
+        return self._ws_form["B14"].value
+    
+    @property
+    def manipulator_3(self):
+        return self._ws_form["B15"].value
+    
     @property
     def manipulators(self):
         expby1 = self._ws_form["B13"].value
@@ -1126,6 +1162,18 @@ class ExpFormElisaV250227(ReadExpInfo):
     def expinfo(self):
         return self._ws_form["B10"].value # TODO: Rename to plate_layout_id
 
+    @property
+    def manipulator_1(self):
+        return self._ws_form["B13"].value
+    
+    @property
+    def manipulator_2(self):
+        return self._ws_form["B14"].value
+    
+    @property
+    def manipulator_3(self):
+        return self._ws_form["B15"].value
+    
     @property
     def manipulators(self):
         expby1 = self._ws_form["B13"].value
