@@ -59,6 +59,10 @@ class ReadExpInfo:
     @property
     def expdate(self):
         return str(int(self._ws_form["B4"].value)) # change to datetime object later
+    
+    @property
+    def species(self):
+        return "Mouse" if self.assay_name == "V-PLEX Proinfammatory P1 Mouse" else "Human"
 
     @property
     def project_name(self):
