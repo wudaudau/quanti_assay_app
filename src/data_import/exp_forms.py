@@ -117,6 +117,10 @@ class ReadExpInfo:
         return None
     
     @property
+    def sdcat(self): # sd cat number
+        return None
+    
+    @property
     def sdlots(self):
         sdlot1 = self._ws_form["B17"].value
         sdlot2 = self._ws_form["B18"].value
@@ -619,7 +623,7 @@ class ExpFormElisaV201222(ReadExpInfo):
         return self._ws_form["B16"].value
 
     @property
-    def sdcat(self):
+    def sdcat(self): # sd cat number
         return self._ws_form["B17"].value
 
     @property
@@ -795,7 +799,7 @@ class ExpFormElisaV210310(ReadExpInfo):
         return self._ws_form["B16"].value
 
     @property
-    def sdcat(self):
+    def sdcat(self): # sd cat number
         return self._ws_form["B17"].value
 
     @property
@@ -972,7 +976,7 @@ class ExpFormElisaV230228(ReadExpInfo):
         return self._ws_form["B16"].value
 
     @property
-    def sdcat(self):
+    def sdcat(self): # sd cat number
         return self._ws_form["B17"].value
 
     @property
@@ -1203,7 +1207,7 @@ class ExpFormElisaV250227(ReadExpInfo):
         return self._ws_form["B18"].value
 
     @property
-    def sdcat(self):
+    def sdcat(self): # sd cat number
         return self._ws_form["B19"].value
 
     @property
