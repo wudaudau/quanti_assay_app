@@ -81,7 +81,7 @@ class ReadExpInfo:
         return self._ws_form["B7"].value
 
     @property
-    def expinfo(self):
+    def expinfo(self): # plate layout name, e.g. Soumia202312pl01, igive202312pl01
         return self._ws_form["B8"].value
 
     @property
