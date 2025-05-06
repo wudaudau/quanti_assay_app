@@ -37,13 +37,12 @@ FORM_CLASSES = {
 }
 
 
-def load_exp_form(file_path):
-    temp_form = ReadExpInfo(file_path)
-    key = (temp_form.assay_type, temp_form.exp_form_version)
+def load_exp_form(file_path, assay_type=None, form_version=None):
+    key = (assay_type, form_version)
     form_class = FORM_CLASSES.get(key)
 
     if form_class is None:
-        raise ValueError(f"No form class for assay_type={key[0]}, version={key[1]}")
+        raise ValueError(f"No form class for assay_type={key[0]}, form_version={key[1]}")
 
     return form_class(file_path)
 
