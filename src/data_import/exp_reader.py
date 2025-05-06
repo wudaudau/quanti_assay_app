@@ -21,17 +21,19 @@ from src.data_import.exp_forms import (
 
 
 FORM_CLASSES = {
+    ("MSD", None): ExpFormMsdV210310,  # Default to the latest version
     ("MSD", "v20210305"): ExpFormMsdV210305,
     ("MSD", "v20210310"): ExpFormMsdV210310,
     ("MSD", "v20211019"): ExpFormMsdV211019,
     ("MSD", "v20220907"): ExpFormMsdV220907,
     ("MSD", "v20230306"): ExpFormMsdV230306,
     ("MSD", "v20240104"): ExpFormMsdV240104,
-    ("MSD", "v20240227"): ExpFormMsdV250227,
-    ("ELISA", "v201222"): ExpFormElisaV201222,
+    ("MSD", "v20250227"): ExpFormMsdV250227,
+    ("ELISA", None): ExpFormElisaV201222,  # Default to the latest version
+    ("ELISA", "v20201222"): ExpFormElisaV201222,
     ("ELISA", "v20210310"): ExpFormElisaV210310,
     ("ELISA", "v20230228"): ExpFormElisaV230228,
-    ("ELISA", "v20240227"): ExpFormElisaV250227,
+    ("ELISA", "v20250227"): ExpFormElisaV250227,
 }
 
 
