@@ -49,17 +49,17 @@ def insert_experiment(conn: sqlite3.Connection, exp_data: Dict) -> int:
         log_data.get("notes"),
     ))
 
-    experiment_id = cur.lastrowid
+    experiment_raw_id = cur.lastrowid
 
     # --- Insert well_data ---
     for well_id, row in exp_data["well_data"].iterrows():
         cur.execute("""
             INSERT INTO well_data (
-                experiment_id, well_id, sample_name, sample_role,
+                experiment_raw_id, well_id, sample_name, sample_role,
                 dilution_factor, freeze_thaw_cycle, excluded
             ) VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (
-            experiment_id,
+            experiment_raw_id,
             well_id,
             row["sample_name"],
             row["sample_role"],
@@ -88,16 +88,16 @@ def insert_experiment(conn: sqlite3.Connection, exp_data: Dict) -> int:
     if sd_prep:
         cur.execute("""
             INSERT INTO sd_preparation (
-                experiment_id, sd7_concentration, serial_dilution_factor
+                experiment_raw_id, sd7_concentration, serial_dilution_factor
             ) VALUES (?, ?, ?)
         """, (
-            experiment_id,
+            experiment_raw_id,
             str(sd_prep.get("sd7_concentration")),  # Often a dict
             sd_prep.get("serial_dilution_factor"),
         ))
 
     conn.commit()
-    return experiment_id
+    return experiment_raw_id
 
 
 def get_well_id_by_label(well_df, label):
