@@ -67,6 +67,10 @@ class ReadExpInfo:
     @property
     def project_name(self):
         return self._ws_form["B5"].value
+    
+    @property
+    def cohort(self):
+        return None
 
     @property
     def assay_name(self):
