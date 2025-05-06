@@ -47,7 +47,7 @@ import numpy as np
 import pandas as pd
 import openpyxl
 
-from src.tool_quanti_data_process_WUDAUDAU.tool import plate_to_table_96well # TODO: I might have published this function somewhere else. Try to include it to my GitHub
+from src.plate_box_utils.plate_box_utils import plate_to_table_96well # TODO: I might have published this function somewhere else. Try to include it to my GitHub
 
 def unique_value_in_df(df):
     v = df.values.reshape([1,-1])[0] # in a 1d array
