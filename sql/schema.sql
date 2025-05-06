@@ -114,18 +114,30 @@ CREATE TABLE IF NOT EXISTS manipulator (
     UNIQUE(first_name, last_name)
 );
 
--- Experiment Log Table
--- TODO: Update project_name, cohort_name, plate_layout_name, kit_cat_number, sd_cat_number, sd_lot_number, qc_h_lot_number, qc_m_lot_number, qc_l_lot_number to be foreign keys to a project table if needed.
-CREATE TABLE IF NOT EXISTS experiment (
+-- TODO: Experiment Table
+-- to have foreign ids for project_name, cohort_name, plate_layout_name, kit_cat_number, sd_cat_number, sd_lot_number, qc_h_lot_number, qc_m_lot_number, qc_l_lot_number to be foreign keys to a project table if needed.
+-- CREATE TABLE IF NOT EXISTS experiemnt (
+--     FOREIGN KEY (species_id) REFERENCES species(id),
+--     FOREIGN KEY (assay_type_id) REFERENCES assay_type(id),
+--     FOREIGN KEY (assay_id) REFERENCES assay(id),
+--     FOREIGN KEY (sample_type_id) REFERENCES sample_type(id),
+--     FOREIGN KEY (manipulator_1_id) REFERENCES manipulator(id),
+--     FOREIGN KEY (manipulator_2_id) REFERENCES manipulator(id),
+--     FOREIGN KEY (manipulator_3_id) REFERENCES manipulator(id)
+-- )
+
+
+-- Experiment Raw Table (for experiment verbatim data from the ExpInfoForm)
+CREATE TABLE IF NOT EXISTS experiment_raw (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     exp_date TEXT NOT NULL,
-    species_id INTEGER NOT NULL,
-    assay_type_id INTEGER NOT NULL,
-    assay_id INTEGER NOT NULL,
-    sample_type_id INTEGER NOT NULL,
-    manipulator_1_id INTEGER NOT NULL,
-    manipulator_2_id INTEGER,
-    manipulator_3_id INTEGER,
+    species TEXT NOT NULL,
+    assay_type TEXT NOT NULL,
+    assay TEXT NOT NULL,
+    sample_type TEXT NOT NULL,
+    manipulator_1 TEXT NOT NULL,
+    manipulator_2 TEXT,
+    manipulator_3 TEXT,
     project_name TEXT,
     cohort_name TEXT,
     plate_layout_name TEXT,
@@ -136,28 +148,22 @@ CREATE TABLE IF NOT EXISTS experiment (
     qc_h_lot_number TEXT,
     qc_m_lot_number TEXT,
     qc_l_lot_number TEXT,
-    notes TEXT,
-    FOREIGN KEY (species_id) REFERENCES species(id),
-    FOREIGN KEY (assay_type_id) REFERENCES assay_type(id),
-    FOREIGN KEY (assay_id) REFERENCES assay(id),
-    FOREIGN KEY (sample_type_id) REFERENCES sample_type(id),
-    FOREIGN KEY (manipulator_1_id) REFERENCES manipulator(id),
-    FOREIGN KEY (manipulator_2_id) REFERENCES manipulator(id),
-    FOREIGN KEY (manipulator_3_id) REFERENCES manipulator(id)
+    notes TEXT
 );
 
 -- Table: well_data
+-- TODO: Add experiment_id
 CREATE TABLE IF NOT EXISTS well_data (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    experiment_id INTEGER NOT NULL,
+    experiment_raw_id INTEGER NOT NULL,
     well_id TEXT NOT NULL,
     sample_name TEXT,
     sample_role TEXT,
     dilution_factor REAL,
     freeze_thaw_cycle INTEGER,
     excluded BOOLEAN DEFAULT 0,
-    FOREIGN KEY (experiment_id) REFERENCES experiment(id),
-    UNIQUE (experiment_id, well_id)  -- Avoid duplicate wells in the same experiment
+    FOREIGN KEY (experiment_raw_id) REFERENCES experiment_raw(id),
+    UNIQUE (experiment_raw_id, well_id)  -- Avoid duplicate wells in the same experiment
 );
 
 -- Table: readout
@@ -172,35 +178,37 @@ CREATE TABLE IF NOT EXISTS readout (
 );
 
 -- Table: sd_preparation
+-- TODO: Add experiment_id
 CREATE TABLE IF NOT EXISTS sd_preparation (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    experiment_id INTEGER NOT NULL,
+    experiment_raw_id INTEGER NOT NULL,
     sd7_concentration REAL,
     serial_dilution_factor REAL,
     sd7_unit TEXT,
-    FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+    FOREIGN KEY (experiment_raw_id) REFERENCES experiment_raw(id)
 );
 
 -- Table: qc_concentration
+-- TODO: Add experiment_id
 CREATE TABLE IF NOT EXISTS qc_concentration (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    experiment_id INTEGER NOT NULL,
+    experiment_raw_id INTEGER NOT NULL,
     qc_l_concentration REAL,
     qc_m_concentration REAL,
     qc_h_concentration REAL,
     qc_unit TEXT,
-    FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+    FOREIGN KEY (experiment_raw_id) REFERENCES experiment_raw(id)
 );
 
 -- Table: file
 CREATE TABLE IF NOT EXISTS file (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    experiment_id INTEGER NOT NULL,
+    experiment_raw_id INTEGER NOT NULL,
     file_type TEXT,
     file_path TEXT,
     sheet_name TEXT,
     version TEXT,
-    FOREIGN KEY (experiment_id) REFERENCES experiment(id)
+    FOREIGN KEY (experiment_raw_id) REFERENCES experiment_raw(id)
 );
 
 -- Table: result (for processed values)
