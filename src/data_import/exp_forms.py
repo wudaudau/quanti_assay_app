@@ -69,7 +69,7 @@ class ReadExpInfo:
         return self._ws_form["B5"].value
     
     @property
-    def cohort(self):
+    def cohort(self): # Cohort name
         return None
 
     @property
