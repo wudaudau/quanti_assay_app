@@ -172,7 +172,6 @@ CREATE TABLE IF NOT EXISTS readout (
     well_data_id INTEGER NOT NULL,
     analyte_name TEXT NOT NULL,
     value REAL,
-    unit TEXT,
     readout_type TEXT DEFAULT 'raw',  -- e.g., 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
     FOREIGN KEY (well_data_id) REFERENCES well_data(id)
 );
