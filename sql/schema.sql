@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS experiment_raw (
     exp_date TEXT NOT NULL,
     species TEXT NOT NULL,
     assay_type TEXT NOT NULL,
-    assay TEXT NOT NULL,
+    assay_name TEXT NOT NULL,
     sample_type TEXT NOT NULL,
     manipulator_1 TEXT NOT NULL,
     manipulator_2 TEXT,
