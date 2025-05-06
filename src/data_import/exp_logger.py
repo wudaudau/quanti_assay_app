@@ -12,20 +12,36 @@ def insert_experiment(conn: sqlite3.Connection, exp_data: Dict) -> int:
 
     # --- Insert into exp_log ---
     log_data = exp_data["exp_log"]
-    cur.execute("""
-        INSERT INTO exp_log (
-            exp_date, project_name, assay_name, sample_type,
-            plate_bar_code, kit_cat_number, sd_cat_number,
-            sd_lot_number, qc_h_lot_number, qc_m_lot_number, qc_l_lot_number, notes
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        
+    cur.execute("""INSERT INTO experiment_raw (
+            exp_date, species, assay_type, assay_name, sample_type, 
+            manipulator_1, manipulator_2, manipulator_3,
+            project_name, cohort_name, plate_layout_name, plate_bar_code, 
+            kit_cat_number, sd_cat_number,
+            sd_lot_number, qc_h_lot_number, qc_m_lot_number, qc_l_lot_number,
+            notes
+        ) VALUES (?, ?, ?, ?, ?,
+            ?, ?, ?,
+            ?, ?, ?, ?,
+            ?, ?,
+            ?, ?, ?, ?,
+            ?
+        )
     """, (
         log_data["exp_date"],
-        log_data.get("project_name"),
+        log_data["species"],
+        log_data["assay_type"],
         log_data["assay_name"],
         log_data["sample_type"],
+        log_data.get("manipulator_1"),
+        log_data.get("manipulator_2"),
+        log_data.get("manipulator_3"),
+        log_data.get("project_name"),
+        log_data.get("cohort_name"),
+        log_data.get("plate_layout_name"),
         log_data.get("plate_bar_code"),
         log_data["kit_cat_number"],
-        log_data.get("sd_cat_number"),
+        log_data["sd_cat_number"],
         ", ".join(log_data["sd_lot_number"]) if isinstance(log_data["sd_lot_number"], list) else log_data["sd_lot_number"],
         log_data.get("qc_h_lot_number"),
         log_data.get("qc_m_lot_number"),
