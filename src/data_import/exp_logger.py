@@ -73,14 +73,14 @@ def insert_experiment(conn: sqlite3.Connection, exp_data: Dict) -> int:
     if exp_data["readouts"] is not None:
         for _, row in exp_data["readouts"].iterrows():
             cur.execute("""
-                INSERT INTO readouts (
-                    well_data_id, analyte_name, value, unit
+                INSERT INTO readout (
+                    well_data_id, analyte_name, value, readout_type
                 ) VALUES (?, ?, ?, ?)
             """, (
-                get_well_id_by_label(exp_data["well_data"], row["Well"]),
-                row["Analyte"],  # could be analyte_name or wavelength
+                row["Well"],
+                row["Analyte"],
                 row["value"],
-                row.get("unit", None),
+                row["readout_type"],
             ))
 
     # --- Insert sd_preparation ---
