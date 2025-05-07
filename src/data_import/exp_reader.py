@@ -60,7 +60,7 @@ def extract_exp_data(form):
             "manipulator_2": form.manipulator_2,
             "manipulator_3": form.manipulator_3,
             "project_name": form.project_name,
-            "cohort_name": form.cohort_name,
+            "cohort_name": form.cohort,
             "plate_layout_name": form.expinfo,
             "plate_bar_code": form.plate_bar_code,
             "kit_cat_number": form.kitcat,
