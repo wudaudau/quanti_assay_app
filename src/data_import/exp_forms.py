@@ -778,29 +778,36 @@ class ExpFormElisaV201222(ReadExpInfo):
     @property
     def readout_df(self):
         # make it as readout_df
-        # the index is Well
+            # It's a long table
+            # columns: Well, analyte, value, reaout_type
+            # readout_type: 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
+
+
+        # obtain the analyte_name based on the assay_name
+        analyte = ASSAY_TO_ANALYTES[self.assay_name]
+
+        df_opt = pd.DataFrame(columns=["Well", "Analyte", "value", "readout_type"])
         
-        # readout_type: 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
 
-        df_opt = plate_to_table_96well(self.df_450_570nm, "OD 450-570 nm") # This is the default readout
-        # make sure the column is numeric
-        df_opt["OD 450-570 nm"] = df_opt["OD 450-570 nm"].astype("float64")
-
-        # Add the 450nm and 570nm readout to the df
-        for value_in_layout_df, readout_type in ((self.df_450nm, "OD 450 nm"),
+        # obtain the readout to df_opt
+        for value_in_layout_df, readout_type in ((self.df_450_570nm, "OD 450-570 nm"),
+                                                 (self.df_450nm, "OD 450 nm"),
                                                  (self.df_570nm, "OD 570 nm")):
 
-            df_temp = plate_to_table_96well(value_in_layout_df, readout_type)
+            df_temp = plate_to_table_96well(value_in_layout_df, "value") # the index name is Well
 
             # make sure the column is numeric
-            df_temp[readout_type] = df_temp[readout_type].astype("float64")
+            df_temp["value"] = df_temp["value"].astype("float64")
 
-            # Concatenate to df_opt
-            df_opt = pd.concat([df_opt, df_temp], axis=1)
+            # add readout_type and analyte to the df_temp
+            df_temp["readout_type"] = readout_type
+            df_temp["Analyte"] = analyte
 
-        # TODO: We need to obtain the analyte_name based on the assay_name
-        analyte = ASSAY_TO_ANALYTES[self.assay_name]
-        df_opt.insert(0, "Analyte", analyte)
+            # reset the index
+            df_temp.reset_index(inplace=True)
+
+            # concatenate the df_temp to the df_opt
+            df_opt = pd.concat([df_opt, df_temp], ignore_index=True, axis=0)
 
         
         return df_opt
@@ -970,29 +977,36 @@ class ExpFormElisaV210310(ReadExpInfo):
     @property
     def readout_df(self):
         # make it as readout_df
-        # the index is Well
+            # It's a long table
+            # columns: Well, analyte, value, reaout_type
+            # readout_type: 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
+
+
+        # obtain the analyte_name based on the assay_name
+        analyte = ASSAY_TO_ANALYTES[self.assay_name]
+
+        df_opt = pd.DataFrame(columns=["Well", "Analyte", "value", "readout_type"])
         
-        # readout_type: 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
 
-        df_opt = plate_to_table_96well(self.df_450_570nm, "OD 450-570 nm") # This is the default readout
-        # make sure the column is numeric
-        df_opt["OD 450-570 nm"] = df_opt["OD 450-570 nm"].astype("float64")
-
-        # Add the 450nm and 570nm readout to the df
-        for value_in_layout_df, readout_type in ((self.df_450nm, "OD 450 nm"),
+        # obtain the readout to df_opt
+        for value_in_layout_df, readout_type in ((self.df_450_570nm, "OD 450-570 nm"),
+                                                 (self.df_450nm, "OD 450 nm"),
                                                  (self.df_570nm, "OD 570 nm")):
 
-            df_temp = plate_to_table_96well(value_in_layout_df, readout_type)
+            df_temp = plate_to_table_96well(value_in_layout_df, "value") # the index name is Well
 
             # make sure the column is numeric
-            df_temp[readout_type] = df_temp[readout_type].astype("float64")
+            df_temp["value"] = df_temp["value"].astype("float64")
 
-            # Concatenate to df_opt
-            df_opt = pd.concat([df_opt, df_temp], axis=1)
+            # add readout_type and analyte to the df_temp
+            df_temp["readout_type"] = readout_type
+            df_temp["Analyte"] = analyte
 
-        # TODO: We need to obtain the analyte_name based on the assay_name
-        analyte = ASSAY_TO_ANALYTES[self.assay_name]
-        df_opt.insert(0, "Analyte", analyte)
+            # reset the index
+            df_temp.reset_index(inplace=True)
+
+            # concatenate the df_temp to the df_opt
+            df_opt = pd.concat([df_opt, df_temp], ignore_index=True, axis=0)
 
         
         return df_opt
@@ -1163,29 +1177,36 @@ class ExpFormElisaV230228(ReadExpInfo):
     @property
     def readout_df(self):
         # make it as readout_df
-        # the index is Well
+            # It's a long table
+            # columns: Well, analyte, value, reaout_type
+            # readout_type: 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
+
+
+        # obtain the analyte_name based on the assay_name
+        analyte = ASSAY_TO_ANALYTES[self.assay_name]
+
+        df_opt = pd.DataFrame(columns=["Well", "Analyte", "value", "readout_type"])
         
-        # readout_type: 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
 
-        df_opt = plate_to_table_96well(self.df_450_570nm, "OD 450-570 nm") # This is the default readout
-        # make sure the column is numeric
-        df_opt["OD 450-570 nm"] = df_opt["OD 450-570 nm"].astype("float64")
-
-        # Add the 450nm and 570nm readout to the df
-        for value_in_layout_df, readout_type in ((self.df_450nm, "OD 450 nm"),
+        # obtain the readout to df_opt
+        for value_in_layout_df, readout_type in ((self.df_450_570nm, "OD 450-570 nm"),
+                                                 (self.df_450nm, "OD 450 nm"),
                                                  (self.df_570nm, "OD 570 nm")):
 
-            df_temp = plate_to_table_96well(value_in_layout_df, readout_type)
+            df_temp = plate_to_table_96well(value_in_layout_df, "value") # the index name is Well
 
             # make sure the column is numeric
-            df_temp[readout_type] = df_temp[readout_type].astype("float64")
+            df_temp["value"] = df_temp["value"].astype("float64")
 
-            # Concatenate to df_opt
-            df_opt = pd.concat([df_opt, df_temp], axis=1)
+            # add readout_type and analyte to the df_temp
+            df_temp["readout_type"] = readout_type
+            df_temp["Analyte"] = analyte
 
-        # TODO: We need to obtain the analyte_name based on the assay_name
-        analyte = ASSAY_TO_ANALYTES[self.assay_name]
-        df_opt.insert(0, "Analyte", analyte)
+            # reset the index
+            df_temp.reset_index(inplace=True)
+
+            # concatenate the df_temp to the df_opt
+            df_opt = pd.concat([df_opt, df_temp], ignore_index=True, axis=0)
 
         
         return df_opt
@@ -1433,29 +1454,36 @@ class ExpFormElisaV250227(ReadExpInfo):
     @property
     def readout_df(self):
         # make it as readout_df
-        # the index is Well
+            # It's a long table
+            # columns: Well, analyte, value, reaout_type
+            # readout_type: 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
+
+
+        # obtain the analyte_name based on the assay_name
+        analyte = ASSAY_TO_ANALYTES[self.assay_name]
+
+        df_opt = pd.DataFrame(columns=["Well", "Analyte", "value", "readout_type"])
         
-        # readout_type: 'OD 450-570 nm', 'OD 450 nm', 'OD 570 nm', 'MSD ECL intensity', 'Luminex MFI'
 
-        df_opt = plate_to_table_96well(self.df_450_570nm, "OD 450-570 nm") # This is the default readout
-        # make sure the column is numeric
-        df_opt["OD 450-570 nm"] = df_opt["OD 450-570 nm"].astype("float64")
-
-        # Add the 450nm and 570nm readout to the df
-        for value_in_layout_df, readout_type in ((self.df_450nm, "OD 450 nm"),
+        # obtain the readout to df_opt
+        for value_in_layout_df, readout_type in ((self.df_450_570nm, "OD 450-570 nm"),
+                                                 (self.df_450nm, "OD 450 nm"),
                                                  (self.df_570nm, "OD 570 nm")):
 
-            df_temp = plate_to_table_96well(value_in_layout_df, readout_type)
+            df_temp = plate_to_table_96well(value_in_layout_df, "value") # the index name is Well
 
             # make sure the column is numeric
-            df_temp[readout_type] = df_temp[readout_type].astype("float64")
+            df_temp["value"] = df_temp["value"].astype("float64")
 
-            # Concatenate to df_opt
-            df_opt = pd.concat([df_opt, df_temp], axis=1)
+            # add readout_type and analyte to the df_temp
+            df_temp["readout_type"] = readout_type
+            df_temp["Analyte"] = analyte
 
-        # TODO: We need to obtain the analyte_name based on the assay_name
-        analyte = ASSAY_TO_ANALYTES[self.assay_name]
-        df_opt.insert(0, "Analyte", analyte)
+            # reset the index
+            df_temp.reset_index(inplace=True)
+
+            # concatenate the df_temp to the df_opt
+            df_opt = pd.concat([df_opt, df_temp], ignore_index=True, axis=0)
 
         
         return df_opt
