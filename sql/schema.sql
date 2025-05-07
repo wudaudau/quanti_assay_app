@@ -148,7 +148,8 @@ CREATE TABLE IF NOT EXISTS experiment_raw (
     qc_h_lot_number TEXT,
     qc_m_lot_number TEXT,
     qc_l_lot_number TEXT,
-    notes TEXT
+    notes TEXT,
+    UNIQUE(exp_date, assay_name, plate_layout_name)
 );
 
 -- Table: well_data
