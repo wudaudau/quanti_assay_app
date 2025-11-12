@@ -73,11 +73,24 @@ quanti_assay_app/
 │   │
 │   ├── assay_logging/           # Logic for logging experiment entries
 │   │   └── assay_logging.py     # DB interactions to insert and fetch experiment logs
-│   ├── data_import/
+│   ├── data_import/             # Excel file parsing and data extraction
 │   │   ├── __init__.py
-│   │   ├── exp_reader.py      # reads Excel files into structured dicts/dataframes
-│   │   ├── exp_parser.py      # converts those dicts to DB-ready formats
-│   │   └── exp_logger.py      # inserts data into the SQLite database
+│   │   ├── exp_reader.py        # Main interface for loading experiment forms
+│   │   ├── exp_logger.py        # Database insertion logic for experiments
+│   │   ├── assay_to_analyte_map.py # Assay to analyte mapping utilities
+│   │   ├── exp_forms/           # Modular experiment form readers
+│   │   │   ├── __init__.py
+│   │   │   ├── base.py          # Base ReadExpInfo class and shared utilities
+│   │   │   ├── msd_versions/    # MSD-specific form readers by version
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── v210305.py   # MSD form reader for version 210305
+│   │   │   │   └── ...          # Other MSD version files
+│   │   │   └── elisa_versions/  # ELISA-specific form readers by version
+│   │   │       ├── __init__.py
+│   │   │       ├── v201222.py   # ELISA form reader for version 201222
+│   │   │       └── ...          # Other ELISA version files
+│   │   └── plate_box_utils/     # Plate layout and data transformation utilities
+│   │       └── plate_box_utils.py
 │
 ├── sql/
 │   └── schema.sql               # SQL script to initialize the database schema

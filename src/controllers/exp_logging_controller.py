@@ -1,5 +1,5 @@
 """
-TODO: Rename this file to exp_logging_controller.py
+Experiment logging controller - handles user interaction for logging experiments
 """
 
 from datetime import datetime
