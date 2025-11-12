@@ -6,7 +6,7 @@
   - [x] Design the new tables (experiments, wells, readouts, etc.)
   - [x] Add these to sql/schema.sql
   - [x] Create models / queries (or ORM if used)
-  - [ ] Integrate your existing Excel parsing (ExpInfoForm) to populate these tables
+  - [x] Integrate your existing Excel parsing (ExpInfoForm) to populate these tables
   - [ ] Build a UI or CLI function to log a new experiment from files
   - [ ] Add logging/feedback for successful import
   - [ ] Build separate results table and use processing logic to populate it.
