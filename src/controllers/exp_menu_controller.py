@@ -35,7 +35,7 @@ def exp_menu_flow(db_path):
         if choice == "1":
             result = exp_logging_menu_flow(db_path)
         elif choice == "2":
-            result = exp_lookup_menu_flow(db_path, 15) # Limit to last 15 experiments
+            result = exp_lookup_menu_flow(db_path)
         elif choice == "3":
             result="main menu"
             print("Returning to Main Menu...")
