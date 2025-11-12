@@ -13,11 +13,18 @@ Outputs: dictionary or DataFrames like:
 
 import pandas as pd
 
-from src.data_import.exp_forms import (
-    ReadExpInfo,
-    ExpFormMsdV210305, ExpFormMsdV210310, ExpFormMsdV211019, ExpFormMsdV220907, ExpFormMsdV230306, ExpFormMsdV240104, ExpFormMsdV250227, 
-    ExpFormElisaV201222, ExpFormElisaV210310, ExpFormElisaV230228, ExpFormElisaV250227
-)
+from src.data_import.exp_forms.base import ReadExpInfo
+from src.data_import.exp_forms.msd_versions.v210305 import ExpFormMsdV210305
+from src.data_import.exp_forms.msd_versions.v210310 import ExpFormMsdV210310
+from src.data_import.exp_forms.msd_versions.v211019 import ExpFormMsdV211019
+from src.data_import.exp_forms.msd_versions.v220907 import ExpFormMsdV220907
+from src.data_import.exp_forms.msd_versions.v230306 import ExpFormMsdV230306
+from src.data_import.exp_forms.msd_versions.v240104 import ExpFormMsdV240104
+from src.data_import.exp_forms.msd_versions.v250227 import ExpFormMsdV250227
+from src.data_import.exp_forms.elisa_versions.v201222 import ExpFormElisaV201222
+from src.data_import.exp_forms.elisa_versions.v210310 import ExpFormElisaV210310
+from src.data_import.exp_forms.elisa_versions.v230228 import ExpFormElisaV230228
+from src.data_import.exp_forms.elisa_versions.v250227 import ExpFormElisaV250227
 
 
 FORM_CLASSES = {
