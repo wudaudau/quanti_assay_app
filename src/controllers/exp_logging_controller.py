@@ -6,11 +6,39 @@ from datetime import datetime
 import sqlite3
 
 from src.controllers.controller_utils import show_flow_title_and_descriptions, ask_a_choice, ask_yes_no
-from src.assay_logging.assay_logging import select_sample_type, select_manipulator, log_experiment
+from src.assay_logging.assay_logging import select_sample_type, select_manipulator, log_experiment, log_experiment_manual
 from src.assay_lookup.assay_lookup import (fetch_ls_species_from_db, fetch_ls_assay_types_from_db_based_on_species,
                                            fetch_ls_assays_from_db_based_on_species_and_assay_type
                                              )
 from src.data_import.exp_reader import log_experiment_from_excel
+from src.database.db_utils import check_exists
+
+
+def get_species_id(db_path, species_name):
+    """Get species ID from name."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    result = check_exists(cursor, 'species', {'name': species_name})
+    conn.close()
+    return result[0] if result else None
+
+
+def get_assay_type_id(db_path, assay_type_name):
+    """Get assay type ID from name."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    result = check_exists(cursor, 'assay_type', {'name': assay_type_name})
+    conn.close()
+    return result[0] if result else None
+
+
+def get_assay_id(db_path, assay_name):
+    """Get assay ID from name."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    result = check_exists(cursor, 'assay', {'name': assay_name})
+    conn.close()
+    return result[0] if result else None
 
 def ask_manipulator(db_path):
     """
@@ -134,12 +162,75 @@ def log_experiment_flow_manually(db_path):
 
 
         # Review the selected options
-        # TODO: Add the review and confirmation step
+        print("\n" + "="*50)
+        print("EXPERIMENT SUMMARY")
+        print("="*50)
+        print(f"Date: {exp_date}")
+        print(f"Species: {species_name}")
+        print(f"Assay Type: {assay_type}")
+        print(f"Assay: {assay_name}")
+        print(f"Sample Type: {sample_type_name}")
+        
+        # Show manipulators
+        manipulator_names = []
+        for i, manip_id in enumerate(manipulator_ids):
+            if manip_id:
+                conn = sqlite3.connect(db_path)
+                cursor = conn.cursor()
+                cursor.execute("SELECT first_name, last_name FROM manipulator WHERE id = ?", (manip_id,))
+                result = cursor.fetchone()
+                conn.close()
+                if result:
+                    manipulator_names.append(f"{result[0]} {result[1]}")
+                else:
+                    manipulator_names.append("Unknown")
+            else:
+                manipulator_names.append("None")
+        
+        print(f"Manipulator 1: {manipulator_names[0]}")
+        print(f"Manipulator 2: {manipulator_names[1]}")
+        print(f"Manipulator 3: {manipulator_names[2]}")
+        print("="*50)
+
+        # Confirm before logging
+        confirm = ask_yes_no("\nProceed with logging this experiment?")
+        if not confirm:
+            print("Operation cancelled. Returning to menu...")
+            return "exp logging menu"
+
+        # Get IDs for database insertion
+        species_id = get_species_id(db_path, species_name)
+        assay_type_id = get_assay_type_id(db_path, assay_type)
+        assay_id = get_assay_id(db_path, assay_name)
+
+        if not all([species_id, assay_type_id, assay_id, sample_type_id]):
+            print("Error: Could not find IDs for selected items. Please check the database.")
+            input("\nPress Enter to continue...")
+            continue
+
+        # For manual logging, we need kit information
+        print("\nPlease provide kit information:")
+        kit_cat_number = input("Kit catalog number: ").strip()
+        if not kit_cat_number:
+            print("Kit catalog number is required.")
+            input("\nPress Enter to continue...")
+            continue
+
+        # Log the experiment
+        try:
+            log_experiment_manual(db_path, species_name, assay_type, assay_name, sample_type_name, 
+                                manipulator_names, exp_date, kit_cat_number)
+            print("✅ Experiment logged successfully!")
             
+            # Ask if user wants to log another experiment
+            another = ask_yes_no("\nWould you like to log another experiment?")
+            if not another:
+                return "exp logging menu"
                 
-        # TODO: Refactor this
-        # log_experiment(db_path, species_id, assay_type_id, assay_id, sample_type_id, manipulator_ids, exp_date)
-        print("(We need to refactor log_experiment() to log the data more efficiently.)")
+        except Exception as e:
+            print(f"Error logging experiment: {e}")
+            input("\nPress Enter to continue...")
+            continue
 
 def log_experiment_flow_from_file(db_path):
     """

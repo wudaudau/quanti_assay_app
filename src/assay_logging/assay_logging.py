@@ -79,3 +79,41 @@ def log_experiment(db_path, species_id, assay_type_id, assay_id, sample_type_id,
     conn.close()
     print("Experiment logged successfully.")
 
+
+def log_experiment_manual(db_path, species_name, assay_type, assay_name, sample_type_name, 
+                         manipulator_names, exp_date, kit_cat_number):
+    """
+    Log a manually entered experiment to the experiment_raw table.
+    
+    Args:
+        db_path: Path to the database
+        species_name: Name of the species
+        assay_type: Type of assay (MSD/ELISA)
+        assay_name: Name of the assay
+        sample_type_name: Name of the sample type
+        manipulator_names: List of manipulator names (can include None)
+        exp_date: Experiment date in YYYY-MM-DD format
+        kit_cat_number: Kit catalog number
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            INSERT INTO experiment_raw (
+                exp_date, species, assay_type, assay_name, sample_type,
+                manipulator_1, manipulator_2, manipulator_3, kit_cat_number
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (exp_date, species_name, assay_type, assay_name, sample_type_name,
+              manipulator_names[0], manipulator_names[1], manipulator_names[2], kit_cat_number))
+
+        conn.commit()
+        print("Experiment logged successfully.")
+        
+    except Exception as e:
+        conn.rollback()
+        raise e
+    finally:
+        conn.close()
+

@@ -13,7 +13,7 @@
   - [ ] Add views to display processed data.
 - [ ] "refactor/exp-menu-funcs" from "refactor/qc-menu-funcs"
   - [/] Develop Exp Menu, Exp Log Menu, and Exp Lookup Menu
-  - [ ] Create function to add an exp from ExpInfoForm
+  - [x] Create function to add an exp from ExpInfoForm
   - [ ] Develop a basic exp lookup function
 - [ ] "refactor/qc-menu-funcs" from "refactor/update-menus"
   - [x] Create "refactor/qc-menu-funcs" branch
