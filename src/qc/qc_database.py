@@ -44,12 +44,12 @@ def insert_qc(
         return None
 
     # Get or insert manufacture
-    manufacture_id = get_or_insert(cursor, "manufacture", {"name": manufacture_name}) if manufacture_name else None
+    manufacture_id = get_or_insert(cursor, "manufacturer", {"name": manufacture_name}) if manufacture_name else None
 
     # Insert into qc table
     cursor.execute("""
         INSERT INTO qc (
-            qc_type, name, lot_number, manufacture_id,
+            qc_type, name, lot_number, manufacturer_id,
             cat_number, expiration_date, preparation_date
         )
         VALUES (?, ?, ?, ?, ?, ?, ?)

@@ -110,3 +110,7 @@ quanti_assay_app/
   - 300
   - y
 
+```bash
+cd "/Users/wudaudau/Py projects/GitHub/quanti_assay_app" && rm -f data/quanti_assay.sqlite && echo -e "2\n1\n1\n8\nQC123test\nlot123\nQC-H123\n5\n2025-11-13\nn\n7\n100\ny\nq\nq" | python main.py
+```
+

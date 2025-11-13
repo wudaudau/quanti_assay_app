@@ -12,7 +12,7 @@
     - [x] Develop "Lookup a QC by Lot Nº" -> basic function ok
     - [x] Develop "Lookup a QC by Assay"
     - [x] Develop "Lookup a QC by Analyte"
-    - [ ] Refactor Add a QC function
+    - [x] Refactor Add a QC function
     - [ ] Add a password before add QC
     - [x] Import QC data
 - [ ] "refactor/update-menus"
