@@ -11,10 +11,10 @@
   - [ ] Add logging/feedback for successful import
   - [ ] Build separate results table and use processing logic to populate it.
   - [ ] Add views to display processed data.
-- [ ] "refactor/exp-menu-funcs" from "refactor/qc-menu-funcs"
-  - [/] Develop Exp Menu, Exp Log Menu, and Exp Lookup Menu
+- [x] "refactor/exp-menu-funcs" from "refactor/qc-menu-funcs"
+  - [x] Develop Exp Menu, Exp Log Menu, and Exp Lookup Menu
   - [x] Create function to add an exp from ExpInfoForm
-  - [ ] Develop a basic exp lookup function
+  - [x] Develop a basic exp lookup function
 - [ ] "refactor/qc-menu-funcs" from "refactor/update-menus"
   - [x] Create "refactor/qc-menu-funcs" branch
   - [ ] Develop qc lookup functions
