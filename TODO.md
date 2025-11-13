@@ -10,8 +10,8 @@
   - [ ] Develop qc lookup functions
     - [x] Make a qc_loopup_menu
     - [x] Develop "Lookup a QC by Lot Nº" -> basic function ok
-    - [ ] Develop "Lookup a QC by Assay"
-    - [ ] Develop "Lookup a QC by Analyte"
+    - [x] Develop "Lookup a QC by Assay"
+    - [x] Develop "Lookup a QC by Analyte"
     - [ ] Refactor Add a QC function
     - [ ] Add a password before add QC
     - [x] Import QC data

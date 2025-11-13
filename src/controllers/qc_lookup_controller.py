@@ -3,7 +3,30 @@
 
 from src.controllers.controller_utils import show_flow_title_and_descriptions, ask_a_choice, ask_for_string, ask_for_number, ask_yes_no
 
-from src.qc.qc_lookup import fetch_last_10_qc_lot_from_db, get_qc_details_by_lot_part_1, get_qc_details_by_lot_part_2
+from src.qc.qc_lookup import (fetch_last_10_qc_lot_from_db, get_qc_details_by_lot_part_1, get_qc_details_by_lot_part_2,
+                              fetch_qc_assays_from_db, get_qc_details_by_assay,
+                              fetch_qc_analytes_from_db, get_qc_details_by_analyte)
+
+
+def review_and_confirm_selections(selections):
+    """
+    Review the selected options and ask for confirmation.
+    
+    Args:
+        selections: List of selected items to review
+        
+    Returns:
+        str: "fetch details" to proceed, "qc lookup menu" to go back
+    """
+    print("\nSelected options:")
+    for i, selection in enumerate(selections, 1):
+        print(f"{i}. {selection}")
+    
+    confirm = ask_yes_no("\nProceed with fetching QC details?")
+    if confirm:
+        return "fetch details"
+    else:
+        return "qc lookup menu"
 
 
 def lookup_qc_flow_by_lot(db_path):
@@ -224,3 +247,125 @@ def handle_next_step() -> str:
         return "qc lookup menu"
     elif next_step == "Back to Main Menu":
         return "main menu"
+
+
+def lookup_qc_flow_by_assay(db_path):
+    """
+    Lookup QC by assay name.
+    """
+    while True:
+        show_flow_title_and_descriptions("Lookup QC by Assay",
+                                         "Show QC details by selecting an Assay.")
+
+        # Get list of QC assays
+        ls_qc_assays = fetch_qc_assays_from_db(db_path)
+
+        if len(ls_qc_assays) == 0:
+            print("No QC assays found in the database.")
+            print("Back to QC Menu...")
+            return "qc menu"
+        else:
+            qc_assay_name = ask_a_choice("\nAvailable QC Assays:", ls_qc_assays)
+
+        # Review and confirm
+        confirm_action = review_and_confirm_selections([qc_assay_name])
+
+        if confirm_action == "fetch details":
+            showing_qc_lookup_results_by_assay(db_path, qc_assay_name)
+        elif confirm_action == "qc lookup menu":
+            return confirm_action
+
+        # Ask next step
+        next_step = handle_next_step()
+        if next_step == "restart":
+            continue
+        elif next_step == "qc lookup menu":
+            return next_step
+        elif next_step == "main menu":
+            return next_step
+
+
+def showing_qc_lookup_results_by_assay(db_path, qc_assay_name):
+    """
+    Display QC lookup results by assay.
+    """
+    print(f"\nFetching QC details for Assay: {qc_assay_name}")
+    print("=" * 60)
+
+    # Get QC details
+    details = get_qc_details_by_assay(db_path, qc_assay_name)
+
+    if details:
+        for qc_name, qc_type, manufacturer, cat_number, lot_number, prep_date, exp_date in details:
+            print(f"QC Name: {qc_name}")
+            print(f"Lot Number: {lot_number}")
+            print(f"Type: {qc_type}")
+            print(f"Manufacturer: {manufacturer}")
+            print(f"Catalog Number: {cat_number}")
+            print(f"Preparation Date: {prep_date}")
+            print(f"Expiration Date: {exp_date}")
+            print("-" * 40)
+    else:
+        print(f"No QC found with Assay: {qc_assay_name}")
+
+
+def lookup_qc_flow_by_analyte(db_path):
+    """
+    Lookup QC by analyte name.
+    """
+    while True:
+        show_flow_title_and_descriptions("Lookup QC by Analyte",
+                                         "Show QC details by selecting an Analyte.")
+
+        # Get list of QC analytes
+        ls_qc_analytes = fetch_qc_analytes_from_db(db_path)
+
+        if len(ls_qc_analytes) == 0:
+            print("No QC analytes found in the database.")
+            print("Back to QC Menu...")
+            return "qc menu"
+        else:
+            qc_analyte_name = ask_a_choice("\nAvailable QC Analytes:", ls_qc_analytes)
+
+        # Review and confirm
+        confirm_action = review_and_confirm_selections([qc_analyte_name])
+
+        if confirm_action == "fetch details":
+            showing_qc_lookup_results_by_analyte(db_path, qc_analyte_name)
+        elif confirm_action == "qc lookup menu":
+            return confirm_action
+
+        # Ask next step
+        next_step = handle_next_step()
+        if next_step == "restart":
+            continue
+        elif next_step == "qc lookup menu":
+            return next_step
+        elif next_step == "main menu":
+            return next_step
+
+
+def showing_qc_lookup_results_by_analyte(db_path, qc_analyte_name):
+    """
+    Display QC lookup results by analyte.
+    """
+    print(f"\nFetching QC details for Analyte: {qc_analyte_name}")
+    print("=" * 60)
+
+    # Get QC details
+    details = get_qc_details_by_analyte(db_path, qc_analyte_name)
+
+    if details:
+        for qc_name, lot_number, concentration, unit, qc_type, manufacturer, cat_number, prep_date, exp_date in details:
+            print(f"QC Name: {qc_name}")
+            print(f"Lot Number: {lot_number}")
+            print(f"Analyte: {qc_analyte_name}")
+            print(f"Concentration: {concentration} {unit}")
+            print(f"Type: {qc_type}")
+            print(f"Manufacturer: {manufacturer}")
+            print(f"Catalog Number: {cat_number}")
+            print(f"Preparation Date: {prep_date}")
+            print(f"Expiration Date: {exp_date}")
+            print("-" * 40)
+    else:
+        print(f"No QC found with Analyte: {qc_analyte_name}")

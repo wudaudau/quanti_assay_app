@@ -68,3 +68,95 @@ def get_qc_details_by_lot_part_2(db_path, qc_lot_number):
     conn.close()
 
     return qc_details # Return a list of tuples with QC details
+
+
+######
+# Lookup QC by Assay
+######
+
+def fetch_qc_assays_from_db(db_path) -> list:
+    """
+    db_path: str. Path to the SQLite database.
+
+    Fetch all unique QC assay names from the database.
+
+    Return a list of QC assay names.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT DISTINCT qc_name FROM qc_lookup_view ORDER BY qc_name;")
+    qc_assays = cursor.fetchall()
+    conn.close()
+
+    ls_qc_assays = [qc_assay[0] for qc_assay in qc_assays]  # Extract names from tuples
+
+    return ls_qc_assays
+
+
+def get_qc_details_by_assay(db_path, qc_assay_name):
+    """
+    db_path: str. Path to the SQLite database.
+    qc_assay_name: str. QC assay name to look up.
+
+    Fetch QC details by assay name from the database.
+    Return a list of tuples with QC details.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT DISTINCT qc_name, qc_type, manufacturer, cat_number, lot_number, preparation_date, expiration_date
+        FROM qc_lookup_view
+        WHERE qc_name = ?;
+    """, (qc_assay_name,))
+    qc_details = cursor.fetchall()
+    conn.close()
+
+    return qc_details
+
+
+######
+# Lookup QC by Analyte
+######
+
+def fetch_qc_analytes_from_db(db_path) -> list:
+    """
+    db_path: str. Path to the SQLite database.
+
+    Fetch all unique QC analyte names from the database.
+
+    Return a list of QC analyte names.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT DISTINCT analyte_name FROM qc_lookup_view ORDER BY analyte_name;")
+    qc_analytes = cursor.fetchall()
+    conn.close()
+
+    ls_qc_analytes = [qc_analyte[0] for qc_analyte in qc_analytes]  # Extract names from tuples
+
+    return ls_qc_analytes
+
+
+def get_qc_details_by_analyte(db_path, qc_analyte_name):
+    """
+    db_path: str. Path to the SQLite database.
+    qc_analyte_name: str. QC analyte name to look up.
+
+    Fetch QC details by analyte name from the database.
+    Return a list of tuples with QC details.
+    """
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT DISTINCT qc_name, lot_number, concentration, unit, qc_type, manufacturer, cat_number, preparation_date, expiration_date
+        FROM qc_lookup_view
+        WHERE analyte_name = ?;
+    """, (qc_analyte_name,))
+    qc_details = cursor.fetchall()
+    conn.close()
+
+    return qc_details
